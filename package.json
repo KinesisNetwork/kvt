@@ -1,0 +1,41 @@
+{
+  "name": "kairos-promo-site",
+  "version": "1.0.0",
+  "description": "Promotional website",
+  "main": "js/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --watch",
+    "webserver": "cd dist && python -m SimpleHTTPServer 9000",
+    "compile": "webpack -p --progress"
+  },
+  "author": "ABX",
+  "license": "ISC",
+  "dependencies": {
+    "@types/react-router-dom": "^4.2.2",
+    "jquery": "1.12.4",
+    "lodash": "4.17.4",
+    "moment": "2.18.1",
+    "moment-timezone": "0.5.13",
+    "react": "15.6.1",
+    "react-dom": "15.6.1",
+    "react-router-dom": "4.1.1",
+    "tslint": "5.7.0",
+    "tslint-loader": "3.5.3",
+    "typescript": "2.4.1"
+  },
+  "devDependencies": {
+    "@types/lodash": "4.14.71",
+    "@types/node": "8.0.9",
+    "@types/react-dom": "^16.0.3",
+    "awesome-typescript-loader": "3.2.1",
+    "css-loader": "0.28.4",
+    "file-loader": "0.11.2",
+    "node-sass": "4.5.3",
+    "sass-loader": "6.0.6",
+    "source-map-loader": "0.2.1",
+    "style-loader": "0.18.2",
+    "url-loader": "0.5.9",
+    "webpack": "3.1.0"
+  }
+}
