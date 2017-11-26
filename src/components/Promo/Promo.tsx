@@ -1,16 +1,24 @@
 import * as React from 'react'
+const Scroll: any = require('react-scroll')
+const ScrollLink = Scroll.Link
+const loadTemplateJs = require('../../vendor/js/main.js')
 
 export class Promo extends React.Component<null, null> {
   constructor(props: any) {
     super(props)
   }
 
+  public componentDidMount() {
+    loadTemplateJs()
+  }
+
   public render() {
+
     return (
       <div>
         <header>
           <div className='header_wrapper'>
-            <nav className='navbar navbar-default pt-10' id='home'>
+            <nav className='navbar navbar-default pt-10'>
               <div className='container-fluid pl-30 pr-30'>
                 <div className='navbar-header'>
                   <button type='button' className='navbar-toggle collapsed' data-toggle='collapse' data-target='#my_nav' aria-expanded='false'>
@@ -26,18 +34,17 @@ export class Promo extends React.Component<null, null> {
                 {/* End of .navbar-header */}
                 {/* Collect the nav links, forms, and other content for toggling */}
                 <div className='collapse navbar-collapse' id='my_nav'>
-                  <ul className='nav navbar-nav navbar-right'>
-                    <li><a data-scroll href='#home'>home</a></li>
-                    <li><a data-scroll href='#services'>services</a></li>
-                    <li><a data-scroll href='#portfolio'>portfolio</a></li>
-                    <li><a data-scroll href='#team'>team</a></li>
-                    <li><a data-scroll href='#feedback'>feedback</a></li>
-                    <li><a data-scroll href='#pricing'>pricing</a></li>
-                    <li><a data-scroll href='#blog'>blog</a></li>
-                    <li><a data-scroll href='#faq'>faq</a></li>
-                    <li><a data-scroll href='#contact'> Contact</a></li>
-                  </ul>
-                  {/* End of .nav */}
+                    <ul className='nav navbar-nav navbar-right'>
+                      <li style={{cursor: 'pointer'}}><ScrollLink to='home' spy={true} smooth={true} offset={0} duration={500}>home</ScrollLink></li>
+                      <li style={{cursor: 'pointer'}}><ScrollLink to='services' spy={true} smooth={true} offset={0} duration={500}>services</ScrollLink></li>
+                      <li style={{cursor: 'pointer'}}><ScrollLink to='team' spy={true} smooth={true} offset={0} duration={500}>team</ScrollLink></li>
+                      <li style={{cursor: 'pointer'}}><ScrollLink to='feedback' spy={true} smooth={true} offset={0} duration={500}>feedback</ScrollLink></li>
+                      <li style={{cursor: 'pointer'}}><ScrollLink to='pricing' spy={true} smooth={true} offset={0} duration={500}>pricing</ScrollLink></li>
+                      <li style={{cursor: 'pointer'}}><ScrollLink to='blog' spy={true} smooth={true} offset={0} duration={500}>blog</ScrollLink></li>
+                      <li style={{cursor: 'pointer'}}><ScrollLink to='faq' spy={true} smooth={true} offset={0} duration={500}>faq</ScrollLink></li>
+                      <li style={{cursor: 'pointer'}}><ScrollLink to='contact' spy={true} smooth={true} offset={0} duration={500}>contact</ScrollLink></li>
+                    </ul>
+                    {/* End of .nav */}
                 </div>
                 {/* End of .navbar-collapse */}
               </div>
@@ -49,7 +56,7 @@ export class Promo extends React.Component<null, null> {
         </header>
         {/* End of header */}
         {/* section banner starts ============================================ */}
-        <section className='banner bg_2 pt-80 style_2' data-stellar-background-ratio='.7'>
+        <section className='banner bg_2 pt-80 style_2' data-stellar-background-ratio='.7' id='home'>
           <div className='overlay' />
           <div className='container text-center'>
             <h1 className='mb-20'>let's start with vertical</h1>
@@ -147,12 +154,11 @@ export class Promo extends React.Component<null, null> {
         </section>
         {/* End of .services */}
         {/* section others starts ============================================ */}
-        <section className='others ptb-80'>
-          <div className='overlay' />
-          <div className='main_content'>
+        <section className='others ptb-100 bg-off'>
+          <div className='main_content bg-off'>
             <div className='container'>
               <div className='row'>
-                <div className='col-sm-6 text-left pr-50'>
+                <div className='col-sm-12 text-left pr-50'>
                   <div className='section_title clearfix mb-50'>
                     <h2>other areas we expertise</h2>
                     <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
@@ -198,200 +204,6 @@ export class Promo extends React.Component<null, null> {
           {/* End of .main_content */}
         </section>
         {/* End of .others */}
-        {/* section portfolio starts ============================================ */}
-        <section className='portfolio pt-80' id='portfolio'>
-          <div className='container-fluid p-0'>
-            <div className='section_title mb-50 text-center'>
-              <h2 className='mb-10'>some of our latest works</h2>
-              <p>Corem ipsum dolor sit amet consecter adipsicing elit sed usm tempor incididunt ut reitad dolore magna aliqua ut enim minim beniaps quis nostrual exercitationullamco laboris sed.</p>
-            </div>
-            {/* End of .section_title */}
-            <div className='button-group filter-button-group wow fadeIn mb-50'>
-              <button className='button is-checked' data-filter='*'>All</button>
-              <button className='button' data-filter='.a1'>Graphic Design</button>
-              <button className='button' data-filter='.a2'>Web Design</button>
-              <button className='button' data-filter='.a3'>Photography</button>
-              <button className='button' data-filter='.a4'>Apps</button>
-            </div>
-            {/* button-group ends */}
-            <div className='grid clearfix'>
-              {/* Items for portfolio currently using 12 items. More Items can be added. */}
-              <div className='a3 a4 grid-item wow fadeIn'>
-                <div className='img_container'>
-                  <img src='images/portfolio/1.jpg' alt='port_img' className='img-responsive' />
-                  <a className='magnify overlay' href='images/portfolio/1.jpg'>
-                    <div className='content'>
-                      <h4>Project Title <span>subtitle of the project</span></h4>
-                    </div>
-                    {/* End of .content */}
-                  </a>
-                  {/* End of .overlay */}
-                </div>
-                {/* End of .img_container */}
-              </div>
-              {/* End of .grid-item */}
-              <div className='a2 a4 a1 grid-item wow fadeIn'>
-                <div className='img_container'>
-                  <img src='images/portfolio/2.jpg' alt='port_img' className='img-responsive' />
-                  <a className='magnify overlay' href='images/portfolio/2.jpg'>
-                    <div className='content'>
-                      <h4>Project Title <span>subtitle of the project</span></h4>
-                    </div>
-                    {/* End of .content */}
-                  </a>
-                  {/* End of .overlay */}
-                </div>
-                {/* End of .img_container */}
-              </div>
-              {/* End of .grid-item */}
-              <div className='a3 a4 a2 grid-item wow fadeIn'>
-                <div className='img_container'>
-                  <img src='images/portfolio/3.jpg' alt='port_img' className='img-responsive' />
-                  <a className='magnify overlay' href='images/portfolio/3.jpg'>
-                    <div className='content'>
-                      <h4>Project Title <span>subtitle of the project</span></h4>
-                    </div>
-                    {/* End of .content */}
-                  </a>
-                  {/* End of .overlay */}
-                </div>
-                {/* End of .img_container */}
-              </div>
-              {/* End of .grid-item */}
-              <div className='a4 a1 grid-item wow fadeIn'>
-                <div className='img_container'>
-                  <img src='images/portfolio/4.jpg' alt='port_img' className='img-responsive' />
-                  <a className='magnify overlay' href='images/portfolio/4.jpg'>
-                    <div className='content'>
-                      <h4>Project Title <span>subtitle of the project</span></h4>
-                    </div>
-                    {/* End of .content */}
-                  </a>
-                  {/* End of .overlay */}
-                </div>
-                {/* End of .img_container */}
-              </div>
-              {/* End of .grid-item */}
-              <div className='a2 a1 grid-item wow fadeIn'>
-                <div className='img_container'>
-                  <img src='images/portfolio/5.jpg' alt='port_img' className='img-responsive' />
-                  <a className='magnify overlay' href='images/portfolio/5.jpg'>
-                    <div className='content'>
-                      <h4>Project Title <span>subtitle of the project</span></h4>
-                    </div>
-                    {/* End of .content */}
-                  </a>
-                  {/* End of .overlay */}
-                </div>
-                {/* End of .img_container */}
-              </div>
-              {/* End of .grid-item */}
-              <div className='a3 a4 a1 grid-item wow fadeIn'>
-                <div className='img_container'>
-                  <img src='images/portfolio/6.jpg' alt='port_img' className='img-responsive' />
-                  <a className='magnify overlay' href='images/portfolio/6.jpg'>
-                    <div className='content'>
-                      <h4>Project Title <span>subtitle of the project</span></h4>
-                    </div>
-                    {/* End of .content */}
-                  </a>
-                  {/* End of .overlay */}
-                </div>
-                {/* End of .img_container */}
-              </div>
-              {/* End of .grid-item */}
-              <div className='a2 a4 grid-item wow fadeIn'>
-                <div className='img_container'>
-                  <img src='images/portfolio/7.jpg' alt='port_img' className='img-responsive' />
-                  <a className='magnify overlay' href='images/portfolio/7.jpg'>
-                    <div className='content'>
-                      <h4>Project Title <span>subtitle of the project</span></h4>
-                    </div>
-                    {/* End of .content */}
-                  </a>
-                  {/* End of .overlay */}
-                </div>
-                {/* End of .img_container */}
-              </div>
-              {/* End of .grid-item */}
-              <div className='a3 a2 a1 grid-item wow fadeIn'>
-                <div className='img_container'>
-                  <img src='images/portfolio/8.jpg' alt='port_img' className='img-responsive' />
-                  <a className='magnify overlay' href='images/portfolio/8.jpg'>
-                    <div className='content'>
-                      <h4>Project Title <span>subtitle of the project</span></h4>
-                    </div>
-                    {/* End of .content */}
-                  </a>
-                  {/* End of .overlay */}
-                </div>
-                {/* End of .img_container */}
-              </div>
-              {/* End of .grid-item */}
-              <div className='a2 a4 grid-item wow fadeIn'>
-                <div className='img_container'>
-                  <img src='images/portfolio/9.jpg' alt='port_img' className='img-responsive' />
-                  <a className='magnify overlay' href='images/portfolio/9.jpg'>
-                    <div className='content'>
-                      <h4>Project Title <span>subtitle of the project</span></h4>
-                    </div>
-                    {/* End of .content */}
-                  </a>
-                  {/* End of .overlay */}
-                </div>
-                {/* End of .img_container */}
-              </div>
-              {/* End of .grid-item */}
-              <div className='a3 grid-item wow fadeIn'>
-                <div className='img_container'>
-                  <img src='images/portfolio/10.jpg' alt='port_img' className='img-responsive' />
-                  <a className='magnify overlay' href='images/portfolio/10.jpg'>
-                    <div className='content'>
-                      <h4>Project Title <span>subtitle of the project</span></h4>
-                    </div>
-                    {/* End of .content */}
-                  </a>
-                  {/* End of .overlay */}
-                </div>
-                {/* End of .img_container */}
-              </div>
-              {/* End of .grid-item */}
-              <div className='a4 grid-item wow fadeIn'>
-                <div className='img_container'>
-                  <img src='images/portfolio/11.jpg' alt='port_img' className='img-responsive' />
-                  <a className='magnify overlay' href='images/portfolio/11.jpg'>
-                    <div className='content'>
-                      <h4>Project Title <span>subtitle of the project</span></h4>
-                    </div>
-                    {/* End of .content */}
-                  </a>
-                  {/* End of .overlay */}
-                </div>
-                {/* End of .img_container */}
-              </div>
-              {/* End of .grid-item */}
-              <div className='a1 grid-item wow fadeIn'>
-                <div className='img_container'>
-                  <img src='images/portfolio/12.jpg' alt='port_img' className='img-responsive' />
-                  <a className='magnify overlay' href='images/portfolio/12.jpg'>
-                    <div className='content'>
-                      <h4>Project Title <span>subtitle of the project</span></h4>
-                    </div>
-                    {/* End of .content */}
-                  </a>
-                  {/* End of .overlay */}
-                </div>
-                {/* End of .img_container */}
-              </div>
-              {/* End of .grid-item */}
-              {/* Last item */}
-              {/* to add more items to the portfolio section copy and paste any of the items underneath the last item */}
-            </div>
-            {/* End of .grid */}
-          </div>
-          {/* End of .container-fluid */}
-        </section>
-        {/* End of #portfolio */}
         {/* section subscribe starts ============================================ */}
         <section className='subscribe pt-60 pb-30'>
           <div className='container'>

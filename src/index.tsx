@@ -16,7 +16,6 @@ import './vendor/css/dark.css'
 // Template JS
 import './vendor/js/misc/bootstrap.min.js'
 import './vendor/js/misc/plugins.js'
-import './vendor/js/main.js'
 
 ReactDOM.render(
   <App />,

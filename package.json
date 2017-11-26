@@ -22,6 +22,7 @@
     "react": "15.6.1",
     "react-dom": "15.6.1",
     "react-router-dom": "4.1.1",
+    "react-scroll": "^1.6.7",
     "smooth-scroll": "^12.1.5",
     "tslint": "5.7.0",
     "tslint-loader": "3.5.3",
