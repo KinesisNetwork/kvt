@@ -1,9 +1,2 @@
-// @import 'variables';
-// @import 'navbar';
-//
-// html {
-//   overflow-y: auto !important
-// }
-//
-// @import '~bulma/bulma';
-// @import 'overwrides';
+$fa-font-path: "~font-awesome/fonts";
+@import '~font-awesome/scss/font-awesome.scss';

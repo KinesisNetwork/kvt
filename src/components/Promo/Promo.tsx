@@ -991,15 +991,6 @@ export class Promo extends React.Component<null, null> {
             </div>
             {/* End of .section_title */}
             <div className='row'>
-              <div className='col-sm-8'>
-                <div className='content mb-100'>
-                  <h3 className='mb-30'>find us on google maps</h3>
-                  <div className='google_map_wrapper'>
-                    <div id='map' />
-                  </div>
-                  {/* End of .google_map_wrapper */}
-                </div>
-                  </div>
                   <form className='quform' method='post' encType='multipart/form-data'>
                     <div className='row quform-elements'>
                       <div className='quform-input form-group col-sm-6'>
@@ -1090,7 +1081,6 @@ export class Promo extends React.Component<null, null> {
               </div>
               {/* End of .col-sm-4 */}
             </section>
-============================================ */}
         <section className='partners ptb-80'>
           <div className='section_title mb-70 text-center'>
             <h2>media partners</h2>
@@ -1139,16 +1129,14 @@ export class Promo extends React.Component<null, null> {
                 <img src='images/partners/logo4-1.png' alt='partners logo' className='img-responsive' />
               </div>
               {/* End of .item */}
-              {/* to add more items copy and paste one of
-        the items underneath the last item */}
+              {/* to add more items copy and paste one of the items underneath the last item */}
             </div>
             {/* End of .partner_logos */}
           </div>
           {/* End of .container */}
         </section>
         {/* End of .partners */}
-        {/* section purchase starts
-============================================ */}
+        {/* section purchase starts ============================================ */}
         <section className='purchase pt-50 pb-20'>
           <div className='container'>
             <div className='row'>
@@ -1167,8 +1155,7 @@ export class Promo extends React.Component<null, null> {
           {/* End of .container */}
         </section>
         {/* End of .purchase */}
-        {/* footer starts
-============================================ */}
+        {/* footer starts ============================================ */}
         <footer>
           <div className='footer_top text-left pt-80 pb-30'>
             <div className='container'>

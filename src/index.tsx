@@ -4,7 +4,6 @@ import { App } from './components/App'
 import './styles/style.scss'
 
 // Template CSS
-import './vendor/css/misc/font-awesome.min.css'
 import './vendor/css/misc/customicon.css'
 import './vendor/css/misc/bootstrap.min.css'
 import './vendor/css/misc/magnific-popup.css'

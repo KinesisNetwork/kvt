@@ -16,9 +16,12 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', '.json'],
     plugins: [
       new TsConfigPathsPlugin(),
-    ]
+    ],
+    alias: {
+      'masonry': 'masonry-layout',
+      'isotope': 'isotope-layout'
+    }
   },
-
   module: {
     rules: [
       // Lint!
@@ -50,10 +53,17 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
+        test: /\.(png|jpg|svg)$/,
         use: [{
           loader: 'file-loader'
         }]
+      },
+      {
+        test: /\.(eot|woff|ttf|svg)$/,
+        loaders: ["file-loader?name=[path][name].[ext]?[hash]"]
+      }, {
+        test: /\.woff2(\?\S*)?$/,
+        loaders: ["file-loader?name=[path][name].[ext]?[hash]"]
       }
     ]
   },
@@ -61,7 +71,7 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'node-static',
       filename: 'node-static.js',
-      minChunks (module, count) {
+      minChunks(module, count) {
         var context = module.context
         return context && context.indexOf('node_modules') >= 0
       }
