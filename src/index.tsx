@@ -11,7 +11,7 @@ import './vendor/css/misc/owl.carousel.min.css'
 import './vendor/css/misc/owl.theme.default.min.css'
 import './vendor/css/misc/animate.css'
 import './vendor/css/base.css'
-import './vendor/css/dark.css'
+import './styles/theme.scss'
 
 // Template JS
 import './vendor/js/misc/bootstrap.min.js'

@@ -59,7 +59,7 @@ export class Promo extends React.Component<null, null> {
         <section className='banner bg_2 pt-80 style_2' data-stellar-background-ratio='.7' id='home'>
           <div className='overlay' />
           <div className='container text-center'>
-            <h1 className='mb-20'>let's start with vertical</h1>
+            <h1 className='mb-20'>A Gold standard cryptocurrency</h1>
             <a href='#' className='ml-5 mr-5 mb-20 btn '>get started</a>
           </div>
           {/* End of .container */}
@@ -70,8 +70,8 @@ export class Promo extends React.Component<null, null> {
           <div className='container'>
             <div className='row'>
               <div className='col-sm-8'>
-                <h3 className='mb-10'>best theme for startups</h3>
-                <p className='mb-20'>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+                <h3 className='mb-10'>A short overview</h3>
+                <p className='mb-20'>This should be a short description to encourage the user to explore further</p>
               </div>
               {/* End of .col-sm-8 */}
               <div className='col-sm-4 text-right'>
@@ -88,7 +88,7 @@ export class Promo extends React.Component<null, null> {
         <section className='services pt-80 pb-80' id='services'>
           <div className='container'>
             <div className='section_title text-center mb-60'>
-              <h2>our services</h2>
+              <h2>What does Kairos offer?</h2>
               <p>Corem ipsum dolor sit amet consecter adipsicing elit sed usm tempor incididunt ut reitad dolore magna aliqua ut enim minim beniaps quis nostrual exercitationullamco laboris sed.</p>
             </div>
             {/* End of .section_title */}
