@@ -59,7 +59,7 @@ export class Promo extends React.Component<null, null> {
         <section className='banner bg_2 pt-80 style_2' data-stellar-background-ratio='.7' id='home'>
           <div className='overlay' />
           <div className='container text-center'>
-            <h1 className='mb-20'>A Gold standard cryptocurrency</h1>
+            <h1 className='mb-20'>A Gold standard in cryptocurrency</h1>
             <a href='#' className='ml-5 mr-5 mb-20 btn '>get started</a>
           </div>
           {/* End of .container */}
