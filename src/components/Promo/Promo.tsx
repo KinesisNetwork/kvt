@@ -28,7 +28,7 @@ export class Promo extends React.Component<null, null> {
                     <span className='icon-bar' />
                   </button>
                   <a className='navbar-brand' href='#'>
-                    <img src='images/brand_logo.png' alt='brand logo' className='img-responsive main_logo default-logo' />
+                    <img src='images/white_logo.svg' style={{width: '62px', marginTop:'-7px', marginBottom: '-7px'}} alt='brand logo' className='img-responsive main_logo default-logo' />
                   </a>
                 </div>
                 {/* End of .navbar-header */}
