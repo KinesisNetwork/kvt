@@ -9,7 +9,6 @@ import {
 import { NotFound } from './NotFound'
 import { Promo } from './Promo/Promo'
 
-
 export class App extends React.Component<null, null> {
   constructor(props: any) {
     super(props)
