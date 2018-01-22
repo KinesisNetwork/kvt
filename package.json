@@ -4,10 +4,12 @@
   "description": "Promotional website",
   "main": "js/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --watch",
     "webserver": "cd dist && python -m SimpleHTTPServer 9000",
-    "compile": "webpack -p --progress"
+    "client-compile": "webpack -p --progress",
+    "contract-compile": "truffle compile",
+    "contract-deploy": "truffle migrate",
+    "test": "truffle test"
   },
   "author": "ABX",
   "license": "ISC",
