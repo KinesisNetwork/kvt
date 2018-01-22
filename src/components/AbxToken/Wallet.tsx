@@ -1,7 +1,7 @@
-import React from 'react'
+import * as React from 'react'
 import { convertWeiToEther } from '../../helpers/ethConversions'
 
-export class Wallet extends React.Component {
+export class Wallet extends React.Component<any, any> {
   constructor(props) {
     super(props)
     this.state = {

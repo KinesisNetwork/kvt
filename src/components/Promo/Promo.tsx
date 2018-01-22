@@ -12,6 +12,7 @@ import { Roadmap } from './Roadmap'
 import { Blog } from './Blog'
 import { Faq } from './Faq'
 import { Contact } from './Contact'
+import { Token } from '../AbxToken/Token'
 
 export class Promo extends React.Component<null, null> {
   constructor(props: any) {
@@ -66,6 +67,7 @@ export class Promo extends React.Component<null, null> {
         <Faq />
         <Blog />
         <Contact />
+        <Token />
         <footer>
           <div className='footer_bottom bg-off pt-30 pb-10'>
             <div className='container'>

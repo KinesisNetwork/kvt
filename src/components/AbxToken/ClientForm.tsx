@@ -1,8 +1,8 @@
-import React from 'react'
+import * as React from 'react'
 
-import { Wallet } from './Wallet.jsx'
+import { Wallet } from './Wallet'
 import { convertEtherToWei, convertWeiToEther } from '../../helpers/ethConversions'
-export class ClientForm extends React.Component {
+export class ClientForm extends React.Component<any, any> {
   constructor(props) {
     super(props)
     this.state = {
