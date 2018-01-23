@@ -93,39 +93,28 @@ export class AdminForm extends React.Component<any, any> {
   render() {
     return (
       <div>
-        <Wallet {...this.props} />
-        <div className='row'>
-          <div className='col-sm-6 col-sm-push-3 col-md-4 col-md-push-4'>
-            <div className='panel panel-default'>
-              <div className='panel-heading'>
-                <h3 className='panel-title'>Administrative Transfers</h3>
-              </div>
-              <div className='panel-body'>
-                <form onSubmit={(ev) => this.handleAdminTransfer(ev)}>
-                  <input type='text' className='form-control' value={this.state.targetAddress} onChange={(ev) => this.handleAddressChange(ev)} placeholder='Address'/>
-                  <input type='number' className='form-control' value={this.state.amount} onChange={(ev) => this.handleAmountChange(ev)} placeholder='Amount'/>
-                  <input className='btn btn-primary' type='submit' value='Transfer' />
-                </form>
-              </div>
-            </div>
-          </div>
+        <div className='col-sm-4'>
+          <Wallet {...this.props} />
         </div>
-        <div className='row'>
-          <div className='col-sm-6 col-sm-push-3 col-md-4 col-md-push-4'>
-            <div className='panel panel-default'>
-              <div className='panel-heading'>
-                <h3 className='panel-title'>ABXT Price</h3>
-              </div>
-              <div className='panel-body'>
-                <h4>Current Price (ETH)</h4>
-                <p><strong>{this.state.currentSellPriceInEther}</strong></p>
-                <form onSubmit={(ev) => this.handlePriceSubmit(ev)}>
-                  <input type='number' className='form-control' value={this.state.newSellPriceInEther} onChange={(ev) => this.handlePriceChange(ev)} placeholder='Sell Price'/>
-                  <input className='btn btn-primary' type='submit' value='Update' />
-                </form>
-              </div>
-            </div>
-          </div>
+        <div className='col-sm-4'>
+          <h3>Administrative Transfers</h3>
+          <form onSubmit={(ev) => this.handleAdminTransfer(ev)}>
+            <label style={{marginTop: '10px'}}>Target Address</label>
+            <input type='text' className='form-control' value={this.state.targetAddress} onChange={(ev) => this.handleAddressChange(ev)} placeholder='Address'/>
+            <label style={{marginTop: '10px'}}>Quantity of ABXT</label>
+            <input type='number' className='form-control' value={this.state.amount} onChange={(ev) => this.handleAmountChange(ev)} placeholder='Amount'/>
+            <input className='btn btn-primary' type='submit' value='Transfer' style={{marginTop: '10px'}} />
+          </form>
+        </div>
+        <div className='col-sm-4'>
+          <h3>Administrative Price Update</h3>
+          <form onSubmit={(ev) => this.handlePriceSubmit(ev)}>
+            <label style={{marginTop: '10px'}}>Current Price (ETH)</label>
+            <input type='number' className='form-control' value={this.state.currentSellPriceInEther} style={{backgroundColor: '#555555'}} disabled/>
+            <label style={{marginTop: '10px'}}>New Price (ETH)</label>
+            <input type='number' className='form-control' value={this.state.newSellPriceInEther} onChange={(ev) => this.handlePriceChange(ev)} placeholder='Sell Price'/>
+            <input className='btn btn-primary' type='submit' value='Update' style={{marginTop: '10px'}} />
+          </form>
         </div>
         {this.state.successMessage && <div className='alert alert-success' role='alert'>{this.state.successMessage}</div>}
         {this.state.errorMessage && <div className='alert alert-danger' role='alert'>{this.state.errorMessage}</div>}
