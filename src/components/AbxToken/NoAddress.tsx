@@ -1,11 +1,11 @@
 import * as React from 'react'
 
 export class NoAddress extends React.Component {
-  render () {
+  public render () {
     return (
-      <div>
+      <p>
         Please login to your MetaMask wallet
-      </div>
+      </p>
     )
   }
 }

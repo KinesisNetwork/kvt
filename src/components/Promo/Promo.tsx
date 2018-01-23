@@ -7,12 +7,12 @@ import { Home } from './Home'
 import { Intro } from './Intro'
 import { About } from './About'
 import { Ico } from './Ico'
-import { Team } from './Team'
-import { Roadmap } from './Roadmap'
-import { Blog } from './Blog'
-import { Faq } from './Faq'
-import { Contact } from './Contact'
+// import { Team } from './Team'
+// import { Roadmap } from './Roadmap'
+// import { Blog } from './Blog'
+// import { Faq } from './Faq'
 import { Token } from '../AbxToken/Token'
+import { Contact } from './Contact'
 
 export class Promo extends React.Component<null, null> {
   constructor(props: any) {
@@ -47,11 +47,12 @@ export class Promo extends React.Component<null, null> {
                       <li style={{cursor: 'pointer'}}><ScrollLink to='home' spy={true} smooth={true} offset={0} duration={500}>home</ScrollLink></li>
                       <li style={{cursor: 'pointer'}}><ScrollLink to='about' spy={true} smooth={true} offset={0} duration={500}>about</ScrollLink></li>
                       <li style={{cursor: 'pointer'}}><ScrollLink to='ico' spy={true} smooth={true} offset={0} duration={500}>ico</ScrollLink></li>
-                      <li style={{cursor: 'pointer'}}><ScrollLink to='roadmap' spy={true} smooth={true} offset={0} duration={500}>roadmap</ScrollLink></li>
+                      <li style={{cursor: 'pointer'}}><ScrollLink to='token' spy={true} smooth={true} offset={0} duration={500}>Token Offering</ScrollLink></li>
+                      { /* <li style={{cursor: 'pointer'}}><ScrollLink to='roadmap' spy={true} smooth={true} offset={0} duration={500}>roadmap</ScrollLink></li>
                       <li style={{cursor: 'pointer'}}><ScrollLink to='team' spy={true} smooth={true} offset={0} duration={500}>team</ScrollLink></li>
                       <li style={{cursor: 'pointer'}}><ScrollLink to='faq' spy={true} smooth={true} offset={0} duration={500}>faq</ScrollLink></li>
-                      <li style={{cursor: 'pointer'}}><ScrollLink to='blog' spy={true} smooth={true} offset={0} duration={500}>blog</ScrollLink></li>
-                      <li style={{cursor: 'pointer'}}><ScrollLink to='contact' spy={true} smooth={true} offset={0} duration={500}>contact</ScrollLink></li>
+                      <li style={{cursor: 'pointer'}}><ScrollLink to='blog' spy={true} smooth={true} offset={0} duration={500}>blog</ScrollLink></li> */ }
+                      <li style={{cursor: 'pointer'}}><ScrollLink to='contact' spy={true} smooth={true} offset={0} duration={500}>Register</ScrollLink></li>
                     </ul>
                 </div>
               </div>
@@ -62,14 +63,14 @@ export class Promo extends React.Component<null, null> {
         <Intro />
         <About />
         <Ico />
-        <Roadmap />
+        { /* <Roadmap />
         <Team />
         <Faq />
-        <Blog />
-        <Contact />
+        <Blog /> */ }
         <Token />
+        <Contact />
         <footer>
-          <div className='footer_bottom bg-off pt-30 pb-10'>
+          <div className='footer_bottom pt-30 pb-10'>
             <div className='container'>
               <p className='mb-20 pull-left'>© 2017. Kairos. All rights reserved.</p>
               <ul className='list-inline pull-right mb-20'>

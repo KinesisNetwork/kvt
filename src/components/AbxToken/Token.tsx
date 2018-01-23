@@ -32,9 +32,10 @@ export class Token extends React.Component<any, any> {
 
       web3.eth.getAccounts(async (error, accounts) => {
         if (error) {
-          console.log(error);
+          console.log(error)
         }
 
+        console.log(accounts)
         const account = accounts[0]
         if (!account) {
           this.setState({noAddress: true})
@@ -56,14 +57,11 @@ export class Token extends React.Component<any, any> {
 
   public render() {
     return (
-      <div>
-        <div className='container'>
-          <div className='row'>
-            <div className='col-xs-12 col-sm-8 col-sm-push-2'>
-              <h1 className='text-center'>ABX Token</h1>
-              <hr/>
-              <br/>
-            </div>
+      <div className='container'>
+        <section className='contact pt-80 pb-50' id='token'>
+          <div className='section_title mb-70 text-center'>
+            <h2>ABX Token Offering</h2>
+            <p>Buy ABX tokens now for some garuntee of future value.</p>
           </div>
           <div className='row'>
             {this.state.noWeb3 && <NoWeb3/>}
@@ -71,7 +69,7 @@ export class Token extends React.Component<any, any> {
             {this.state.isAdmin && <AdminForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} />}
             {!this.state.isAdmin && this.state.address && <ClientForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} />}
           </div>
-        </div>
+        </section>
       </div>
     )
   }
