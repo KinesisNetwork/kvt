@@ -15,7 +15,7 @@ export class Ico extends React.Component<null, null> {
               <div className='col-sm-6'>
                 <div className='section_title mb-50 text-left'>
                   <h2>Initial Coin Offering</h2>
-                  <p>Kinesis will offer its initial coin offering in June, 2018.</p>
+                  <p>Kinesis will offer its initial coin offering in March, 2018.</p>
                   <p>Register your interest below to be kept up to date with the most recent information.</p>
                   <a href='#' className='btn mt-10 '>read more</a>
                 </div>
