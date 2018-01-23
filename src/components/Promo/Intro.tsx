@@ -13,8 +13,8 @@ export class Intro extends React.Component<null, null> {
           <div className='container'>
             <div className='row'>
               <div className='col-sm-8'>
-                <h3 className='mb-10'>Why Kairos</h3>
-                <p className='mb-20'>Kairos is redefining physically backed cryptocurrencies.</p>
+                <h3 className='mb-10'>Why Kinesis</h3>
+                <p className='mb-20'>Kinesis is redefining physically backed cryptocurrencies.</p>
               </div>
               <div className='col-sm-4 text-right'>
                 <a href='#' className='btn mt-10 wow fadeInRight'>Whitepaper</a>

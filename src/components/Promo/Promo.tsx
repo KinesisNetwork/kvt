@@ -72,7 +72,7 @@ export class Promo extends React.Component<null, null> {
         <footer>
           <div className='footer_bottom pt-30 pb-10'>
             <div className='container'>
-              <p className='mb-20 pull-left'>© 2017. Kairos. All rights reserved.</p>
+              <p className='mb-20 pull-left'>© 2017. Kinesis. All rights reserved.</p>
               <ul className='list-inline pull-right mb-20'>
                 <li><a href='#'><i className='fa fa-facebook' /></a></li>
                 <li><a href='#'><i className='fa fa-twitter' /></a></li>

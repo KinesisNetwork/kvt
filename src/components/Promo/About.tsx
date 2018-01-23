@@ -12,7 +12,7 @@ export class About extends React.Component<null, null> {
         <section className='services pt-80 pb-80' id='about'>
           <div className='container'>
             <div className='section_title text-center mb-60'>
-              <h2>What does Kairos offer?</h2>
+              <h2>What does Kinesis offer?</h2>
               <p>Corem ipsum dolor sit amet consecter adipsicing elit sed usm tempor incididunt ut reitad dolore magna aliqua ut enim minim beniaps quis nostrual exercitationullamco laboris sed.</p>
             </div>
             {/* End of .section_title */}
