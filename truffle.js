@@ -1,5 +1,5 @@
 // Ropsten MetaMask nmonic
-const ropstenNmonic = 'base impulse among dog dignity exercise gas piece split people honey choose'
+const ropstenNmonic = 'top chicken finish story close feature comfort vendor regret prize brush raw'
 
 // https://github.com/trufflesuite/truffle-hdwallet-provider
 const HDWalletProvider = require('truffle-hdwallet-provider')

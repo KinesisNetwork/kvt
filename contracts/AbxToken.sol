@@ -6,7 +6,7 @@ import "zeppelin-solidity/contracts/ownership/Ownable.sol";
 contract AbxToken is BasicToken, Ownable {
   string public name = "ABXToken";
   string public symbol = "ABXT";
-  uint8 public decimals = 2;
+  uint8 public decimals = 0;
 
 	/* This is 0.1 ETH */
   uint256 public pricePerTokenInWei = 100000000000000000;
