@@ -8,7 +8,7 @@ contract AbxToken is BasicToken, Ownable {
   string public name = "ABXToken";
   string public symbol = "ABXT";
   uint8 public decimals = 0;
-  address public approver = 0x0000000000000000000000000000000000000000;
+  address public approver = address(0);
   address[] public transfers;
 
 	/* This is 0.1 ETH */
@@ -16,6 +16,8 @@ contract AbxToken is BasicToken, Ownable {
 
   uint public INITIAL_SUPPLY = 1000000;
   bool public isTransferable = false;
+
+  bool burnIsPending = false;
 
   function AbxToken() public {
     totalSupply = INITIAL_SUPPLY;
@@ -84,6 +86,31 @@ contract AbxToken is BasicToken, Ownable {
     owner.transfer(quantity * pricePerTokenInWei);
 
     return _transfer(msg.sender, owner, quantity);
+  }
+
+  function burnUnsoldTokens() internal {
+    uint256 unsoldTokens = balances[owner];
+    balances[owner] = balances[owner].sub(unsoldTokens);
+    totalSupply = totalSupply.sub(unsoldTokens);
+  }
+
+  function startBurn() public onlyOwner {
+    burnIsPending = true;
+  }
+
+  function cancelBurn() public onlyOwner {
+    burnIsPending = false;
+  }
+
+  function isBurnPending() public view returns (bool) {
+    return burnIsPending;
+  }
+
+  function approveBurn() public {
+    require(msg.sender == approver);
+    require(balances[owner] != 0);
+    require(burnIsPending == true);
+    burnUnsoldTokens();
   }
 
   /* balanceOf is already implemented. So we just need a getTotalSupply() so we can show users the percentage they own */

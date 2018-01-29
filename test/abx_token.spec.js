@@ -189,4 +189,66 @@ contract('AbxToken', function(accounts) {
 			expect(isOwner).to.eql(false)
     })
   })
+
+  describe.only('burning tokens', () => {
+    describe('owner burn methods', () => {
+      it('sets burn to pending', async () => {
+        await instance.startBurn({from: owner})
+        const isBurnPending = await instance.isBurnPending()
+        expect(isBurnPending).to.eql(true)
+      })
+
+      it('only allows burn pending state for owner', async () => {
+        await instance.startBurn({from: approver})
+        const isBurnPending = await instance.isBurnPending()
+        expect(isBurnPending).to.eql(false)
+      })
+
+      it('can cancel a pending burn', async () => {
+        await instance.startBurn({from: owner})
+        await instance.cancelBurn({from: owner})
+        const isBurnPending = await instance.isBurnPending()
+        expect(isBurnPending).to.eql(false)
+      })
+
+      it('only owner can cancel a pending burn', async () => {
+        await instance.startBurn({from: owner})
+        await instance.cancelBurn({from: approver})
+        const isBurnPending = await instance.isBurnPending()
+        expect(isBurnPending).to.eql(true)
+      })
+    })
+    describe('burn on approval', () => {
+      it('only allows approver to approve the burn', async () => {
+        const ownerBalancePreBurn = (await instance.balanceOf(owner)).toNumber()
+        await instance.startBurn({from: owner})
+        await instance.approveBurn({from: owner})
+        const ownerBalancePostBurn = (await instance.balanceOf(owner)).toNumber()
+        expect(ownerBalancePostBurn).to.eql(ownerBalancePreBurn)
+      })
+      it('approves the burn and burns the owners balance while reducing the totalSupply', async () => {
+        const ownerBalancePreBurn = (await instance.balanceOf(owner)).toNumber()
+        expect(ownerBalancePreBurn).to.not.eql(0)
+        await instance.startBurn({from: owner})
+        await instance.approveBurn({from: approver})
+        const ownerBalancePostBurn = (await instance.balanceOf(owner)).toNumber()
+        expect(ownerBalancePostBurn).to.eql(0)
+        const newTotalSupply = (await instance.getTotalSupply()).toNumber()
+        expect(newTotalSupply).to.eql(tokenSupply - ownerBalancePreBurn)
+      })
+      it('does not do anything if burn is not pending', async () => {
+        const isBurnPending = await instance.isBurnPending()
+        expect(isBurnPending).to.eql(false)
+
+        const ownerBalancePreBurn = (await instance.balanceOf(owner)).toNumber()
+        expect(ownerBalancePreBurn).to.not.eql(0)
+        await instance.approveBurn({from: approver})
+
+        const ownerBalancePostBurn = (await instance.balanceOf(owner)).toNumber()
+        expect(ownerBalancePostBurn).to.eql(ownerBalancePreBurn)
+        const newTotalSupply = (await instance.getTotalSupply()).toNumber()
+        expect(newTotalSupply).to.eql(tokenSupply)
+      })
+    })
+  })
 })
