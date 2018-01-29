@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Wallet } from './Wallet'
 import { Spinner } from './Spinner'
+import { Transfers } from './Transfers'
 import { convertWeiToEther, convertEtherToWei } from '../../helpers/ethConversions'
 
 export class ApproverForm extends React.Component<any, any> {
@@ -21,25 +22,23 @@ export class ApproverForm extends React.Component<any, any> {
   }
 
   async componentWillMount () {
-    const currentSellPriceInWei = (await this.props.abxTokenInstance.getPrice()).toNumber()
-    this.setState({currentSellPriceInWei, currentSellPriceInEther: convertWeiToEther(currentSellPriceInWei)})
   }
 
-  async transferToAddress(address, amount) {
+  async approveTransfer(transferAddress: string) {
     try {
       this.setState({loading: true})
 
-      await this.props.abxTokenInstance.transfer(address, amount, {from: this.props.address})
+      await this.props.abxTokenInstance.approveTransfer(transferAddress, {from: this.props.address})
 
       this.setState({
         successMessage: `
-          Transfer successful. It will take >10 minutes for the balance change to reflect
+          Transfer successfully approved. It will take >10 minutes for the balance change to reflect
           You can inspect your address (${this.props.address}) at https://etherscan.io/
         `,
         loading: false
       })
     } catch (e) {
-      if (e.message === `new BigNumber() not a number: ${address}`) {
+      if (e.message === `new BigNumber() not a number: ${transferAddress}`) {
         this.setState({errorMessage: 'Invalid target address', loading: false})
       } else {
         this.setState({errorMessage: e.message, loading: false})
@@ -86,7 +85,7 @@ export class ApproverForm extends React.Component<any, any> {
       return
     }
 
-    this.transferToAddress(this.state.targetAddress, this.state.amount)
+    this.approveTransfer(this.state.targetAddress)
   }
 
   handlePriceSubmit(event) {
@@ -138,6 +137,9 @@ export class ApproverForm extends React.Component<any, any> {
           {this.state.loading &&
             <Spinner />
           }
+        </div>
+        <div className='row'>
+          <Transfers {...this.props} />
         </div>
       </div>
     )

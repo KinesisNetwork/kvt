@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Wallet } from './Wallet'
 import { Spinner } from './Spinner'
 import { convertWeiToEther, convertEtherToWei } from '../../helpers/ethConversions'
+import { Transfers } from './Transfers'
 
 export class AdminForm extends React.Component<any, any> {
   constructor(props) {
@@ -29,7 +30,8 @@ export class AdminForm extends React.Component<any, any> {
     try {
       this.setState({loading: true})
 
-      await this.props.abxTokenInstance.transfer(address, amount, {from: this.props.address})
+      console.log(this.props.abxTokenInstance)
+      await this.props.abxTokenInstance.adminTransfer(address, amount, {from: this.props.address})
 
       this.setState({
         successMessage: `Transfer submitted to the approver.`,
@@ -182,6 +184,9 @@ export class AdminForm extends React.Component<any, any> {
           {this.state.loading &&
             <Spinner />
           }
+        </div>
+        <div className='row'>
+          <Transfers {...this.props} />
         </div>
       </div>
     )
