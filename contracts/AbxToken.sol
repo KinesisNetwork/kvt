@@ -18,20 +18,41 @@ contract AbxToken is BasicToken, Ownable {
   bool public isTransferable = false;
 
   bool burnIsPending = false;
+  bool toggleTransferablePending = false;
 
   function AbxToken() public {
     totalSupply = INITIAL_SUPPLY;
     balances[msg.sender] = INITIAL_SUPPLY;
   }
 
-	/* Allow a the owner of the smart contract to enable transfers by regular holders */
-	function makeTransferable() public onlyOwner {
-		isTransferable = true;
+	// /* Allow a the owner of the smart contract to enable transfers by regular holders */
+	// function makeTransferable() public onlyOwner {
+  //   makeTransferableIsPending = true;
+  // }
+
+	// /* Allows the owner to disable transfers of the token */
+	// function disableTransfers() public onlyOwner {
+	// 	disableTransfersIsPending = false;
+  // }
+
+  function getTransferableState() public view returns (bool) {
+    return isTransferable;
   }
 
-	/* Allows the owner to disable transfers of the token */
-	function disableTransfers() public onlyOwner {
-		isTransferable = false;
+  function isToggleTransferablePending() public view returns (bool) {
+    return toggleTransferablePending;
+  }
+
+  function setTransferable(bool toState) public onlyOwner {
+    require(isTransferable != toState);
+    toggleTransferablePending = true;
+  }
+
+  function approveTransferableToggle() public {
+    require(msg.sender == approver);
+    require(toggleTransferablePending == true);
+    isTransferable = !isTransferable;
+    toggleTransferablePending = false;
   }
 
 	/* Set price in wei */

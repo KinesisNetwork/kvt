@@ -251,4 +251,83 @@ contract('AbxToken', function(accounts) {
       })
     })
   })
+
+  describe.only('isTransferable changes', () => {
+    it('initially is not transferable', async () => {
+      const isTransferable = await instance.getTransferableState()
+      expect(isTransferable).to.eql(false)
+    })
+
+    it('correctly creates a toggle request', async () => {
+      await instance.setTransferable(true, {from: owner})
+      const isPending = await instance.isToggleTransferablePending()
+      expect(isPending).to.eql(true)
+      const isTransferable = await instance.getTransferableState()
+      expect(isTransferable).to.eql(false)
+    })
+
+    it('will not create a toggle request for non-owner', async () => {
+      await instance.setTransferable(true, {from: investorOne})
+      const isPending = await instance.isToggleTransferablePending()
+      expect(isPending).to.eql(false)
+    })
+
+    it('will not create a toggle request for no state change', async () => {
+      await instance.setTransferable(false, {from: owner})
+      const isPending = await instance.isToggleTransferablePending()
+      expect(isPending).to.eql(false)
+    })
+
+    it('approves a toggle request', async () => {
+      await instance.setTransferable(true, {from: owner})
+      await instance.approveTransferableToggle({from: approver})
+      const isPending = await instance.isToggleTransferablePending()
+      const isTransferable = await instance.getTransferableState()
+      expect(isPending).to.eql(false)
+      expect(isTransferable).to.eql(true)
+    })
+
+    it('only approver can approve change', async () => {
+      await instance.setTransferable(true, {from: owner})
+      await instance.approveTransferableToggle({from: owner})
+      const isPending = await instance.isToggleTransferablePending()
+      const isTransferable = await instance.getTransferableState()
+      expect(isPending).to.eql(true)
+      expect(isTransferable).to.eql(false)
+    })
+
+    it('only toggles when a toggle is requested', async () => {
+      await instance.approveTransferableToggle({from: approver})
+      const isPending = await instance.isToggleTransferablePending()
+      const isTransferable = await instance.getTransferableState()
+      expect(isPending).to.eql(false)
+      expect(isTransferable).to.eql(false)
+    })
+
+    it('can toggle back to not transferable after', async () => {
+      let isPending, isTransferable
+      await instance.setTransferable(true, {from: owner})
+      await instance.approveTransferableToggle({from: approver})
+      isPending = await instance.isToggleTransferablePending()
+      expect(isPending).to.eql(false)
+      isTransferable = await instance.getTransferableState()
+      expect(isTransferable).to.eql(true)
+
+      await instance.setTransferable(true, {from: owner})
+      isPending = await instance.isToggleTransferablePending()
+      expect(isPending).to.eql(false)
+      await instance.approveTransferableToggle({from: approver})
+      isTransferable = await instance.getTransferableState()
+      expect(isTransferable).to.eql(true)
+
+      await instance.setTransferable(false, {from: owner})
+      isPending = await instance.isToggleTransferablePending()
+      expect(isPending).to.eql(true)
+      await instance.approveTransferableToggle({from: approver})
+      isTransferable = await instance.getTransferableState()
+      expect(isTransferable).to.eql(false)
+      isPending = await instance.isToggleTransferablePending()
+      expect(isPending).to.eql(false)
+    })
+  })
 })
