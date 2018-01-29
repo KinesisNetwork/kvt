@@ -72,7 +72,7 @@ export class ClientForm extends React.Component<any, any> {
               <label style={{marginTop: '10px'}}>Cost Per ABXT (ETH)</label>
               <input type='text' className='form-control' value={this.state.costInEther} style={{backgroundColor: '#555555'}} disabled/>
               <label style={{marginTop: '10px'}}>Purchase Quantity</label>
-              <input type='number' className='form-control' value={this.state.desiredQuantity} onChange={(ev) => this.handleQuantityChange(ev)} placeholder='Address'/>
+              <input type='number' className='form-control' value={this.state.desiredQuantity} onChange={(ev) => this.handleQuantityChange(ev)} placeholder='ABXT Quantity'/>
               <label style={{marginTop: '10px'}}>Total Cost (ETH)</label>
               <input type='text' className='form-control' value={this.state.costInEther * this.state.desiredQuantity} style={{backgroundColor: '#555555'}} disabled/>
               <input className='btn btn-primary' type='submit' value='Purchase' style={{marginTop: '10px'}} />

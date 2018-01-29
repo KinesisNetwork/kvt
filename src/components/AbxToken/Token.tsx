@@ -7,6 +7,7 @@ const abxTokenDefinition = require('../../../build/contracts/AbxToken.json')
 import {NoWeb3} from './NoWeb3'
 import {NoAddress} from './NoAddress'
 import {AdminForm} from './AdminForm'
+import {ApproverForm} from './ApproverForm'
 import {ClientForm} from './ClientForm'
 
 export class Token extends React.Component<any, any> {
@@ -20,6 +21,7 @@ export class Token extends React.Component<any, any> {
       noAddress: false,
       address: null,
       isAdmin: false,
+      isApprover: false,
     }
   }
 
@@ -61,8 +63,9 @@ export class Token extends React.Component<any, any> {
 
         const tokenInstance = await abxToken.deployed()
         const isAdmin = await tokenInstance.isOwner({from: account})
+        const isApprover = await tokenInstance.isApprover({from: account})
 
-        this.setState({isAdmin, abxTokenInstance: tokenInstance, address: account})
+        this.setState({isAdmin, isApprover, abxTokenInstance: tokenInstance, address: account})
       }
     })
   }
@@ -80,7 +83,8 @@ export class Token extends React.Component<any, any> {
             {this.state.noWeb3 && <NoWeb3/>}
             {this.state.noAddress && <NoAddress/>}
             {this.state.isAdmin && <AdminForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} />}
-            {!this.state.isAdmin && this.state.address && <ClientForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} />}
+            {this.state.isApprover && <ApproverForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} />}
+            {!this.state.isAdmin && !this.state.isApprover && this.state.address && <ClientForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} />}
           </div>
         </section>
       </div>
