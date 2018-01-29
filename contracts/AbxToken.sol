@@ -53,24 +53,24 @@ contract AbxToken is BasicToken, Ownable {
     return true;
   }
 
-  function publicTransfer(address _to, uint256 _value) public returns (bool) {
+  function transfer(address _to, uint256 _value) public returns (bool) {
     require(isTransferable == true);
     require(msg.sender != owner);
     return _transfer(_to, msg.sender, _value);
   }
 
-  function createTransfer(address _to, uint32 _quantity) public onlyOwner returns (address) {
-    address newTransfer = new MultiSigTransfer(_quantity, _to);
+  function adminTransfer(address _to, uint32 _quantity) public onlyOwner {
+    MultiSigTransfer newTransfer = new MultiSigTransfer(_quantity, _to);
     transfers.push(newTransfer);
-    return newTransfer;
+    // return address(newTransfer);
   }
 
   function approveTransfer(address approvedTransfer) public returns (bool) {
     require(msg.sender == approver);
-    MultiSigTransfer transfer = MultiSigTransfer(approvedTransfer);
-    uint32 transferQuantity = transfer.getQuantity();
-    address deliveryAddress = transfer.getTargetAddress();
-    transfer.approveTransfer();
+    MultiSigTransfer transferToApprove = MultiSigTransfer(approvedTransfer);
+    uint32 transferQuantity = transferToApprove.getQuantity();
+    address deliveryAddress = transferToApprove.getTargetAddress();
+    transferToApprove.approveTransfer();
     return _transfer(deliveryAddress, owner, transferQuantity);
   }
 
@@ -106,7 +106,7 @@ contract AbxToken is BasicToken, Ownable {
 	}
 
   function setApprover(address newApprover) public onlyOwner {
-    require(approver == 0x0000000000000000000000000000000000000000);
+    require(approver == address(0));
     approver = newApprover;
   } 
 

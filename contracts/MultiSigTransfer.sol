@@ -15,6 +15,7 @@ contract MultiSigTransfer is Ownable {
   }
 
   function approveTransfer() public onlyOwner {
+    require(complete == false);
     complete = true;
   }
 
