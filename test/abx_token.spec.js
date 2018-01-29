@@ -164,17 +164,17 @@ contract('AbxToken', function(accounts) {
 
   describe('buy Token', () => {
     it('correctly transfers from owner to investor on purchase', async () => {
-      let originalOwnerQty = await instance.balanceOf(owner)
-      let originalInvestorOneQty = await instance.balanceOf(investorOne)
-      expect(originalOwnerQty.toNumber()).to.eql(tokenSupply)
-      expect(originalInvestorOneQty.toNumber()).to.eql(0)
+      let originalOwnerQty = (await instance.balanceOf(owner)).toNumber()
+      let originalInvestorOneQty = (await instance.balanceOf(investorOne)).toNumber()
+      expect(originalOwnerQty).to.eql(tokenSupply)
+      expect(originalInvestorOneQty).to.eql(0)
 
-      await instance.transfer(investorOne, 100, {from: owner})
+      await instance.buyToken(100, {from: investorOne, value: 100 * (await instance.getPrice()).toNumber()})
 
-      let newOwnerQty = await instance.balanceOf(owner)
-      let newInvestorOneQty = await instance.balanceOf(investorOne)
-      expect(newOwnerQty.toNumber()).to.eql(tokenSupply - 100)
-      expect(newInvestorOneQty.toNumber()).to.eql(100)
+      let newOwnerQty = (await instance.balanceOf(owner)).toNumber()
+      let newInvestorOneQty = (await instance.balanceOf(investorOne)).toNumber()
+      expect(newOwnerQty).to.eql(originalOwnerQty - 100)
+      expect(newInvestorOneQty).to.eql(originalInvestorOneQty + 100)
     })
   })
 

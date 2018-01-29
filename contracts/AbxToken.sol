@@ -83,12 +83,7 @@ contract AbxToken is BasicToken, Ownable {
     /* Transfer the set wei to abx, then we give the user their token */
     owner.transfer(quantity * pricePerTokenInWei);
 
-    require(quantity <= balances[owner]);
-
-    balances[owner] = balances[owner].sub(quantity);
-    balances[msg.sender] = balances[msg.sender].add(quantity);
-    Transfer(owner, msg.sender, quantity);
-    return true;
+    return _transfer(msg.sender, owner, quantity);
   }
 
   /* balanceOf is already implemented. So we just need a getTotalSupply() so we can show users the percentage they own */
