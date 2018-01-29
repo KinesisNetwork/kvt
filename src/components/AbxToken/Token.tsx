@@ -33,7 +33,13 @@ export class Token extends React.Component<any, any> {
       this.setState({noWeb3: true})
     }
 
-    setInterval(() => this.refreshEthState(), 10000)
+    setInterval(() => {
+      try {
+        this.refreshEthState()
+      } catch (e) {
+        console.log(e)
+      }
+    }, 1000)
   }
 
   public refreshEthState () {
