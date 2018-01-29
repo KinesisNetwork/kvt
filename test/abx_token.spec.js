@@ -106,7 +106,7 @@ contract('AbxToken', function(accounts) {
       expect(originalOwnerQty.toNumber()).to.eql(tokenSupply)
       expect(originalInvestorOneQty.toNumber()).to.eql(0)
 
-      await instance._transfer(investorOne, owner, 100, {from: owner})
+      await approveTransferToAddress(investorOne, 100)
 
       let newOwnerQty = await instance.balanceOf(owner)
       let newInvestorOneQty = await instance.balanceOf(investorOne)
@@ -115,18 +115,13 @@ contract('AbxToken', function(accounts) {
     })
 
     it('fails to transfer from investor1 to investor2 if contract is not transferable', async () => {
-      await instance.transfer(investorOne, 100, {from: owner})
+      await approveTransferToAddress(investorOne, 100)
       let originalInvestorOneQty = await instance.balanceOf(investorOne)
       let originalInvestorTwoQty = await instance.balanceOf(investorTwo)
       expect(originalInvestorOneQty.toNumber()).to.eql(100)
       expect(originalInvestorTwoQty.toNumber()).to.eql(0)
 
       await instance.transfer(investorTwo, 50, {from: investorOne})
-        // This promise is not throwing an error. However balances arent getting updated so we're okay
-        //
-        // .then(() => {
-        //   throw new Error('Error should have thrown')
-        // }, () => {})
 
       let newInvestorOneQty = await instance.balanceOf(investorOne)
       let newInvestorTwoQty = await instance.balanceOf(investorTwo)
@@ -136,7 +131,8 @@ contract('AbxToken', function(accounts) {
 
     it('transfers from investor1 to investor2 if contract is transferable', async () => {
       await instance.makeTransferable({from: owner})
-      await instance.transfer(investorOne, 100, {from: owner})
+      await approveTransferToAddress(investorOne, 100)
+
       let originalInvestorOneQty = await instance.balanceOf(investorOne)
       let originalInvestorTwoQty = await instance.balanceOf(investorTwo)
       expect(originalInvestorOneQty.toNumber()).to.eql(100)
@@ -148,6 +144,21 @@ contract('AbxToken', function(accounts) {
       let newInvestorTwoQty = await instance.balanceOf(investorTwo)
       expect(newInvestorOneQty.toNumber()).to.eql(50)
       expect(newInvestorTwoQty.toNumber()).to.eql(50)
+    })
+
+    it('doesn\'t allow owner to make basic transfers even when token set to transferable', async () => {
+      await instance.makeTransferable({from: owner})
+
+      let originalOwnerQty = (await instance.balanceOf(owner)).toNumber()
+      let originalInvestorQty = (await instance.balanceOf(investorOne)).toNumber()
+
+      await instance.transfer(investorOne, 100, {from: owner})
+
+      let newOwnerQty = (await instance.balanceOf(owner)).toNumber()
+      let newInvestorQty = (await instance.balanceOf(investorOne)).toNumber()
+      expect(newOwnerQty).to.eql(originalOwnerQty)
+      expect(newInvestorQty).to.eql(originalInvestorQty)
+
     })
   })
 
