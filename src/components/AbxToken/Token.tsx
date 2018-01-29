@@ -19,7 +19,7 @@ export class Token extends React.Component<any, any> {
       noWeb3: false,
       noAddress: false,
       address: null,
-      isAdmin: false
+      isAdmin: false,
     }
   }
 
@@ -27,15 +27,29 @@ export class Token extends React.Component<any, any> {
     const w: any = window
     if (typeof w.web3 !== 'undefined') {
       const web3 = new Web3(w.web3.currentProvider)
-      w.web3 = web3
       this.setState({web3Provider: w.web3.currentProvider, web3})
+      this.refreshEthState()
+    } else {
+      this.setState({noWeb3: true})
+    }
 
-      web3.eth.getAccounts(async (error, accounts) => {
-        if (error) {
-          console.log(error)
-        }
+    setInterval(() => {
+      try {
+        this.refreshEthState()
+      } catch (e) {
+        console.log(e)
+      }
+    }, 1000)
+  }
 
-        console.log(accounts)
+  public refreshEthState () {
+    const w: any = window
+    w.web3.eth.getAccounts(async (error, accounts) => {
+      if (error) {
+        console.log(error)
+      }
+
+      if (this.state.address !== accounts[0]) {
         const account = accounts[0]
         if (!account) {
           this.setState({noAddress: true})
@@ -49,11 +63,10 @@ export class Token extends React.Component<any, any> {
         const isAdmin = await tokenInstance.isOwner({from: account})
 
         this.setState({isAdmin, abxTokenInstance: tokenInstance, address: account})
-      })
-    } else {
-      this.setState({noWeb3: true})
-    }
+      }
+    })
   }
+
 
   public render() {
     return (
