@@ -190,7 +190,7 @@ contract('AbxToken', function(accounts) {
     })
   })
 
-  describe.only('burning tokens', () => {
+  describe('burning tokens', () => {
     describe('owner burn methods', () => {
       it('sets burn to pending', async () => {
         await instance.startBurn({from: owner})
