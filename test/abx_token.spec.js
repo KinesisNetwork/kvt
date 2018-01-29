@@ -252,7 +252,7 @@ contract('AbxToken', function(accounts) {
     })
   })
 
-  describe.only('isTransferable changes', () => {
+  describe('isTransferable changes', () => {
     it('initially is not transferable', async () => {
       const isTransferable = await instance.getTransferableState()
       expect(isTransferable).to.eql(false)
