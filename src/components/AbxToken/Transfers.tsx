@@ -71,9 +71,9 @@ export class Transfers extends React.Component<any, { transfers: Transfer[], isA
         <div className='well' style={wellOverwride}>
           <strong>Target Address: </strong>{t.targetAddress}&nbsp;
           <strong>ABXT: </strong>{t.quantity}&nbsp;
-          { t.pending && !this.state.isApprover && <span className='label label-info'>Pending</span> }
-          { t.pending && this.state.isApprover && <button onClick={() => this.approveTransfer(t.contractAddress)} className='btn btn-success'>Approve</button> }
-          { !t.pending && <span className='label label-success'>Complete</span> }
+          { t.pending && !this.state.isApprover && <span className='label label-info pull-right'>Pending</span> }
+          { t.pending && this.state.isApprover && <span onClick={() => this.approveTransfer(t.contractAddress)} className='label label-primary pull-right' style={{cursor: 'pointer'}}>Approve</span> }
+          { !t.pending && <span className='label label-success pull-right'>Complete</span> }
         </div>
       )
     })
