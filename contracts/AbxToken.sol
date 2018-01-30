@@ -120,7 +120,7 @@ contract AbxToken is BasicToken, Ownable {
     if (_to != owner) {
       require(isTransferable == true);
     }
-    require(msg.sender != owner);
+    require(msg.sender != owner && msg.sender != trustAccount);
     return _transfer(_to, msg.sender, _value);
   }
 
