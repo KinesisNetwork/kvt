@@ -8,7 +8,7 @@ contract AbxToken is BasicToken, Ownable {
   string public name = "ABXToken";
   string public symbol = "ABXT";
   uint8 public decimals = 0;
-  address public approver = 0x0000000000000000000000000000000000000000;
+  address public approver = address(0);
   address[] public transfers;
 
 	/* This is 0.1 ETH */
@@ -17,24 +17,51 @@ contract AbxToken is BasicToken, Ownable {
   uint public INITIAL_SUPPLY = 1000000;
   bool public isTransferable = false;
 
+  bool burnIsPending = false;
+  bool toggleTransferablePending = false;
+
   function AbxToken() public {
     totalSupply = INITIAL_SUPPLY;
     balances[msg.sender] = INITIAL_SUPPLY;
   }
 
-	/* Allow a the owner of the smart contract to enable transfers by regular holders */
-	function makeTransferable() public onlyOwner {
-		isTransferable = true;
+  /* Multi-Signature on Transferable state */
+  function getTransferableState() public view returns (bool) {
+    return isTransferable;
   }
 
-	/* Allows the owner to disable transfers of the token */
-	function disableTransfers() public onlyOwner {
-		isTransferable = false;
+  function isToggleTransferablePending() public view returns (bool) {
+    return toggleTransferablePending;
   }
 
-	/* Set price in wei */
-	function setPriceInWei(uint256 tokenPrice) public onlyOwner {
-		pricePerTokenInWei = tokenPrice;
+  function setTransferable(bool toState) public onlyOwner {
+    require(isTransferable != toState);
+    toggleTransferablePending = true;
+  }
+
+  function approveTransferableToggle() public {
+    require(msg.sender == approver);
+    require(toggleTransferablePending == true);
+    isTransferable = !isTransferable;
+    toggleTransferablePending = false;
+  }
+
+  /* Multi-Signature on Price Changes */
+  uint256 pendingPriceChange = 0;
+
+  function getPendingPriceChange() public view returns (uint256) {
+    return pendingPriceChange;
+  }
+
+  function requestPriceChange(uint priceChangeInWei) public onlyOwner {
+    pendingPriceChange = priceChangeInWei;
+  }
+
+  function approvePriceChange() public {
+    require(msg.sender == approver);
+    require(pendingPriceChange != 0);
+    pricePerTokenInWei = pendingPriceChange;
+    pendingPriceChange = 0;
   }
 
   /**
@@ -84,6 +111,33 @@ contract AbxToken is BasicToken, Ownable {
     owner.transfer(quantity * pricePerTokenInWei);
 
     return _transfer(msg.sender, owner, quantity);
+  }
+
+  /* Multi sig for burning unsold tokens */
+  function burnUnsoldTokens() internal {
+    uint256 unsoldTokens = balances[owner];
+    balances[owner] = balances[owner].sub(unsoldTokens);
+    totalSupply = totalSupply.sub(unsoldTokens);
+  }
+
+  function startBurn() public onlyOwner {
+    burnIsPending = true;
+  }
+
+  function cancelBurn() public {
+    require(msg.sender == owner || msg.sender == approver);
+    burnIsPending = false;
+  }
+
+  function isBurnPending() public view returns (bool) {
+    return burnIsPending;
+  }
+
+  function approveBurn() public {
+    require(msg.sender == approver);
+    require(balances[owner] != 0);
+    require(burnIsPending == true);
+    burnUnsoldTokens();
   }
 
   /* balanceOf is already implemented. So we just need a getTotalSupply() so we can show users the percentage they own */

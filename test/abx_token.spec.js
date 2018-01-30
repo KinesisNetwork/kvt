@@ -20,6 +20,11 @@ contract('AbxToken', function(accounts) {
     await instance.approveTransfer(transfer, {from: approver})
   }
 
+  const setTransferable = async () => {
+    await instance.setTransferable(true, {from: owner})
+    await instance.approveTransferableToggle({from: approver})
+  }
+
 	beforeEach(async () => {
     instance = await AbxToken.new()
     await instance.setApprover(approver, {from: owner})
@@ -130,7 +135,7 @@ contract('AbxToken', function(accounts) {
     })
 
     it('transfers from investor1 to investor2 if contract is transferable', async () => {
-      await instance.makeTransferable({from: owner})
+      await setTransferable()
       await approveTransferToAddress(investorOne, 100)
 
       let originalInvestorOneQty = await instance.balanceOf(investorOne)
@@ -147,7 +152,7 @@ contract('AbxToken', function(accounts) {
     })
 
     it('doesn\'t allow owner to make basic transfers even when token set to transferable', async () => {
-      await instance.makeTransferable({from: owner})
+      await setTransferable()
 
       let originalOwnerQty = (await instance.balanceOf(owner)).toNumber()
       let originalInvestorQty = (await instance.balanceOf(investorOne)).toNumber()
@@ -187,6 +192,209 @@ contract('AbxToken', function(accounts) {
     it('returns false for the anyone who is not the owner', async function () {
       const isOwner = await instance.isOwner({from: investorOne})
 			expect(isOwner).to.eql(false)
+    })
+  })
+
+  describe('burning tokens', () => {
+    describe('owner burn methods', () => {
+      it('sets burn to pending', async () => {
+        await instance.startBurn({from: owner})
+        const isBurnPending = await instance.isBurnPending()
+        expect(isBurnPending).to.eql(true)
+      })
+
+      it('only allows burn pending state for owner', async () => {
+        await instance.startBurn({from: approver})
+        const isBurnPending = await instance.isBurnPending()
+        expect(isBurnPending).to.eql(false)
+      })
+
+      it('can cancel a pending burn', async () => {
+        await instance.startBurn({from: owner})
+        await instance.cancelBurn({from: owner})
+        const isBurnPending = await instance.isBurnPending()
+        expect(isBurnPending).to.eql(false)
+      })
+
+      it('either approver or owner can cancel a pending burn', async () => {
+        await instance.startBurn({from: owner})
+
+        await instance.cancelBurn({from: investorOne})
+        const isBurnPendingAfterInvestorCancel = await instance.isBurnPending()
+        expect(isBurnPendingAfterInvestorCancel).to.eql(true)
+
+        await instance.cancelBurn({from: approver})
+        const isBurnPending = await instance.isBurnPending()
+        expect(isBurnPending).to.eql(false)
+      })
+    })
+    describe('burn on approval', () => {
+      it('only allows approver to approve the burn', async () => {
+        const ownerBalancePreBurn = (await instance.balanceOf(owner)).toNumber()
+        await instance.startBurn({from: owner})
+        await instance.approveBurn({from: owner})
+        const ownerBalancePostBurn = (await instance.balanceOf(owner)).toNumber()
+        expect(ownerBalancePostBurn).to.eql(ownerBalancePreBurn)
+      })
+      it('approves the burn and burns the owners balance while reducing the totalSupply', async () => {
+        const ownerBalancePreBurn = (await instance.balanceOf(owner)).toNumber()
+        expect(ownerBalancePreBurn).to.not.eql(0)
+        await instance.startBurn({from: owner})
+        await instance.approveBurn({from: approver})
+        const ownerBalancePostBurn = (await instance.balanceOf(owner)).toNumber()
+        expect(ownerBalancePostBurn).to.eql(0)
+        const newTotalSupply = (await instance.getTotalSupply()).toNumber()
+        expect(newTotalSupply).to.eql(tokenSupply - ownerBalancePreBurn)
+      })
+      it('does not do anything if burn is not pending', async () => {
+        const isBurnPending = await instance.isBurnPending()
+        expect(isBurnPending).to.eql(false)
+
+        const ownerBalancePreBurn = (await instance.balanceOf(owner)).toNumber()
+        expect(ownerBalancePreBurn).to.not.eql(0)
+        await instance.approveBurn({from: approver})
+
+        const ownerBalancePostBurn = (await instance.balanceOf(owner)).toNumber()
+        expect(ownerBalancePostBurn).to.eql(ownerBalancePreBurn)
+        const newTotalSupply = (await instance.getTotalSupply()).toNumber()
+        expect(newTotalSupply).to.eql(tokenSupply)
+      })
+    })
+  })
+
+  describe('isTransferable changes', () => {
+    it('initially is not transferable', async () => {
+      const isTransferable = await instance.getTransferableState()
+      expect(isTransferable).to.eql(false)
+    })
+
+    it('correctly creates a toggle request', async () => {
+      await instance.setTransferable(true, {from: owner})
+      const isPending = await instance.isToggleTransferablePending()
+      expect(isPending).to.eql(true)
+      const isTransferable = await instance.getTransferableState()
+      expect(isTransferable).to.eql(false)
+    })
+
+    it('will not create a toggle request for non-owner', async () => {
+      await instance.setTransferable(true, {from: investorOne})
+      const isPending = await instance.isToggleTransferablePending()
+      expect(isPending).to.eql(false)
+    })
+
+    it('will not create a toggle request for no state change', async () => {
+      await instance.setTransferable(false, {from: owner})
+      const isPending = await instance.isToggleTransferablePending()
+      expect(isPending).to.eql(false)
+    })
+
+    it('approves a toggle request', async () => {
+      await instance.setTransferable(true, {from: owner})
+      await instance.approveTransferableToggle({from: approver})
+      const isPending = await instance.isToggleTransferablePending()
+      const isTransferable = await instance.getTransferableState()
+      expect(isPending).to.eql(false)
+      expect(isTransferable).to.eql(true)
+    })
+
+    it('only approver can approve change', async () => {
+      await instance.setTransferable(true, {from: owner})
+      await instance.approveTransferableToggle({from: owner})
+      const isPending = await instance.isToggleTransferablePending()
+      const isTransferable = await instance.getTransferableState()
+      expect(isPending).to.eql(true)
+      expect(isTransferable).to.eql(false)
+    })
+
+    it('only toggles when a toggle is requested', async () => {
+      await instance.approveTransferableToggle({from: approver})
+      const isPending = await instance.isToggleTransferablePending()
+      const isTransferable = await instance.getTransferableState()
+      expect(isPending).to.eql(false)
+      expect(isTransferable).to.eql(false)
+    })
+
+    it('can toggle back to not transferable after', async () => {
+      let isPending, isTransferable
+      await instance.setTransferable(true, {from: owner})
+      await instance.approveTransferableToggle({from: approver})
+      isPending = await instance.isToggleTransferablePending()
+      expect(isPending).to.eql(false)
+      isTransferable = await instance.getTransferableState()
+      expect(isTransferable).to.eql(true)
+
+      await instance.setTransferable(true, {from: owner})
+      isPending = await instance.isToggleTransferablePending()
+      expect(isPending).to.eql(false)
+      await instance.approveTransferableToggle({from: approver})
+      isTransferable = await instance.getTransferableState()
+      expect(isTransferable).to.eql(true)
+
+      await instance.setTransferable(false, {from: owner})
+      isPending = await instance.isToggleTransferablePending()
+      expect(isPending).to.eql(true)
+      await instance.approveTransferableToggle({from: approver})
+      isTransferable = await instance.getTransferableState()
+      expect(isTransferable).to.eql(false)
+      isPending = await instance.isToggleTransferablePending()
+      expect(isPending).to.eql(false)
+    })
+  })
+
+  describe('setting price', () => {
+    it('full price change test', async () => {
+      const currentPrice = (await instance.getPrice()).toNumber()
+      /* Approval before any request doesn't change anything */
+      await instance.approvePriceChange({from: approver})
+      const preRequestApprovalPrice = (await instance.getPrice()).toNumber()
+      expect(preRequestApprovalPrice).to.eql(currentPrice)
+
+      /* Only owner can request a price change */
+      const priceChange = 0.5 * 1e18
+      await instance.requestPriceChange(priceChange, {from: approver})
+      const approverRequestedPriceChange = (await instance.getPendingPriceChange()).toNumber()
+      expect(approverRequestedPriceChange).to.eql(0)
+      const afterApproverRequestPrice = (await instance.getPrice()).toNumber()
+      expect(afterApproverRequestPrice).to.eql(currentPrice)
+
+      await instance.requestPriceChange(priceChange, {from: owner})
+      const requestedPriceChange = (await instance.getPendingPriceChange()).toNumber()
+      expect(requestedPriceChange).to.eql(priceChange)
+      const afterRequestPrice = (await instance.getPrice()).toNumber()
+      expect(afterRequestPrice).to.eql(currentPrice)
+
+      /* Second price request overwrites the first one */
+      const secondPriceChange = 1 * 1e18
+      await instance.requestPriceChange(secondPriceChange, {from: owner})
+      const secondRequestedPriceChange = (await instance.getPendingPriceChange()).toNumber()
+      expect(secondRequestedPriceChange).to.eql(secondPriceChange)
+      const afterSecondRequestPrice = (await instance.getPrice()).toNumber()
+      expect(afterSecondRequestPrice).to.eql(currentPrice)
+
+      /* Owner can't approve */
+      await instance.approvePriceChange({from: owner})
+      const postOwnerApprovalRequestPrice = (await instance.getPendingPriceChange()).toNumber()
+      expect(postOwnerApprovalRequestPrice).to.eql(secondPriceChange)
+      const postOwnerApprovalPrice = (await instance.getPrice()).toNumber()
+      expect(postOwnerApprovalPrice).to.eql(currentPrice)
+
+      /* Only approver can approve */
+      await instance.approvePriceChange({from: investorOne})
+      const postInvestorApprovalRequestPrice = (await instance.getPendingPriceChange()).toNumber()
+      expect(postInvestorApprovalRequestPrice).to.eql(secondPriceChange)
+      const postInvestorApprovalPrice = (await instance.getPrice()).toNumber()
+      expect(postInvestorApprovalPrice).to.eql(currentPrice)
+
+      /* Approver approves and price changes */
+      await instance.approvePriceChange({from: approver})
+      const postApprovalRequestPrice = (await instance.getPendingPriceChange()).toNumber()
+      expect(postApprovalRequestPrice).to.eql(0)
+      const postApprovalPrice = (await instance.getPrice()).toNumber()
+      expect(postApprovalPrice).to.eql(secondPriceChange)
+
+      await instance.approvePriceChange({from: approver})
+      const secondApprovalPrice = (await instance.getPrice()).toNumber()
+      expect(secondApprovalPrice).to.eql(postApprovalPrice)
     })
   })
 })
