@@ -9,6 +9,7 @@ contract('AbxToken', function(accounts) {
   const investorOne = accounts[1]
   const investorTwo = accounts[2]
   const approver = accounts[3]
+  const trustAccount = accounts[4]
   const revertMessage = 'VM Exception while processing transaction: revert'
 	let instance
   const tokenSupply = 1000000
@@ -28,6 +29,21 @@ contract('AbxToken', function(accounts) {
 	beforeEach(async () => {
     instance = await AbxToken.new()
     await instance.setApprover(approver, {from: owner})
+    await instance.setTrustAccount(trustAccount, {from: owner})
+  })
+
+  describe('setting special accounts', () => {
+    it('does not allow to change approver', async () => {
+      await instance.setApprover(investorOne, {from: owner})
+      const isInvestorApprover = await instance.isApprover({from: investorOne})
+      expect(isInvestorApprover).to.eql(false)
+    })
+
+    it('does not allow to change trustAccount', async () => {
+      await instance.setTrustAccount(investorOne, {from: owner})
+      const isInvestorTrustAccount = await instance.isTrustAccount({from: investorOne})
+      expect(isInvestorTrustAccount).to.eql(false)
+    })
   })
   
   describe('adminTransfers', () => {
@@ -90,6 +106,12 @@ contract('AbxToken', function(accounts) {
       await instance.approveTransfer(transfer, {from: approver})
       const secondTransferBalance = (await instance.balanceOf(investorOne)).toNumber()
       expect(secondTransferBalance).to.eql(postTransferBalance)
+    })
+  })
+
+  describe('trust account transfers', () => {
+    it('requires multisignature transfer', async () => {
+
     })
   })
 
@@ -163,7 +185,22 @@ contract('AbxToken', function(accounts) {
       let newInvestorQty = (await instance.balanceOf(investorOne)).toNumber()
       expect(newOwnerQty).to.eql(originalOwnerQty)
       expect(newInvestorQty).to.eql(originalInvestorQty)
+    })
 
+    it('allows people to transfer back to owner at any time', async () => {
+      await approveTransferToAddress(investorOne, 100)
+      
+      const initialOwnerBalance = (await instance.balanceOf(owner)).toNumber()
+      const initialInvestorBalance = (await instance.balanceOf(investorOne)).toNumber()
+      expect(initialOwnerBalance).to.eql(tokenSupply - 100)
+      expect(initialInvestorBalance).to.eql(100)
+
+      await instance.transfer(owner, 50, {from: investorOne})
+
+      const postTransferOwnerBalance = (await instance.balanceOf(owner)).toNumber()
+      const postTransferInvestorBalance = (await instance.balanceOf(investorOne)).toNumber()
+      expect(postTransferOwnerBalance).to.eql(tokenSupply - 100 + 50)
+      expect(postTransferInvestorBalance).to.eql(50)
     })
   })
 

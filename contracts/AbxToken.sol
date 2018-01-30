@@ -9,6 +9,8 @@ contract AbxToken is BasicToken, Ownable {
   string public symbol = "ABXT";
   uint8 public decimals = 0;
   address public approver = address(0);
+  address public trustAccount = address(0);
+
   address[] public transfers;
 
 	/* This is 0.1 ETH */
@@ -23,6 +25,40 @@ contract AbxToken is BasicToken, Ownable {
   function AbxToken() public {
     totalSupply = INITIAL_SUPPLY;
     balances[msg.sender] = INITIAL_SUPPLY;
+  }
+  /* We will use this check to determine if the person viewing the page is the owner of the smart contract */
+	function isOwner() public view returns (bool) {
+		return owner == msg.sender;
+	}
+
+  function isApprover() public view returns (bool) {
+    return approver == msg.sender;
+  }
+
+  function isTrustAccount() public view returns (bool) {
+    return trustAccount == msg.sender;
+  }
+
+  function setApprover(address newApprover) public onlyOwner {
+    require(approver == address(0));
+    require(newApprover != owner);
+    require(newApprover != trustAccount);
+    approver = newApprover;
+  } 
+
+  function getApprover() public view returns (address) {
+    return approver;
+  }
+
+  function setTrustAccount(address newTrust) public onlyOwner {
+    require(trustAccount == address(0));
+    require(newTrust != owner);
+    require(newTrust != approver);
+    trustAccount = newTrust;
+  }
+
+  function getTrustAccount() public view returns (address) {
+    return trustAccount;
   }
 
   /* Multi-Signature on Transferable state */
@@ -81,15 +117,25 @@ contract AbxToken is BasicToken, Ownable {
   }
 
   function transfer(address _to, uint256 _value) public returns (bool) {
-    require(isTransferable == true);
+    if (_to != owner) {
+      require(isTransferable == true);
+    }
     require(msg.sender != owner);
     return _transfer(_to, msg.sender, _value);
   }
 
-  function adminTransfer(address _to, uint32 _quantity) public onlyOwner {
-    MultiSigTransfer newTransfer = new MultiSigTransfer(_quantity, _to);
+  function trustTransfer(address to, uint32 quantity) public {
+    require(msg.sender == trustAccount);
+    newMultiSigTransfer(trustAccount, to, quantity);
+  }
+
+  function adminTransfer(address to, uint32 quantity) public onlyOwner {
+    newMultiSigTransfer(owner, to, quantity);
+  }
+
+  function newMultiSigTransfer(address from, address to, uint32 quantity) internal {
+    address newTransfer = new MultiSigTransfer(quantity, to, from);
     transfers.push(newTransfer);
-    // return address(newTransfer);
   }
 
   function approveTransfer(address approvedTransfer) public returns (bool) {
@@ -97,8 +143,9 @@ contract AbxToken is BasicToken, Ownable {
     MultiSigTransfer transferToApprove = MultiSigTransfer(approvedTransfer);
     uint32 transferQuantity = transferToApprove.getQuantity();
     address deliveryAddress = transferToApprove.getTargetAddress();
+    address fromAddress = transferToApprove.getFromAddress();
     transferToApprove.approveTransfer();
-    return _transfer(deliveryAddress, owner, transferQuantity);
+    return _transfer(deliveryAddress, fromAddress, transferQuantity);
   }
 
   /* This is a payable copy of the above function that, when the correct eth is provided, moves tokens from
@@ -149,19 +196,6 @@ contract AbxToken is BasicToken, Ownable {
 		return pricePerTokenInWei;
 	}
 
-  /* We will use this check to determine if the person viewing the page is the owner of the smart contract */
-	function isOwner() public view returns (bool) {
-		return owner == msg.sender;
-	}
-
-  function setApprover(address newApprover) public onlyOwner {
-    require(approver == address(0));
-    approver = newApprover;
-  } 
-
-  function isApprover() public view returns (bool) {
-    return approver == msg.sender;
-  }
 
   function getTransfers() public view returns (address[]) {
     return transfers;
