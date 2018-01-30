@@ -25,16 +25,7 @@ contract AbxToken is BasicToken, Ownable {
     balances[msg.sender] = INITIAL_SUPPLY;
   }
 
-	// /* Allow a the owner of the smart contract to enable transfers by regular holders */
-	// function makeTransferable() public onlyOwner {
-  //   makeTransferableIsPending = true;
-  // }
-
-	// /* Allows the owner to disable transfers of the token */
-	// function disableTransfers() public onlyOwner {
-	// 	disableTransfersIsPending = false;
-  // }
-
+  /* Multi-Signature on Transferable state */
   function getTransferableState() public view returns (bool) {
     return isTransferable;
   }
@@ -55,9 +46,22 @@ contract AbxToken is BasicToken, Ownable {
     toggleTransferablePending = false;
   }
 
-	/* Set price in wei */
-	function setPriceInWei(uint256 tokenPrice) public onlyOwner {
-		pricePerTokenInWei = tokenPrice;
+  /* Multi-Signature on Price Changes */
+  uint256 pendingPriceChange = 0;
+
+  function getPendingPriceChange() public view returns (uint256) {
+    return pendingPriceChange;
+  }
+
+  function requestPriceChange(int priceChangeInEther) public onlyOwner {
+    pendingPriceChange = priceChangeInEther * 1 ether;
+  }
+
+  function approvePriceChange() public {
+    require(msg.sender == approver);
+    require(pendingPriceChange != 0);
+    pricePerTokenInWei = pendingPriceChange;
+    pendingPriceChange = 0;
   }
 
   /**
@@ -109,6 +113,7 @@ contract AbxToken is BasicToken, Ownable {
     return _transfer(msg.sender, owner, quantity);
   }
 
+  /* Multi sig for burning unsold tokens */
   function burnUnsoldTokens() internal {
     uint256 unsoldTokens = balances[owner];
     balances[owner] = balances[owner].sub(unsoldTokens);
