@@ -30,7 +30,6 @@ export class AdminForm extends React.Component<any, any> {
     try {
       this.setState({loading: true})
 
-      console.log(this.props.abxTokenInstance)
       await this.props.abxTokenInstance.adminTransfer(address, amount, {from: this.props.address})
 
       this.setState({
@@ -74,6 +73,20 @@ export class AdminForm extends React.Component<any, any> {
     }
   }
 
+  public async setTrust() {
+    try {
+      this.setState({loading: true})
+
+      await this.props.abxTokenInstance.setTrust(this.state.trustAddress, {from: this.props.address})
+      this.setState({
+        successMessage: `The trust account has now been set`,
+        loading: false,
+      })
+    } catch (e) {
+      this.setState({errorMessage: e.message, loading: false})
+    }
+  }
+
   handleAddressChange(event) {
     this.setState({targetAddress: event.target.value})
   }
@@ -88,6 +101,10 @@ export class AdminForm extends React.Component<any, any> {
 
   handleApproverAddressChange(event) {
     this.setState({approverAddress: event.target.value})
+  }
+
+  handleTrustAddressChange(event) {
+    this.setState({trustAddress: event.target.value})
   }
 
   handleAdminTransfer(event) {
@@ -126,6 +143,18 @@ export class AdminForm extends React.Component<any, any> {
     this.setApprover()
   }
 
+  handleTrustSubmit(event) {
+    event.preventDefault()
+    this.emptyBanners()
+
+    if (!this.state.trustAddress) {
+      this.setState({warningMessage: 'A trust address is required'})
+      return
+    }
+
+    this.setTrust()
+  }
+
   public emptyBanners() {
     this.setState({warningMessage: '', successMessage: '', errorMessage: ''})
   }
@@ -138,27 +167,49 @@ export class AdminForm extends React.Component<any, any> {
             <Wallet {...this.props} />
           </div>
           <div className='col-sm-3'>
-            <h3>Administrative Transfers</h3>
-            <form onSubmit={(ev) => this.handleAdminTransfer(ev)}>
-              <label style={{marginTop: '10px'}}>Target Address</label>
-              <input type='text' className='form-control' value={this.state.targetAddress} onChange={(ev) => this.handleAddressChange(ev)} placeholder='Address'/>
-              <label style={{marginTop: '10px'}}>Quantity of ABXT</label>
-              <input type='number' className='form-control' value={this.state.amount} onChange={(ev) => this.handleAmountChange(ev)} placeholder='Amount'/>
-              <input className='btn btn-primary' type='submit' value='Transfer' style={{marginTop: '10px'}} />
-            </form>
-          </div>
-          <div className='col-sm-3'>
-            <h3>Administrative Price Update</h3>
-            <form onSubmit={(ev) => this.handlePriceSubmit(ev)}>
-              <label style={{marginTop: '10px'}}>Current Price (ETH)</label>
-              <input type='number' className='form-control' value={this.state.currentSellPriceInEther} style={{backgroundColor: '#555555'}} disabled/>
-              <label style={{marginTop: '10px'}}>New Price (ETH)</label>
-              <input type='number' className='form-control' value={this.state.newSellPriceInEther} onChange={(ev) => this.handlePriceChange(ev)} placeholder='Sell Price'/>
-              <input className='btn btn-primary' type='submit' value='Update' style={{marginTop: '10px'}} />
-            </form>
-          </div>
-          <div className='col-sm-3'>
+            <div className='row' style={{marginBottom: '25px'}}>
+              <div className='col-sm-12'>
+                <h3>Administrative Transfers</h3>
+                <form onSubmit={(ev) => this.handleAdminTransfer(ev)}>
+                  <label style={{marginTop: '10px'}}>Target Address</label>
+                  <input type='text' className='form-control' value={this.state.targetAddress} onChange={(ev) => this.handleAddressChange(ev)} placeholder='Address'/>
+                  <label style={{marginTop: '10px'}}>Quantity of ABXT</label>
+                  <input type='number' className='form-control' value={this.state.amount} onChange={(ev) => this.handleAmountChange(ev)} placeholder='Amount'/>
+                  <input className='btn btn-primary' type='submit' value='Transfer' style={{marginTop: '10px'}} />
+                </form>
+              </div>
+            </div>
             <div className='row'>
+              <div className='col-sm-12'>
+                <h3>Make Transferable</h3>
+                <p style={{marginTop: '10px'}}>This allows holders of ABXT to transfer them to each other. This action goes to the approver before being enabled</p>
+                <button className='btn btn-primary' style={{marginTop: '10px'}}>Enable</button>
+              </div>
+            </div> 
+          </div>
+          <div className='col-sm-3'>
+            <div className='row' style={{marginBottom: '25px'}}>
+              <div className='col-sm-12'>
+                <h3>Administrative Price Update</h3>
+                <form onSubmit={(ev) => this.handlePriceSubmit(ev)}>
+                  <label style={{marginTop: '10px'}}>Current Price (ETH)</label>
+                  <input type='number' className='form-control' value={this.state.currentSellPriceInEther} style={{backgroundColor: '#555555'}} disabled/>
+                  <label style={{marginTop: '10px'}}>New Price (ETH)</label>
+                  <input type='number' className='form-control' value={this.state.newSellPriceInEther} onChange={(ev) => this.handlePriceChange(ev)} placeholder='Sell Price'/>
+                  <input className='btn btn-primary' type='submit' value='Update' style={{marginTop: '10px'}} />
+                </form>
+              </div>
+            </div>
+            <div className='row'>
+              <div className='col-sm-12'>
+                <h3>End Crowdsale</h3>
+                <p style={{marginTop: '10px'}}>This action will be approved prior to the remaining tokens being burnt</p>
+                <button className='btn btn-primary' style={{marginTop: '10px'}}>End and Burn</button>
+              </div>
+            </div> 
+          </div>
+          <div className='col-sm-3'>
+            <div className='row' style={{marginBottom: '25px'}}>
               <div className='col-sm-12'>
                 <h3>Configure Approver</h3>
                 <form onSubmit={(ev) => this.handleApproverSubmit(ev)}>
@@ -170,9 +221,12 @@ export class AdminForm extends React.Component<any, any> {
             </div> 
             <div className='row'>
               <div className='col-sm-12'>
-                <h3>End Crowdsale</h3>
-                <p style={{marginTop: '10px'}}>This action will be approved prior to the remaining tokens being burnt</p>
-                <button className='btn btn-primary' style={{marginTop: '10px'}}>End and Burn</button>
+                <h3>Configure Trust Address</h3>
+                <form onSubmit={(ev) => this.handleTrustSubmit(ev)}>
+                  <label style={{marginTop: '10px'}}>Trust Address</label>
+                  <input type='text' className='form-control' value={this.state.trustAddress} onChange={(ev) => this.handleTrustAddressChange(ev)} placeholder='Address'/>
+                  <input className='btn btn-primary' type='submit' value='Set' style={{marginTop: '10px'}} />
+                </form>
               </div>
             </div> 
           </div>

@@ -11,50 +11,26 @@ export class ApproverForm extends React.Component<any, any> {
       successMessage: '',
       errorMessage: '',
       warningMessage: '',
-      targetAddress: '',
-      amount: 0,
-      currentSellPriceInWei: 0,
-      currentSellPriceInEther: 0,
-      newSellPriceInWei: 0,
-      newSellPriceInEther: 0,
+      pendingPriceChange: 0,
+      pendingMakeTransferable: false,
+      pendingBurn: false,
       loading: false
     }
   }
 
-  async componentWillMount () {
+  public async componentDidMount() {
+    const pendingBurn = await this.props.abxTokenInstance.isBurnPending()
+    this.setState({pendingBurn})
   }
 
-  async approveTransfer(transferAddress: string) {
+  public async endCrowdsale() {
     try {
+      this.emptyBanners()
       this.setState({loading: true})
 
-      await this.props.abxTokenInstance.approveTransfer(transferAddress, {from: this.props.address})
-
+      await this.props.abxTokenInstance.approveBurn({from: this.props.address})
       this.setState({
-        successMessage: `
-          Transfer successfully approved. It will take >10 minutes for the balance change to reflect
-          You can inspect your address (${this.props.address}) at https://etherscan.io/
-        `,
-        loading: false
-      })
-    } catch (e) {
-      if (e.message === `new BigNumber() not a number: ${transferAddress}`) {
-        this.setState({errorMessage: 'Invalid target address', loading: false})
-      } else {
-        this.setState({errorMessage: e.message, loading: false})
-      }
-    }
-  }
-
-  async updateSellPrice() {
-    try {
-      this.setState({loading: true})
-
-      await this.props.abxTokenInstance.setPriceInWei(this.state.newSellPriceInWei, {from: this.props.address})
-      this.setState({
-        successMessage: `
-          ABXT price update successful. It will take >10 minutes for this to be reflected
-        `,
+        successMessage: `ABXT crowdsale complete`,
         loading: false,
       })
     } catch (e) {
@@ -62,72 +38,65 @@ export class ApproverForm extends React.Component<any, any> {
     }
   }
 
-  handleAddressChange(event) {
-    this.setState({targetAddress: event.target.value})
-  }
+  public async cancelBurn() {
+    try {
+      this.emptyBanners()
+      this.setState({loading: true})
 
-  handleAmountChange(event) {
-    this.setState({amount: event.target.value})
-  }
-
-  handlePriceChange(event) {
-    this.setState({newSellPriceInEther: event.target.value, newSellPriceInWei: convertEtherToWei(event.target.value)})
-  }
-
-  handleAdminTransfer(event) {
-    event.preventDefault()
-    this.setState({warningMessage: ''})
-    this.setState({successMessage: ''})
-    this.setState({errorMessage: ''})
-
-    if (!this.state.targetAddress || !this.state.amount) {
-      this.setState({warningMessage: 'Both a target address and amount are required'})
-      return
+      await this.props.abxTokenInstance.cancelBurn({from: this.props.address})
+      this.setState({
+        successMessage: `Burn cancelled`,
+        loading: false,
+      })
+    } catch (e) {
+      this.setState({errorMessage: e.message, loading: false})
     }
-
-    this.approveTransfer(this.state.targetAddress)
   }
 
-  handlePriceSubmit(event) {
-    event.preventDefault()
-    this.setState({warningMessage: ''})
-    this.setState({successMessage: ''})
-    this.setState({errorMessage: ''})
-
-    if (!this.state.newSellPriceInWei) {
-      this.setState({warningMessage: 'The sell price must be bigger than 0'})
-      return
-    }
-
-    this.updateSellPrice()
+  public emptyBanners() {
+    this.setState({warningMessage: '', successMessage: '', errorMessage: ''})
   }
 
   render() {
     return (
       <div>
         <div className='row'>
-          <div className='col-sm-4'>
+          <div className='col-sm-3'>
             <Wallet {...this.props} />
           </div>
-          <div className='col-sm-4'>
-            <h3>Administrative Transfers</h3>
-            <form onSubmit={(ev) => this.handleAdminTransfer(ev)}>
-              <label style={{marginTop: '10px'}}>Target Address</label>
-              <input type='text' className='form-control' value={this.state.targetAddress} onChange={(ev) => this.handleAddressChange(ev)} placeholder='Address'/>
-              <label style={{marginTop: '10px'}}>Quantity of ABXT</label>
-              <input type='number' className='form-control' value={this.state.amount} onChange={(ev) => this.handleAmountChange(ev)} placeholder='Amount'/>
-              <input className='btn btn-primary' type='submit' value='Transfer' style={{marginTop: '10px'}} />
-            </form>
+          <div className='col-sm-3'>
+            <h3>Make ABXT Transferable</h3>
+            { this.state.pendingMakeTransferable ? (
+              <div>
+                <p style={{marginTop: '10px'}}>This allows holders of ABXT to transfer them to each other. Proceed with caution.</p>
+                <button className='btn btn-primary' style={{marginTop: '10px'}}>Enable</button>
+              </div>
+            ) : (
+              <p style={{marginTop: '10px'}}>The ABXT Owner has not yet requested this.</p>
+            ) }
           </div>
-          <div className='col-sm-4'>
-            <h3>Administrative Price Update</h3>
-            <form onSubmit={(ev) => this.handlePriceSubmit(ev)}>
-              <label style={{marginTop: '10px'}}>Current Price (ETH)</label>
-              <input type='number' className='form-control' value={this.state.currentSellPriceInEther} style={{backgroundColor: '#555555'}} disabled/>
-              <label style={{marginTop: '10px'}}>New Price (ETH)</label>
-              <input type='number' className='form-control' value={this.state.newSellPriceInEther} onChange={(ev) => this.handlePriceChange(ev)} placeholder='Sell Price'/>
-              <input className='btn btn-primary' type='submit' value='Update' style={{marginTop: '10px'}} />
-            </form>
+          <div className='col-sm-3'>
+            <h3>End Crowdsale</h3>
+            { this.state.pendingBurn ? (
+              <div>
+                <p style={{marginTop: '10px'}}>Approving this will permanently end the crowdsale. Proceed with caution.</p>
+                <button className='btn btn-primary' style={{marginTop: '10px'}} onClick={() => this.endCrowdsale()}>End Crowdsale</button>
+                <button className='btn btn-warning' style={{marginTop: '10px'}} onClick={() => this.cancelBurn()}>Cancel Burn</button>
+              </div>
+            ) : (
+              <p style={{marginTop: '10px'}}>The ABXT Owner has not yet requested this</p>
+            ) }
+          </div>
+          <div className='col-sm-3'>
+            <h3>Approve Price Change</h3>
+            { this.state.pendingPriceChange !== 0 ? (
+              <div>
+                <p style={{marginTop: '10px'}}>The pending price change is {this.state.pendingPriceChange}</p>
+                <button className='btn btn-primary' style={{marginTop: '10px'}}>End Crowdsale</button>
+              </div>
+            ) : (
+              <p style={{marginTop: '10px'}}>The ABXT Owner has no price change pending.</p>
+            ) }
           </div>
         </div>
         <div className='row'>
