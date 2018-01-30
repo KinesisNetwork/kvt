@@ -17,14 +17,47 @@ export class AdminForm extends React.Component<any, any> {
       currentSellPriceInEther: 0,
       newSellPriceInWei: 0,
       newSellPriceInEther: 0,
-      loading: false
+      loading: false,
+      pendingBurn: false
     }
   }
 
-  public async componentWillMount () {
+  public async componentDidMount () {
     const currentSellPriceInWei = (await this.props.abxTokenInstance.getPrice()).toNumber()
-    this.setState({currentSellPriceInWei, currentSellPriceInEther: convertWeiToEther(currentSellPriceInWei)})
+    const pendingBurn = await this.props.abxTokenInstance.isBurnPending()
+    this.setState({currentSellPriceInWei, currentSellPriceInEther: convertWeiToEther(currentSellPriceInWei), pendingBurn})
   }
+
+  public async startBurn() {
+    try {
+      this.emptyBanners()
+      this.setState({loading: true})
+
+      await this.props.abxTokenInstance.startBurn({from: this.props.address})
+      this.setState({
+        successMessage: `Request for burn submitted to the approver`,
+        loading: false,
+      })
+    } catch (e) {
+      this.setState({errorMessage: e.message, loading: false})
+    }
+  }
+
+  public async cancelBurn() {
+    try {
+      this.emptyBanners()
+      this.setState({loading: true})
+
+      await this.props.abxTokenInstance.cancelBurn({from: this.props.address})
+      this.setState({
+        successMessage: `Burn cancelled`,
+        loading: false,
+      })
+    } catch (e) {
+      this.setState({errorMessage: e.message, loading: false})
+    }
+  }
+
 
   public async transferToAddress(address, amount) {
     try {
@@ -203,8 +236,17 @@ export class AdminForm extends React.Component<any, any> {
             <div className='row'>
               <div className='col-sm-12'>
                 <h3>End Crowdsale</h3>
-                <p style={{marginTop: '10px'}}>This action will be approved prior to the remaining tokens being burnt</p>
-                <button className='btn btn-primary' style={{marginTop: '10px'}}>End and Burn</button>
+                { this.state.pendingBurn ? (
+                  <div>
+                    <p style={{marginTop: '10px'}}>Cancel the burn request. This will be effective immediately</p>
+                    <button className='btn btn-warning' style={{marginTop: '10px'}} onClick={() => this.cancelBurn()}>Cancel Burn</button>
+                  </div>
+                ) : (
+                  <div>
+                    <p style={{marginTop: '10px'}}>This action will be approved prior to the remaining tokens being burnt</p>
+                    <button className='btn btn-primary' style={{marginTop: '10px'}} onClick={() => this.startBurn()}>Request Burn</button>
+                  </div>
+                ) }
               </div>
             </div> 
           </div>
