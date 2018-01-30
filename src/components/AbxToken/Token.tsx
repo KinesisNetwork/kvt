@@ -82,9 +82,9 @@ export class Token extends React.Component<any, any> {
           <div className='row'>
             {this.state.noWeb3 && <NoWeb3/>}
             {this.state.noAddress && <NoAddress/>}
-            {this.state.isAdmin && <AdminForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} />}
-            {this.state.isApprover && <ApproverForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} />}
-            {!this.state.isAdmin && !this.state.isApprover && this.state.address && <ClientForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} />}
+            {this.state.isAdmin && <AdminForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} web3Provider={this.state.web3Provider} />}
+            {this.state.isApprover && <ApproverForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} web3Provider={this.state.web3Provider} />}
+            {!this.state.isAdmin && !this.state.isApprover && this.state.address && <ClientForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} web3Provider={this.state.web3Provider} />}
           </div>
         </section>
       </div>

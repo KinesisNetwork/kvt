@@ -1,11 +1,19 @@
 import * as React from 'react'
 import { Spinner } from './Spinner'
 const transferDefinition = require('../../../build/contracts/MultiSigTransfer.json')
+const TruffleContract = require('truffle-contract')
 
 export interface Transfer {
   targetAddress: string
   quantity: number
   pending: boolean
+  contractAddress: string
+}
+
+const wellOverwride = {
+  backgroundColor: 'rgb(85, 85, 85)',
+  color: 'white',
+  border: 0
 }
 
 export class Transfers extends React.Component<any, { transfers: Transfer[], isApprover: boolean, loading: boolean }> {
@@ -21,29 +29,35 @@ export class Transfers extends React.Component<any, { transfers: Transfer[], isA
   public async loadTransfers() {
     const inst = this.props.abxTokenInstance
     if (inst) {
-      const isApprover = await inst.isApprover()
+      const isApprover = await inst.isApprover({from: this.props.address})
       const transferAddresses = await inst.getTransfers()
       const transferPromises: Promise<Transfer>[] = transferAddresses.map(async (ta: string): Promise<Transfer> => {
-        const transferInstance = await transferDefinition.at(ta)
+        const w: any = window
+        const transferContract = TruffleContract(transferDefinition)
+        transferContract.setProvider(this.props.web3Provider)
+        const transferInstance = await transferContract.at(ta)
+
         const [targetAddress, quantity, pending] = await Promise.all([
           transferInstance.getTargetAddress(),
           transferInstance.getQuantity(),
           transferInstance.isPending()
         ])
 
-        return { targetAddress, quantity: quantity.toNumber(), pending } as Transfer
+        return { targetAddress, quantity: quantity.toNumber(), pending, contractAddress: ta } as Transfer
       })
 
       const transfers = await Promise.all(transferPromises)
 
       this.setState({transfers, isApprover})
+
+      console.log(isApprover)
     }
   }
 
-  public async approveTransfer(transferAddress: string) {
+  public async approveTransfer(contractAddress: string) {
     try {
       this.setState({loading: true})
-      await this.props.abxTokenInstance.approveTransfer(transferAddress, {from: this.props.address})
+      await this.props.abxTokenInstance.approveTransfer(contractAddress, {from: this.props.address})
       await this.loadTransfers()
       this.setState({loading: false})
     } catch (e) {
@@ -54,11 +68,11 @@ export class Transfers extends React.Component<any, { transfers: Transfer[], isA
   public renderTransfers() {
     return this.state.transfers.map((t: Transfer) => {
       return (
-        <div className='well'>
+        <div className='well' style={wellOverwride}>
           <strong>Target Address: </strong>{t.targetAddress}&nbsp;
           <strong>ABXT: </strong>{t.quantity}&nbsp;
           { t.pending && !this.state.isApprover && <span className='label label-info'>Pending</span> }
-          { t.pending && this.state.isApprover && <button onClick={() => this.approveTransfer(t.targetAddress)} className='btn btn-success'>Approve</button> }
+          { t.pending && this.state.isApprover && <button onClick={() => this.approveTransfer(t.contractAddress)} className='btn btn-success'>Approve</button> }
           { !t.pending && <span className='label label-success'>Complete</span> }
         </div>
       )
@@ -71,6 +85,7 @@ export class Transfers extends React.Component<any, { transfers: Transfer[], isA
         { this.state.transfers.length > 0 && 
           <div>
             <h3>Transfers</h3>
+            { this.renderTransfers() }
             { this.state.loading && <Spinner /> }
           </div>
         }
