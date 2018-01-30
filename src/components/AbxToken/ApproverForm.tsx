@@ -14,13 +14,32 @@ export class ApproverForm extends React.Component<any, any> {
       pendingPriceChange: 0,
       pendingMakeTransferable: false,
       pendingBurn: false,
-      loading: false
+      loading: false,
+      transferPending: false,
+      transferable: false
     }
   }
 
   public async componentDidMount() {
     const pendingBurn = await this.props.abxTokenInstance.isBurnPending()
-    this.setState({pendingBurn})
+    const transferPending = await this.props.abxTokenInstance.isToggleTransferablePending()
+    const transferable = await this.props.abxTokenInstance.getTransferableState()
+    this.setState({pendingBurn, transferable, transferPending})
+  }
+
+  public async approveTransferableToggle() {
+    try {
+      this.emptyBanners()
+      this.setState({loading: true})
+
+      await this.props.abxTokenInstance.approveTransferableToggle({from: this.props.address})
+      this.setState({
+        successMessage: `Transferable state updated`,
+        loading: false,
+      })
+    } catch (e) {
+      this.setState({errorMessage: e.message, loading: false})
+    }
   }
 
   public async endCrowdsale() {
@@ -66,13 +85,14 @@ export class ApproverForm extends React.Component<any, any> {
           </div>
           <div className='col-sm-3'>
             <h3>Make ABXT Transferable</h3>
-            { this.state.pendingMakeTransferable ? (
+            <p style={{marginTop: '10px'}}>The ABXT is currently <strong>{this.state.transferable ? 'transferable' : 'non-transferable'}</strong></p>
+            { this.state.transferPending ? (
               <div>
-                <p style={{marginTop: '10px'}}>This allows holders of ABXT to transfer them to each other. Proceed with caution.</p>
-                <button className='btn btn-primary' style={{marginTop: '10px'}}>Enable</button>
+                <p>The owner has requested updating the transferable status to <strong>{this.state.transferable ? 'non-transferable' : 'transferable'}</strong></p>
+                <button className='btn btn-primary' style={{marginTop: '10px'}} onClick={() => this.approveTransferableToggle()}>Approve</button>
               </div>
             ) : (
-              <p style={{marginTop: '10px'}}>The ABXT Owner has not yet requested this.</p>
+              <p>No state change pending</p>
             ) }
           </div>
           <div className='col-sm-3'>

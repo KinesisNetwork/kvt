@@ -18,14 +18,33 @@ export class AdminForm extends React.Component<any, any> {
       newSellPriceInWei: 0,
       newSellPriceInEther: 0,
       loading: false,
-      pendingBurn: false
+      pendingBurn: false,
+      transferable: false,
+      transferPending: false
     }
   }
 
   public async componentDidMount () {
     const currentSellPriceInWei = (await this.props.abxTokenInstance.getPrice()).toNumber()
     const pendingBurn = await this.props.abxTokenInstance.isBurnPending()
-    this.setState({currentSellPriceInWei, currentSellPriceInEther: convertWeiToEther(currentSellPriceInWei), pendingBurn})
+    const transferPending = await this.props.abxTokenInstance.isToggleTransferablePending()
+    const transferable = await this.props.abxTokenInstance.getTransferableState()
+    this.setState({currentSellPriceInWei, currentSellPriceInEther: convertWeiToEther(currentSellPriceInWei), pendingBurn, transferable, transferPending})
+  }
+
+  public async makeTransferable(enable: boolean) {
+    try {
+      this.emptyBanners()
+      this.setState({loading: true})
+
+      await this.props.abxTokenInstance.setTransferable(enable, {from: this.props.address})
+      this.setState({
+        successMessage: `Request for transfer status change sent to the approver`,
+        loading: false,
+      })
+    } catch (e) {
+      this.setState({errorMessage: e.message, loading: false})
+    }
   }
 
   public async startBurn() {
@@ -215,8 +234,18 @@ export class AdminForm extends React.Component<any, any> {
             <div className='row'>
               <div className='col-sm-12'>
                 <h3>Make Transferable</h3>
-                <p style={{marginTop: '10px'}}>This allows holders of ABXT to transfer them to each other. This action goes to the approver before being enabled</p>
-                <button className='btn btn-primary' style={{marginTop: '10px'}}>Enable</button>
+                <p style={{marginTop: '10px'}}>The ABXT is currently <strong>{this.state.transferable ? 'transferable' : 'non-transferable'}</strong></p>
+                { this.state.transferPending ? (
+                  <p>A transfer state change is currently pending with the approver</p>
+                ) : (
+                  <div>
+                    { this.state.transferable ? (
+                      <button className='btn btn-primary' style={{marginTop: '10px'}} onClick={() => this.makeTransferable(false)}>Disable</button>
+                    ) : (
+                      <button className='btn btn-primary' style={{marginTop: '10px'}} onClick={() => this.makeTransferable(true)}>Enable</button>
+                    ) }
+                  </div>
+                ) }
               </div>
             </div> 
           </div>
