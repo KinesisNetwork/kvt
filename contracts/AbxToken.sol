@@ -53,8 +53,8 @@ contract AbxToken is BasicToken, Ownable {
     return pendingPriceChange;
   }
 
-  function requestPriceChange(int priceChangeInEther) public onlyOwner {
-    pendingPriceChange = priceChangeInEther * 1 ether;
+  function requestPriceChange(uint priceChangeInWei) public onlyOwner {
+    pendingPriceChange = priceChangeInWei;
   }
 
   function approvePriceChange() public {
@@ -124,7 +124,8 @@ contract AbxToken is BasicToken, Ownable {
     burnIsPending = true;
   }
 
-  function cancelBurn() public onlyOwner {
+  function cancelBurn() public {
+    require(msg.sender == owner || msg.sender == approver);
     burnIsPending = false;
   }
 
