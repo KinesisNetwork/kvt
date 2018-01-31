@@ -109,12 +109,6 @@ contract('AbxToken', function(accounts) {
     })
   })
 
-  describe('trust account transfers', () => {
-    it('requires multisignature transfer', async () => {
-
-    })
-  })
-
   describe('AbxToken -- Constructor', () => {
     it('correctly sets the total supply to owner on contract initialisation', async () => {
       let newToken = await AbxToken.new()
@@ -435,7 +429,7 @@ contract('AbxToken', function(accounts) {
     })
   })
 
-  describe.only('trust transfers are multisig', () => {
+  describe('trust transfers are multisig', () => {
     it('does not allow trust account to make normal transfers', async () => {
       await approveTransferToAddress(trustAccount, 500)      
       const trustBalance = (await instance.balanceOf(trustAccount)).toNumber()
