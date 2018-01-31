@@ -466,4 +466,5 @@ contract('AbxToken', function(accounts) {
       const postApprovalInvestorBalance = (await instance.balanceOf(investorOne)).toNumber()
       expect(postApprovalInvestorBalance).to.eql(250)
     })
+  })
 })
