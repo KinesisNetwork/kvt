@@ -30,7 +30,7 @@ export class Transfers extends React.Component<any, { transfers: Transfer[], isA
     const inst = this.props.abxTokenInstance
     if (inst) {
       const isApprover = await inst.isApprover({from: this.props.address})
-      const transferAddresses = await inst.getTransfers()
+      const transferAddresses = (await inst.getTransfers()).reverse()
       const transferPromises: Promise<Transfer>[] = transferAddresses.map(async (ta: string): Promise<Transfer> => {
         const w: any = window
         const transferContract = TruffleContract(transferDefinition)
