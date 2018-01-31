@@ -8,10 +8,12 @@ contract MultiSigTransfer is Ownable {
   bool public complete = false;
   uint32 public quantity;
   address public targetAddress;
+  address public fromAddress;
 
-  function MultiSigTransfer(uint32 quantityIn, address targetAddressIn) public {
+  function MultiSigTransfer(uint32 quantityIn, address targetAddressIn, address fromAddressIn) public {
     quantity = quantityIn;
     targetAddress = targetAddressIn;
+    fromAddress = fromAddressIn;
   }
 
   function approveTransfer() public onlyOwner {
@@ -25,6 +27,10 @@ contract MultiSigTransfer is Ownable {
 
   function getTargetAddress() public view returns (address) {
     return targetAddress;
+  }
+
+  function getFromAddress() public view returns (address) {
+    return fromAddress;
   }
 
   function isPending() public view returns (bool) {
