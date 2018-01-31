@@ -434,4 +434,36 @@ contract('AbxToken', function(accounts) {
       expect(secondApprovalPrice).to.eql(postApprovalPrice)
     })
   })
+
+  describe.only('trust transfers are multisig', () => {
+    it('does not allow trust account to make normal transfers', async () => {
+      await approveTransferToAddress(trustAccount, 500)      
+      const trustBalance = (await instance.balanceOf(trustAccount)).toNumber()
+      expect(trustBalance).to.eql(500)
+
+      await instance.transfer(investorOne, 250, {from: trustAccount})
+      const newTrustBalance = (await instance.balanceOf(trustAccount)).toNumber()
+      expect(newTrustBalance).to.eql(500)
+      const newInvestorBalance = (await instance.balanceOf(investorOne)).toNumber()
+      expect(newInvestorBalance).to.eql(0)
+    })
+
+    it('sets a transfer from the trust account to be approved', async () => {
+      await approveTransferToAddress(trustAccount, 500)
+      await instance.trustTransfer(investorOne, 250, {from: trustAccount})
+
+      const preApprovalTrustBalance = (await instance.balanceOf(trustAccount)).toNumber()
+      expect(preApprovalTrustBalance).to.eql(500)
+      const preApprovalInvestorBalance = (await instance.balanceOf(investorOne)).toNumber()
+      expect(preApprovalInvestorBalance).to.eql(0)
+
+      /* Since a transfer has already occurred */
+      const transfer = (await instance.getTransfers())[1]
+      await instance.approveTransfer(transfer, {from: approver})
+
+      const postApprovalTrustBalance = (await instance.balanceOf(trustAccount)).toNumber()
+      expect(postApprovalTrustBalance).to.eql(250)
+      const postApprovalInvestorBalance = (await instance.balanceOf(investorOne)).toNumber()
+      expect(postApprovalInvestorBalance).to.eql(250)
+    })
 })
