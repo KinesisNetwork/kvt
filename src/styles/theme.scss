@@ -509,7 +509,7 @@ header{
 ======================================== --*/
 .banner{
 	height: 100vh;
-	background: url('/images/bg/1.jpg') center top no-repeat;
+	background: url('/images/website-assets/HeroPhotoshop.png') center top no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
 	position: relative;
@@ -633,9 +633,12 @@ header{
 .services .col-sm-4{
 	padding: 0;
 }
+.services  {
+	background: #212121 url('/images/website-assets/WhatKinesisOfferBackground.png') top;
+}
 .services .content{
 	padding: 30px;
-	cursor: pointer;
+	// cursor: pointer;
 	position: relative;
 	text-align: center;
 	-webkit-transition: all .5s ease;
@@ -670,8 +673,8 @@ header{
 	transition: all .5s ease;
 }
 .services .content:hover{
-	background-color: $primary_color;
-	color: $secondary_color;
+	// background-color: $primary_color;
+	// color: $secondary_color;
 	font-weight: 700;
 }
 /*-- 8.others css
@@ -1370,6 +1373,9 @@ header{
 #map {
 	width: 100%;
 	height: 400px;
+}
+.contact {
+	background: url('/images/website-assets/ContactUs.png') tlp;
 }
 .form-control,
 .contact .widget .form-control{
