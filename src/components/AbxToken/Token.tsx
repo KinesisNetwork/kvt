@@ -41,7 +41,7 @@ export class Token extends React.Component<any, any> {
       } catch (e) {
         console.log(e)
       }
-    }, 1000)
+    }, 2000)
   }
 
   public refreshEthState () {

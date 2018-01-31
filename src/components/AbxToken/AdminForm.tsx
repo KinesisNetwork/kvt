@@ -20,7 +20,7 @@ export class AdminForm extends React.Component<any, any> {
       loading: false,
       pendingBurn: false,
       transferable: false,
-      transferPending: false
+      transferPending: false,
     }
   }
 
@@ -101,9 +101,9 @@ export class AdminForm extends React.Component<any, any> {
     try {
       this.setState({loading: true})
 
-      await this.props.abxTokenInstance.setPriceInWei(this.state.newSellPriceInWei, {from: this.props.address})
+      await this.props.abxTokenInstance.requestPriceChange(this.state.newSellPriceInWei, {from: this.props.address})
       this.setState({
-        successMessage: `ABXT price update submitted to the approver.`,
+        successMessage: `ABXT price update submitted to the approver. Any further submission against this form will overwride the pending request`,
         loading: false,
       })
     } catch (e) {

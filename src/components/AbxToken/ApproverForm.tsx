@@ -11,7 +11,8 @@ export class ApproverForm extends React.Component<any, any> {
       successMessage: '',
       errorMessage: '',
       warningMessage: '',
-      pendingPriceChange: 0,
+      pendingPriceChangeInWei: 0,
+      pendingPriceChangeInEth: 0,
       pendingMakeTransferable: false,
       pendingBurn: false,
       loading: false,
@@ -24,7 +25,9 @@ export class ApproverForm extends React.Component<any, any> {
     const pendingBurn = await this.props.abxTokenInstance.isBurnPending()
     const transferPending = await this.props.abxTokenInstance.isToggleTransferablePending()
     const transferable = await this.props.abxTokenInstance.getTransferableState()
-    this.setState({pendingBurn, transferable, transferPending})
+    const pendingPriceChangeInWei = (await this.props.abxTokenInstance.getPendingPriceChange()).toNumber()
+    const pendingPriceChangeInEth = convertWeiToEther(pendingPriceChangeInWei)
+    this.setState({pendingBurn, transferable, transferPending, pendingPriceChangeInWei, pendingPriceChangeInEth})
   }
 
   public async approveTransferableToggle() {
@@ -35,6 +38,21 @@ export class ApproverForm extends React.Component<any, any> {
       await this.props.abxTokenInstance.approveTransferableToggle({from: this.props.address})
       this.setState({
         successMessage: `Transferable state updated`,
+        loading: false,
+      })
+    } catch (e) {
+      this.setState({errorMessage: e.message, loading: false})
+    }
+  }
+
+  public async approvePriceChange() {
+    try {
+      this.emptyBanners()
+      this.setState({loading: true})
+
+      await this.props.abxTokenInstance.approvePriceChange({from: this.props.address})
+      this.setState({
+        successMessage: `ABXT price updated`,
         loading: false,
       })
     } catch (e) {
@@ -109,10 +127,10 @@ export class ApproverForm extends React.Component<any, any> {
           </div>
           <div className='col-sm-3'>
             <h3>Approve Price Change</h3>
-            { this.state.pendingPriceChange !== 0 ? (
+            { this.state.pendingPriceChangeInWei !== 0 ? (
               <div>
-                <p style={{marginTop: '10px'}}>The pending price change is {this.state.pendingPriceChange}</p>
-                <button className='btn btn-primary' style={{marginTop: '10px'}}>End Crowdsale</button>
+                <p style={{marginTop: '10px'}}>The pending price change is {this.state.pendingPriceChangeInEth} ETH</p>
+                <button className='btn btn-primary' style={{marginTop: '10px'}} onClick={() => this.approvePriceChange()}>Approve Price Change</button>
               </div>
             ) : (
               <p style={{marginTop: '10px'}}>The ABXT Owner has no price change pending.</p>
