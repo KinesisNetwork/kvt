@@ -4,6 +4,8 @@ import { Spinner } from './Spinner'
 import { convertWeiToEther, convertEtherToWei } from '../../helpers/ethConversions'
 import { Transfers } from './Transfers'
 
+const zeroAddress = '0x0000000000000000000000000000000000000000'
+
 export class AdminForm extends React.Component<any, any> {
   constructor(props) {
     super(props)
@@ -13,6 +15,7 @@ export class AdminForm extends React.Component<any, any> {
       warningMessage: '',
       targetAddress: '',
       amount: 0,
+      trustAmount: 0,
       currentSellPriceInWei: 0,
       currentSellPriceInEther: 0,
       newSellPriceInWei: 0,
@@ -21,6 +24,8 @@ export class AdminForm extends React.Component<any, any> {
       pendingBurn: false,
       transferable: false,
       transferPending: false,
+      approver: '',
+      trust: ''
     }
   }
 
@@ -29,7 +34,9 @@ export class AdminForm extends React.Component<any, any> {
     const pendingBurn = await this.props.abxTokenInstance.isBurnPending()
     const transferPending = await this.props.abxTokenInstance.isToggleTransferablePending()
     const transferable = await this.props.abxTokenInstance.getTransferableState()
-    this.setState({currentSellPriceInWei, currentSellPriceInEther: convertWeiToEther(currentSellPriceInWei), pendingBurn, transferable, transferPending})
+    const trust = await this.props.abxTokenInstance.getTrustAccount()
+    const approver = await this.props.abxTokenInstance.getApprover()
+    this.setState({currentSellPriceInWei, currentSellPriceInEther: convertWeiToEther(currentSellPriceInWei), pendingBurn, transferable, transferPending, trust, approver})
   }
 
   public async makeTransferable(enable: boolean) {
@@ -129,7 +136,7 @@ export class AdminForm extends React.Component<any, any> {
     try {
       this.setState({loading: true})
 
-      await this.props.abxTokenInstance.setTrust(this.state.trustAddress, {from: this.props.address})
+      await this.props.abxTokenInstance.setTrustAccount(this.state.trustAddress, {from: this.props.address})
       this.setState({
         successMessage: `The trust account has now been set`,
         loading: false,
@@ -145,6 +152,10 @@ export class AdminForm extends React.Component<any, any> {
 
   handleAmountChange(event) {
     this.setState({amount: event.target.value})
+  }
+
+  handleTrustAmountChange(event) {
+    this.setState({trustAmount: event.target.value})
   }
 
   handlePriceChange(event) {
@@ -169,6 +180,18 @@ export class AdminForm extends React.Component<any, any> {
     }
 
     this.transferToAddress(this.state.targetAddress, this.state.amount)
+  }
+
+  handleTrustTransfer(event) {
+    event.preventDefault()
+    this.emptyBanners()
+
+    if (!this.state.trustAmount) {
+      this.setState({warningMessage: 'An amount larger than 0 is required to transfer to the trust account'})
+      return
+    }
+
+    this.transferToAddress(this.state.trust, this.state.trustAmount)
   }
 
   handlePriceSubmit(event) {
@@ -233,18 +256,16 @@ export class AdminForm extends React.Component<any, any> {
             </div>
             <div className='row'>
               <div className='col-sm-12'>
-                <h3>Make Transferable</h3>
-                <p style={{marginTop: '10px'}}>The ABXT is currently <strong>{this.state.transferable ? 'transferable' : 'non-transferable'}</strong></p>
-                { this.state.transferPending ? (
-                  <p>A transfer state change is currently pending with the approver</p>
+                <h3>Transfer to Trust Account</h3>
+                <p>Use this to move reserved ABXT to the trust account</p>
+                { this.state.trust === zeroAddress ? (
+                  <p>The trust account has not yet been configured</p>
                 ) : (
-                  <div>
-                    { this.state.transferable ? (
-                      <button className='btn btn-primary' style={{marginTop: '10px'}} onClick={() => this.makeTransferable(false)}>Disable</button>
-                    ) : (
-                      <button className='btn btn-primary' style={{marginTop: '10px'}} onClick={() => this.makeTransferable(true)}>Enable</button>
-                    ) }
-                  </div>
+                  <form onSubmit={(ev) => this.handleTrustTransfer(ev)}>
+                    <label style={{marginTop: '10px'}}>Quantity of ABXT</label>
+                    <input type='number' className='form-control' value={this.state.trustAmount} onChange={(ev) => this.handleTrustAmountChange(ev)} placeholder='Amount'/>
+                    <input className='btn btn-primary' type='submit' value='Transfer' style={{marginTop: '10px'}} />
+                  </form>
                 ) }
               </div>
             </div> 
@@ -283,21 +304,50 @@ export class AdminForm extends React.Component<any, any> {
             <div className='row' style={{marginBottom: '25px'}}>
               <div className='col-sm-12'>
                 <h3>Configure Approver</h3>
-                <form onSubmit={(ev) => this.handleApproverSubmit(ev)}>
-                  <label style={{marginTop: '10px'}}>Approver Address</label>
-                  <input type='text' className='form-control' value={this.state.approverAddress} onChange={(ev) => this.handleApproverAddressChange(ev)} placeholder='Address'/>
-                  <input className='btn btn-primary' type='submit' value='Set' style={{marginTop: '10px'}} />
-                </form>
+                { this.state.approver !== zeroAddress ? (
+                  <div>
+                    <p style={{marginTop: '10px'}}>The approver address set for ABXT is {this.state.approver}</p>
+                  </div>
+                ) : (
+                  <form onSubmit={(ev) => this.handleApproverSubmit(ev)}>
+                    <label style={{marginTop: '10px'}}>Approver Address</label>
+                    <input type='text' className='form-control' value={this.state.approverAddress} onChange={(ev) => this.handleApproverAddressChange(ev)} placeholder='Address'/>
+                    <input className='btn btn-primary' type='submit' value='Set' style={{marginTop: '10px'}} />
+                  </form>
+                ) }
+              </div>
+            </div> 
+            <div className='row' style={{marginBottom: '25px'}}>
+              <div className='col-sm-12'>
+                <h3>Configure Trust Address</h3>
+                { this.state.trust !== zeroAddress ? (
+                  <div>
+                    <p style={{marginTop: '10px'}}>The trust address set for ABXT is {this.state.trust}</p>
+                  </div>
+                ) : (
+                  <form onSubmit={(ev) => this.handleTrustSubmit(ev)}>
+                    <label style={{marginTop: '10px'}}>Trust Address</label>
+                    <input type='text' className='form-control' value={this.state.trustAddress} onChange={(ev) => this.handleTrustAddressChange(ev)} placeholder='Address'/>
+                    <input className='btn btn-primary' type='submit' value='Set' style={{marginTop: '10px'}} />
+                  </form>
+                ) }
               </div>
             </div> 
             <div className='row'>
               <div className='col-sm-12'>
-                <h3>Configure Trust Address</h3>
-                <form onSubmit={(ev) => this.handleTrustSubmit(ev)}>
-                  <label style={{marginTop: '10px'}}>Trust Address</label>
-                  <input type='text' className='form-control' value={this.state.trustAddress} onChange={(ev) => this.handleTrustAddressChange(ev)} placeholder='Address'/>
-                  <input className='btn btn-primary' type='submit' value='Set' style={{marginTop: '10px'}} />
-                </form>
+                <h3>Make Transferable</h3>
+                <p style={{marginTop: '10px'}}>The ABXT is currently <strong>{this.state.transferable ? 'transferable' : 'non-transferable'}</strong></p>
+                { this.state.transferPending ? (
+                  <p>A transfer state change is currently pending with the approver</p>
+                ) : (
+                  <div>
+                    { this.state.transferable ? (
+                      <button className='btn btn-primary' style={{marginTop: '10px'}} onClick={() => this.makeTransferable(false)}>Disable</button>
+                    ) : (
+                      <button className='btn btn-primary' style={{marginTop: '10px'}} onClick={() => this.makeTransferable(true)}>Enable</button>
+                    ) }
+                  </div>
+                ) }
               </div>
             </div> 
           </div>
