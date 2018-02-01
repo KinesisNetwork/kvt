@@ -3,7 +3,7 @@ import * as React from 'react'
 export const Contact: React.SFC = () => {
   return (
     <div>
-      <section className='services pt-80 pt-80' id='contact'>
+      <section className='startup pt-80 pt-80' id='contact'>
         <div className='container'>
           <div className='section_title mb-70 text-center'>
             <h2>Register Your Interest</h2>
@@ -44,9 +44,9 @@ export const Contact: React.SFC = () => {
                   <h5 className='text-uppercase'>Head Office</h5>
                 </div>
                 <address>
-                  <p><span>address:</span> 1600 Amphitheatre Parkway, Mountain View, CA, 94043</p>
-                  <p><span>phone:</span> (+000) 1252 000522</p>
-                  <p><span>email:</span> index@email.com</p>
+                  <p><strong className='text-uppercase'>address:</strong> 1600 Amphitheatre Parkway, Mountain View, CA, 94043</p>
+                  <p><strong className='text-uppercase'>phone:</strong> (+000) 1252 000522</p>
+                  <p><strong className='text-uppercase'>email:</strong> index@email.com</p>
                 </address>
               </div>
             </div>

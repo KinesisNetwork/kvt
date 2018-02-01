@@ -70,17 +70,19 @@ export class Token extends React.Component<any, any> {
 
   public render() {
     return (
-      <div className='container'>
-        <section className='contact pt-80 pb-50' id='token'>
-          <div className='section_title mb-70 text-center'>
-            <h2>ABX Token Offering</h2>
-            <p>Buy ABX tokens now for some garuntee of future value.</p>
-          </div>
-          <div className='row'>
-            {this.state.noWeb3 && <NoWeb3/>}
-            {this.state.noAddress && <NoAddress/>}
-            {this.state.isAdmin && <AdminForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} />}
-            {!this.state.isAdmin && this.state.address && <ClientForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} />}
+      <div>
+        <section className='contact' id='token'>
+          <div className='container'>
+            <div className='section_title mb-70 text-center'>
+              <h2>ABX Token Offering</h2>
+              <p>Buy ABX tokens now for some garuntee of future value.</p>
+            </div>
+            <div className='row'>
+              {this.state.noWeb3 && <NoWeb3/>}
+              {this.state.noAddress && <NoAddress/>}
+              {this.state.isAdmin && <AdminForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} />}
+              {!this.state.isAdmin && this.state.address && <ClientForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} />}
+            </div>
           </div>
         </section>
       </div>
