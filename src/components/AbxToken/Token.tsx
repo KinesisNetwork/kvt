@@ -7,6 +7,8 @@ const abxTokenDefinition = require('../../../build/contracts/AbxToken.json')
 import {NoWeb3} from './NoWeb3'
 import {NoAddress} from './NoAddress'
 import {AdminForm} from './AdminForm'
+import {ApproverForm} from './ApproverForm'
+import {TrustForm} from './TrustForm'
 import {ClientForm} from './ClientForm'
 
 export class Token extends React.Component<any, any> {
@@ -20,10 +22,12 @@ export class Token extends React.Component<any, any> {
       noAddress: false,
       address: null,
       isAdmin: false,
+      isApprover: false,
+      isTrust: false,
     }
   }
 
-  public componentWillMount() {
+  public componentDidMount() {
     const w: any = window
     if (typeof w.web3 !== 'undefined') {
       const web3 = new Web3(w.web3.currentProvider)
@@ -39,7 +43,7 @@ export class Token extends React.Component<any, any> {
       } catch (e) {
         console.log(e)
       }
-    }, 1000)
+    }, 2000)
   }
 
   public refreshEthState () {
@@ -61,8 +65,10 @@ export class Token extends React.Component<any, any> {
 
         const tokenInstance = await abxToken.deployed()
         const isAdmin = await tokenInstance.isOwner({from: account})
+        const isApprover = await tokenInstance.isApprover({from: account})
+        const isTrust = await tokenInstance.isTrustAccount({from: account})
 
-        this.setState({isAdmin, abxTokenInstance: tokenInstance, address: account})
+        this.setState({isAdmin, isApprover, isTrust, abxTokenInstance: tokenInstance, address: account})
       }
     })
   }
@@ -79,8 +85,10 @@ export class Token extends React.Component<any, any> {
           <div className='row'>
             {this.state.noWeb3 && <NoWeb3/>}
             {this.state.noAddress && <NoAddress/>}
-            {this.state.isAdmin && <AdminForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} />}
-            {!this.state.isAdmin && this.state.address && <ClientForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} />}
+            {this.state.isAdmin && <AdminForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} web3Provider={this.state.web3Provider} />}
+            {this.state.isApprover && <ApproverForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} web3Provider={this.state.web3Provider} />}
+            {this.state.isTrust && <TrustForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} web3Provider={this.state.web3Provider} />}
+            {!this.state.isAdmin && !this.state.isApprover && !this.state.isTrust && this.state.address && <ClientForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} web3Provider={this.state.web3Provider} />}
           </div>
         </section>
       </div>

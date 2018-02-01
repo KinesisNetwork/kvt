@@ -277,6 +277,12 @@ contract('AbxToken', function(accounts) {
         const newTotalSupply = (await instance.getTotalSupply()).toNumber()
         expect(newTotalSupply).to.eql(tokenSupply - ownerBalancePreBurn)
       })
+      it('removes the pendingBurn status after a burn is complete', async () => {
+        await instance.startBurn({from: owner})
+        await instance.approveBurn({from: approver})
+        const isBurnPending = await instance.isBurnPending()
+        expect(isBurnPending).to.eql(false)
+      })
       it('does not do anything if burn is not pending', async () => {
         const isBurnPending = await instance.isBurnPending()
         expect(isBurnPending).to.eql(false)
