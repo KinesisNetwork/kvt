@@ -165,6 +165,7 @@ contract AbxToken is BasicToken, Ownable {
     uint256 unsoldTokens = balances[owner];
     balances[owner] = balances[owner].sub(unsoldTokens);
     totalSupply = totalSupply.sub(unsoldTokens);
+    burnIsPending = false;
   }
 
   function startBurn() public onlyOwner {
