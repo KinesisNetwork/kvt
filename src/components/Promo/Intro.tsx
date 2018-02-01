@@ -3,7 +3,7 @@ import * as React from 'react'
 export const Intro: React.SFC = () => {
   return (
     <div>
-      <section className='startup'>
+      <section className='startup pt-40 pb-40'>
         <div className='container'>
           <div className='row'>
             <div className='col-sm-9'>
