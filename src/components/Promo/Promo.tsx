@@ -8,7 +8,7 @@ import { Intro } from './Intro'
 import { About } from './About'
 import { Ico } from './Ico'
 // import { Team } from './Team'
-// import { Roadmap } from './Roadmap'
+import { Roadmap } from './Roadmap'
 // import { Blog } from './Blog'
 // import { Faq } from './Faq'
 import { Token } from '../AbxToken/Token'
@@ -63,10 +63,14 @@ export class Promo extends React.Component<null, null> {
         <Intro />
         <About />
         <Ico />
-        { /* <Roadmap />
+        { 
+          /*
+        <Roadmap />
         <Team />
         <Faq />
-        <Blog /> */ }
+        <Blog /> 
+        */ 
+        }
         <Token />
         <Contact />
         <footer>

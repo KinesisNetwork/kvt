@@ -1,0 +1,6 @@
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#191f2f+0,1a202e+38,1b253b+71 */
+background: rgb(25,31,47); /* Old browsers */
+background: -moz-linear-gradient(45deg, rgba(25,31,47,1) 0%, rgba(26,32,46,1) 38%, rgba(27,37,59,1) 71%); /* FF3.6-15 */
+background: -webkit-linear-gradient(45deg, rgba(25,31,47,1) 0%,rgba(26,32,46,1) 38%,rgba(27,37,59,1) 71%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(45deg, rgba(25,31,47,1) 0%,rgba(26,32,46,1) 38%,rgba(27,37,59,1) 71%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#191f2f', endColorstr='#1b253b',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */

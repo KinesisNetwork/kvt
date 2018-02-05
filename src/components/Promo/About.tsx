@@ -19,7 +19,7 @@ export class About extends React.Component<null, null> {
             <div className='row text-center m-0'>
               <div className='col-xs-6 col-sm-4 border-right'>
                 <div className='content'>
-                  <i className='icon-camera' />
+                  <img src='images/website-assets/01Security.png' />
                   <h3>Security</h3>
                   <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
                 </div>
@@ -28,7 +28,7 @@ export class About extends React.Component<null, null> {
               {/* End fo .col-sm-4 */}
               <div className='col-xs-6 col-sm-4 border-right'>
                 <div className='content'>
-                  <i className='icon-tools2' />
+                  <img src='images/website-assets/03Backed.png' />
                   <h3>Physically Backed</h3>
                   <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
                 </div>
@@ -37,7 +37,7 @@ export class About extends React.Component<null, null> {
               {/* End fo .col-sm-4 */}
               <div className='col-xs-6 col-sm-4'>
                 <div className='content'>
-                  <i className='icon-upload' />
+                  <img src='images/website-assets/02Integration.png' />
                   <h3>Practicality</h3>
                   <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
                 </div>

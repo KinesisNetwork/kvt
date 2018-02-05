@@ -48,6 +48,7 @@ $dark_color: #1e1f26;
 $mid_color: #4d648d;
 $light_color: #d0e1f9;
 $monotone_color: #9da4ad;
+$white_color: #ffffff;
 
 $bgcolor: $dark_color;
 
@@ -509,7 +510,7 @@ header{
 ======================================== --*/
 .banner{
 	height: 100vh;
-	background: url('/images/bg/1.jpg') center top no-repeat;
+	background: url('/images/website-assets/HeroPhotoshop.png') center top no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
 	position: relative;
@@ -633,9 +634,12 @@ header{
 .services .col-sm-4{
 	padding: 0;
 }
+.services  {
+	background: #212121 url('/images/website-assets/WhatKinesisOfferBackground.png') top;
+}
 .services .content{
 	padding: 30px;
-	cursor: pointer;
+	// cursor: pointer;
 	position: relative;
 	text-align: center;
 	-webkit-transition: all .5s ease;
@@ -670,8 +674,8 @@ header{
 	transition: all .5s ease;
 }
 .services .content:hover{
-	background-color: $primary_color;
-	color: $secondary_color;
+	// background-color: $primary_color;
+	// color: $secondary_color;
 	font-weight: 700;
 }
 /*-- 8.others css
@@ -1371,6 +1375,9 @@ header{
 	width: 100%;
 	height: 400px;
 }
+.contact {
+	background: url('/images/website-assets/ContactUs.png') tlp;
+}
 .form-control,
 .contact .widget .form-control{
 	height: 50px;
@@ -1635,6 +1642,34 @@ footer{
 	}
 }
 
+.startup, .video {
+  background-color: $white_color;
+
+  h2, p, h5 {
+    color: $dark_color;
+  }
+
+  h2::after {
+    background-color: $dark_color;
+  }
+}
+
+#contact {
+  background: url('/images/website-assets/FAQs.png') center repeat;
+}
+
+.contact {
+  background: rgb(25,31,47); /* Old browsers */
+  // background: -moz-linear-gradient(45deg, rgba(25,31,47,1) 0%, rgba(26,32,46,1) 38%, rgba(27,37,59,1) 71%); /* FF3.6-15 */
+  // background: -webkit-linear-gradient(45deg, rgba(25,31,47,1) 0%,rgba(26,32,46,1) 38%,rgba(27,37,59,1) 71%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(45deg, rgba(25,31,47,1) 0%,rgba(26,32,46,1) 38%,rgba(27,37,59,1) 71%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#191f2f', endColorstr='#1b253b',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  padding: 80px 0;
+}
+
+.skills {
+  background: url('/images/website-assets/TOKEN_STAGES.png') center;
+}
 /*-- for devices less then 500px wide --*/
 
 @media screen and (max-width: 499px){
