@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Spinner } from '../AbxToken/Spinner'
+const axios = require('axios')
 
 export class Contact extends React.Component<null, {firstName: string, lastName: string, email: string, botCheck: boolean, loading: boolean, successMessage: string, warningMessage: string}> {
   constructor (props) {
@@ -11,8 +12,9 @@ export class Contact extends React.Component<null, {firstName: string, lastName:
     this.setState({botCheck: true})
   }
 
-  public handleSubmit(e) {
+  public async handleSubmit(e) {
     e.preventDefault()
+    this.setState({warningMessage: '', successMessage: ''})
 
     if (this.state.botCheck) {
       console.log('Bot detected')
@@ -25,8 +27,19 @@ export class Contact extends React.Component<null, {firstName: string, lastName:
     }
 
     this.setState({loading: true})
-    // TODO: Email function
-    this.setState({successMessage: 'Thank you for registering', loading: false})
+
+    try {
+      await axios.post('https://npml7kwhfj.execute-api.ap-southeast-2.amazonaws.com/prod/KinesisPromoEmailer/', {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email
+      })
+
+      this.setState({successMessage: 'Thank you for registering', loading: false})
+    } catch (e) {
+      // Chrome still crys about CORS, but the request goes through
+      this.setState({successMessage: 'Thank you for registering', loading: false})
+    }
   }
 
   public handleField (event) {
