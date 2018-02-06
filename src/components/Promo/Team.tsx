@@ -9,7 +9,7 @@ export class Team extends React.Component<null, null> {
 
     return (
       <div>
-        <section className='team ptb-80 bg-off' id='team'>
+        <section className='video ptb-100 bg-off' id='team'>
           <div className='container'>
             <div className='section_title mb-50 text-center'>
               <h2>A Team With a Wealth of Experience</h2>

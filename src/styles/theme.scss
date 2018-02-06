@@ -506,6 +506,20 @@ header{
 	animation: none;
 }
 
+.roadmap-bg {
+	background: url('/images/website-assets/RoadMap.png') center top no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	position: relative;
+}
+
+.contact-bg {
+	background: url('/images/website-assets/ContactUs.png') center top no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	position: relative;
+}
+
 /*-- 5.banner css
 ======================================== --*/
 .banner{
@@ -1227,7 +1241,9 @@ header{
 
 /*-- 17.faq css
 ======================================== --*/
-.faq{}
+.faq{
+	background-color: #1d1e26;
+}
 .faq .panel{
 	border: none;
 	box-shadow: none;
@@ -1254,7 +1270,7 @@ header{
 .faq .panel-group .panel-heading + .panel-collapse > .list-group,
 .faq .panel-group .panel-heading + .panel-collapse > .panel-body{
 	border: none;
-	background-color: $bgcolor;
+	background-color: #1d1e26;
 	font-size: 15px;
 	line-height: 30px;
 }
@@ -1384,7 +1400,6 @@ header{
 	font-size: 13px;
 	line-height: 44px;
 	color: #ffffff;
-	background-color: #555555;
 	border-radius: 0;
 	border: 1px solid transparent;
 	box-shadow: none;
@@ -1440,6 +1455,7 @@ footer{
 	font-size: 14px;
 	line-height: 30px;
 	color: #757575;
+	background-color: #1D1E26;
 }
 .footer_top .footer_logo{
 	display: block;
@@ -1652,10 +1668,6 @@ footer{
   h2::after {
     background-color: $dark_color;
   }
-}
-
-#contact {
-  background: url('/images/website-assets/FAQs.png') center repeat;
 }
 
 .contact {

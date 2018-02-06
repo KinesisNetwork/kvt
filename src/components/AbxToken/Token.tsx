@@ -77,9 +77,9 @@ export class Token extends React.Component<any, any> {
   public render() {
     return (
       <div>
-        <section className='contact' id='token'>
+        <section className='video' id='token'>
           <div className='container'>
-            <div className='section_title mb-70 text-center'>
+            <div className='section_title pt-80 mb-70 text-center'>
               <h2>ABX Token Offering</h2>
               <p>Buy ABX tokens now for some garuntee of future value.</p>
             </div>
