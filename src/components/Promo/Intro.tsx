@@ -10,7 +10,7 @@ export const Intro: React.SFC = () => {
               <h4 style={{color: 'black', lineHeight: '50px'}}><strong>Why Kinesis?</strong> Read our whitepaper to find out more.</h4>
             </div>
             <div className='col-sm-3'>
-              <a href='#' className='btn wow fadeInRight' style={{marginBottom: 0, border: '2px solid black', backgroundColor: 'transparent'}}>Whitepaper</a>
+              <a href='#' className='btn wow fadeInRight' style={{marginBottom: 0, border: '2px solid black', backgroundColor: 'transparent'}}>Coming Soon</a>
             </div>
           </div>
         </div>

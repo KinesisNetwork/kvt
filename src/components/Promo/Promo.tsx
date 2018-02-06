@@ -46,10 +46,6 @@ export class Promo extends React.Component<null, null> {
                     <ul className='nav navbar-nav navbar-right'>
                       <li style={{cursor: 'pointer'}}><ScrollLink to='home' spy={true} smooth={true} offset={0} duration={500}>home</ScrollLink></li>
                       <li style={{cursor: 'pointer'}}><ScrollLink to='about' spy={true} smooth={true} offset={0} duration={500}>about</ScrollLink></li>
-                      <li style={{cursor: 'pointer'}}><ScrollLink to='ico' spy={true} smooth={true} offset={0} duration={500}>ico</ScrollLink></li>
-                      <li style={{cursor: 'pointer'}}><ScrollLink to='roadmap' spy={true} smooth={true} offset={0} duration={500}>roadmap</ScrollLink></li>
-                      <li style={{cursor: 'pointer'}}><ScrollLink to='team' spy={true} smooth={true} offset={0} duration={500}>team</ScrollLink></li>
-                      <li style={{cursor: 'pointer'}}><ScrollLink to='faq' spy={true} smooth={true} offset={0} duration={500}>faq</ScrollLink></li>
                       <li style={{cursor: 'pointer'}}><ScrollLink to='token' spy={true} smooth={true} offset={0} duration={500}>Token Offering</ScrollLink></li>
                       { /*  <li style={{cursor: 'pointer'}}><ScrollLink to='blog' spy={true} smooth={true} offset={0} duration={500}>blog</ScrollLink></li> */ }
                       <li style={{cursor: 'pointer'}}><ScrollLink to='contact' spy={true} smooth={true} offset={0} duration={500}>Register</ScrollLink></li>
@@ -62,15 +58,6 @@ export class Promo extends React.Component<null, null> {
         <Home />
         <Intro />
         <About />
-        <Ico />
-        <Roadmap />
-        <Team />
-        <Faq />
-        {
-          /*
-        <Blog />
-        */
-        }
         <Token />
         <Contact />
         <footer>

@@ -80,16 +80,8 @@ export class Token extends React.Component<any, any> {
         <section className='video' id='token'>
           <div className='container'>
             <div className='section_title pt-80 mb-70 text-center'>
-              <h2>ABX Token Offering</h2>
-              <p>Buy ABX tokens now for some garuntee of future value.</p>
-            </div>
-            <div className='row'>
-              {this.state.noWeb3 && <NoWeb3 />}
-              {this.state.noAddress && <NoAddress />}
-              {this.state.isAdmin && <AdminForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} web3Provider={this.state.web3Provider} />}
-              {this.state.isApprover && <ApproverForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} web3Provider={this.state.web3Provider} />}
-              {this.state.isTrust && <TrustForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} web3Provider={this.state.web3Provider} />}
-              {!this.state.isAdmin && !this.state.isApprover && !this.state.isTrust && this.state.address && <ClientForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} web3Provider={this.state.web3Provider} />}
+              <h2>Kinesis Revenue Token</h2>
+              <p>Coming Soon...</p>
             </div>
           </div>
         </section>
