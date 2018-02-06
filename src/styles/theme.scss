@@ -1385,6 +1385,17 @@ header{
 	background-color: $primary_color;
 }
 
+@media only screen and (min-width : 768px) {
+    .is-table-row {
+        display: table;
+    }
+    .is-table-row [class*="col-"] {
+        float: none;
+        display: table-cell;
+        vertical-align: middle;
+    }
+}
+
 /*-- 18.contact css
 ======================================== --*/
 #map {
@@ -1399,7 +1410,7 @@ header{
 	height: 50px;
 	font-size: 13px;
 	line-height: 44px;
-	color: #ffffff;
+	color: #999999;
 	border-radius: 0;
 	border: 1px solid transparent;
 	box-shadow: none;

@@ -11,7 +11,7 @@ export class Ico extends React.Component<null, null> {
       <div>
         <section className='video ptb-100 bg-off' id='ico'>
           <div className='container'>
-          <div className='row'>
+          <div className='row is-table-row'>
               <div className='col-sm-6'>
                 <div className='section_title mb-50 text-left'>
                   <h2>Kinesis VISA Card</h2>
@@ -25,7 +25,7 @@ export class Ico extends React.Component<null, null> {
                 </div>
               </div>
             </div>
-            <div className='row'>
+            <div className='row is-table-row'>
               <div className='col-sm-6'>
                 <div className='section_title mb-50 text-left'>
                   <h2>Initial Coin Offering</h2>
