@@ -51,14 +51,14 @@ export class Contact extends React.Component<null, {firstName: string, lastName:
     return (
       <div>
         { this.state.loading && <Spinner /> }
-        <section className='contact-bg pt-80 pt-80' id='contact'>
+        <section className='contact-bg pt-80 pt-80' style={{color: 'white'}} id='contact'>
           <div className='container'>
             <div className='section_title mb-70 text-center'>
               <h2>Register Your Interest</h2>
               <p>Submit your information below and you'll be added to the Kinesis mailing list.</p>
             </div>
             <div className='row'>
-              <div className='col-sm-8'>
+              <div className='col-sm-12'>
                 <form onSubmit={(ev) => this.handleSubmit(ev)}>
                   <div className='row'>
                     <div className='form-group col-sm-12'>
@@ -82,20 +82,6 @@ export class Contact extends React.Component<null, {firstName: string, lastName:
                   </div>
                   {/* End of .row */}
                 </form>
-              </div>
-              {/* End of .content */}
-              {/* End of .col-sm-8 */}
-              <div className='col-sm-4'>
-                <div className='widget text-left mb-40 pl-20'>
-                  <div className='mb-10'>
-                    <h5 className='text-uppercase'><span className='primary_color'>Head Office</span></h5>
-                  </div>
-                  <address>
-                    <p><strong className='text-uppercase'>address:</strong> 10 Market Street, Brisbane, QLD, 4000</p>
-                    <p><strong className='text-uppercase'>phone:</strong> +61 7 3211 5007</p>
-                    <p><strong className='text-uppercase'>email:</strong> info@abx.com</p>
-                  </address>
-                </div>
               </div>
             </div>
           </div>
