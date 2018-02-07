@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Spinner } from '../AbxToken/Spinner'
+import { Spinner } from '../KinesisRevenueToken/Spinner'
 const axios = require('axios')
 
 export class Contact extends React.Component<null, {firstName: string, lastName: string, email: string, botCheck: boolean, loading: boolean, successMessage: string, warningMessage: string}> {

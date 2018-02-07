@@ -4,9 +4,9 @@ import "zeppelin-solidity/contracts/token/StandardToken.sol";
 import "zeppelin-solidity/contracts/ownership/Ownable.sol";
 import "./MultiSigTransfer.sol";
 
-contract AbxToken is BasicToken, Ownable {
-  string public name = "ABXToken";
-  string public symbol = "ABXT";
+contract KinesisRevenueToken is BasicToken, Ownable {
+  string public name = "KinesisRevenueToken";
+  string public symbol = "KRT";
   uint8 public decimals = 0;
   address public approver = address(0);
   address public trustAccount = address(0);
@@ -22,7 +22,7 @@ contract AbxToken is BasicToken, Ownable {
   bool burnIsPending = false;
   bool toggleTransferablePending = false;
 
-  function AbxToken() public {
+  function KinesisRevenueToken() public {
     totalSupply = INITIAL_SUPPLY;
     balances[msg.sender] = INITIAL_SUPPLY;
   }
@@ -44,7 +44,7 @@ contract AbxToken is BasicToken, Ownable {
     require(newApprover != owner);
     require(newApprover != trustAccount);
     approver = newApprover;
-  } 
+  }
 
   function getApprover() public view returns (address) {
     return approver;

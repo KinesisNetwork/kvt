@@ -2,7 +2,7 @@ import * as React from 'react'
 
 const TruffleContract = require('truffle-contract')
 const Web3 = require('web3')
-const abxTokenDefinition = require('../../../build/contracts/AbxToken.json')
+const kinesisRevenueTokenDefinition = require('../../../build/contracts/KinesisRevenueToken.json')
 
 import {NoWeb3} from './NoWeb3'
 import {NoAddress} from './NoAddress'
@@ -17,7 +17,7 @@ export class Token extends React.Component<any, any> {
     this.state = {
       web3Provider: null,
       web3: null,
-      abxTokenInstance: null,
+      kinesisRevenueTokenInstance: null,
       noWeb3: false,
       noAddress: false,
       address: null,
@@ -60,15 +60,15 @@ export class Token extends React.Component<any, any> {
           return
         }
 
-        const abxToken = TruffleContract(abxTokenDefinition)
-        abxToken.setProvider(this.state.web3Provider)
+        const kinesisRevenueToken = TruffleContract(kinesisRevenueTokenDefinition)
+        kinesisRevenueToken.setProvider(this.state.web3Provider)
 
-        const tokenInstance = await abxToken.deployed()
+        const tokenInstance = await kinesisRevenueToken.deployed()
         const isAdmin = await tokenInstance.isOwner({from: account})
         const isApprover = await tokenInstance.isApprover({from: account})
         const isTrust = await tokenInstance.isTrustAccount({from: account})
 
-        this.setState({isAdmin, isApprover, isTrust, abxTokenInstance: tokenInstance, address: account})
+        this.setState({isAdmin, isApprover, isTrust, kinesisRevenueTokenInstance: tokenInstance, address: account})
       }
     })
   }

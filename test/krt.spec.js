@@ -1,8 +1,8 @@
-const AbxToken = artifacts.require('AbxToken')
+const KinesisRevenueToken = artifacts.require('KinesisRevenueToken')
 const MultiSigTransfer = artifacts.require('MultiSigTransfer')
 const expect = require('chai').expect
 
-contract('AbxToken', function(accounts) {
+contract('KinesisRevenueToken', function(accounts) {
   // The truffle test framework creates the contract from the first account in
   // the contract array
   const owner = accounts[0]
@@ -27,7 +27,7 @@ contract('AbxToken', function(accounts) {
   }
 
 	beforeEach(async () => {
-    instance = await AbxToken.new()
+    instance = await KinesisRevenueToken.new()
     await instance.setApprover(approver, {from: owner})
     await instance.setTrustAccount(trustAccount, {from: owner})
   })
@@ -45,7 +45,7 @@ contract('AbxToken', function(accounts) {
       expect(isInvestorTrustAccount).to.eql(false)
     })
   })
-  
+
   describe('adminTransfers', () => {
     it('correctly moves funds from owner to investor1 after approval', async () => {
       const ownerBalance = (await instance.balanceOf(owner)).toNumber()
@@ -75,7 +75,7 @@ contract('AbxToken', function(accounts) {
       expect(ownerBalancePostApproval.toNumber()).to.eql(ownerBalance - 100)
       expect(investorBalancePostApproval.toNumber()).to.eql(investorBalance + 100)
     })
-    
+
     it('fails when not set approver tries to approveTransfer', async () => {
       const ownerBalance = (await instance.balanceOf(owner)).toNumber()
       const investorBalance = (await instance.balanceOf(investorOne)).toNumber()
@@ -109,9 +109,9 @@ contract('AbxToken', function(accounts) {
     })
   })
 
-  describe('AbxToken -- Constructor', () => {
+  describe('KinesisRevenueToken -- Constructor', () => {
     it('correctly sets the total supply to owner on contract initialisation', async () => {
-      let newToken = await AbxToken.new()
+      let newToken = await KinesisRevenueToken.new()
 
       let totalSupply = await newToken.getTotalSupply()
       let ownerQty = await newToken.balanceOf(owner)
@@ -183,7 +183,7 @@ contract('AbxToken', function(accounts) {
 
     it('allows people to transfer back to owner at any time', async () => {
       await approveTransferToAddress(investorOne, 100)
-      
+
       const initialOwnerBalance = (await instance.balanceOf(owner)).toNumber()
       const initialInvestorBalance = (await instance.balanceOf(investorOne)).toNumber()
       expect(initialOwnerBalance).to.eql(tokenSupply - 100)
@@ -437,7 +437,7 @@ contract('AbxToken', function(accounts) {
 
   describe('trust transfers are multisig', () => {
     it('does not allow trust account to make normal transfers', async () => {
-      await approveTransferToAddress(trustAccount, 500)      
+      await approveTransferToAddress(trustAccount, 500)
       const trustBalance = (await instance.balanceOf(trustAccount)).toNumber()
       expect(trustBalance).to.eql(500)
 

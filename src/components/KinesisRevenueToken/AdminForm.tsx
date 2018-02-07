@@ -30,12 +30,12 @@ export class AdminForm extends React.Component<any, any> {
   }
 
   public async componentDidMount () {
-    const currentSellPriceInWei = (await this.props.abxTokenInstance.getPrice()).toNumber()
-    const pendingBurn = await this.props.abxTokenInstance.isBurnPending()
-    const transferPending = await this.props.abxTokenInstance.isToggleTransferablePending()
-    const transferable = await this.props.abxTokenInstance.getTransferableState()
-    const trust = await this.props.abxTokenInstance.getTrustAccount()
-    const approver = await this.props.abxTokenInstance.getApprover()
+    const currentSellPriceInWei = (await this.props.kinesisRevenueTokenInstance.getPrice()).toNumber()
+    const pendingBurn = await this.props.kinesisRevenueTokenInstance.isBurnPending()
+    const transferPending = await this.props.kinesisRevenueTokenInstance.isToggleTransferablePending()
+    const transferable = await this.props.kinesisRevenueTokenInstance.getTransferableState()
+    const trust = await this.props.kinesisRevenueTokenInstance.getTrustAccount()
+    const approver = await this.props.kinesisRevenueTokenInstance.getApprover()
     this.setState({currentSellPriceInWei, currentSellPriceInEther: convertWeiToEther(currentSellPriceInWei), pendingBurn, transferable, transferPending, trust, approver})
   }
 
@@ -44,7 +44,7 @@ export class AdminForm extends React.Component<any, any> {
       this.emptyBanners()
       this.setState({loading: true})
 
-      await this.props.abxTokenInstance.setTransferable(enable, {from: this.props.address})
+      await this.props.kinesisRevenueTokenInstance.setTransferable(enable, {from: this.props.address})
       this.setState({
         successMessage: `Request for transfer status change sent to the approver`,
         loading: false,
@@ -59,7 +59,7 @@ export class AdminForm extends React.Component<any, any> {
       this.emptyBanners()
       this.setState({loading: true})
 
-      await this.props.abxTokenInstance.startBurn({from: this.props.address})
+      await this.props.kinesisRevenueTokenInstance.startBurn({from: this.props.address})
       this.setState({
         successMessage: `Request for burn submitted to the approver`,
         loading: false,
@@ -74,7 +74,7 @@ export class AdminForm extends React.Component<any, any> {
       this.emptyBanners()
       this.setState({loading: true})
 
-      await this.props.abxTokenInstance.cancelBurn({from: this.props.address})
+      await this.props.kinesisRevenueTokenInstance.cancelBurn({from: this.props.address})
       this.setState({
         successMessage: `Burn cancelled`,
         loading: false,
@@ -89,7 +89,7 @@ export class AdminForm extends React.Component<any, any> {
     try {
       this.setState({loading: true})
 
-      await this.props.abxTokenInstance.adminTransfer(address, amount, {from: this.props.address})
+      await this.props.kinesisRevenueTokenInstance.adminTransfer(address, amount, {from: this.props.address})
 
       this.setState({
         successMessage: `Transfer submitted to the approver.`,
@@ -108,9 +108,9 @@ export class AdminForm extends React.Component<any, any> {
     try {
       this.setState({loading: true})
 
-      await this.props.abxTokenInstance.requestPriceChange(this.state.newSellPriceInWei, {from: this.props.address})
+      await this.props.kinesisRevenueTokenInstance.requestPriceChange(this.state.newSellPriceInWei, {from: this.props.address})
       this.setState({
-        successMessage: `ABXT price update submitted to the approver. Any further submission against this form will overwride the pending request`,
+        successMessage: `KRT price update submitted to the approver. Any further submission against this form will overwride the pending request`,
         loading: false,
       })
     } catch (e) {
@@ -122,7 +122,7 @@ export class AdminForm extends React.Component<any, any> {
     try {
       this.setState({loading: true})
 
-      await this.props.abxTokenInstance.setApprover(this.state.approverAddress, {from: this.props.address})
+      await this.props.kinesisRevenueTokenInstance.setApprover(this.state.approverAddress, {from: this.props.address})
       this.setState({
         successMessage: `The approver has now been set`,
         loading: false,
@@ -136,7 +136,7 @@ export class AdminForm extends React.Component<any, any> {
     try {
       this.setState({loading: true})
 
-      await this.props.abxTokenInstance.setTrustAccount(this.state.trustAddress, {from: this.props.address})
+      await this.props.kinesisRevenueTokenInstance.setTrustAccount(this.state.trustAddress, {from: this.props.address})
       this.setState({
         successMessage: `The trust account has now been set`,
         loading: false,
@@ -248,7 +248,7 @@ export class AdminForm extends React.Component<any, any> {
                 <form onSubmit={(ev) => this.handleAdminTransfer(ev)}>
                   <label style={{marginTop: '10px'}}>Target Address</label>
                   <input type='text' className='form-control' value={this.state.targetAddress} onChange={(ev) => this.handleAddressChange(ev)} placeholder='Address'/>
-                  <label style={{marginTop: '10px'}}>Quantity of ABXT</label>
+                  <label style={{marginTop: '10px'}}>Quantity of KRT</label>
                   <input type='number' className='form-control' value={this.state.amount} onChange={(ev) => this.handleAmountChange(ev)} placeholder='Amount'/>
                   <input className='btn btn-primary' type='submit' value='Transfer' style={{marginTop: '10px'}} />
                 </form>
@@ -257,12 +257,12 @@ export class AdminForm extends React.Component<any, any> {
             <div className='row'>
               <div className='col-sm-12'>
                 <h3>Transfer to Trust Account</h3>
-                <p>Use this to move reserved ABXT to the trust account</p>
+                <p>Use this to move reserved KRT to the trust account</p>
                 { this.state.trust === zeroAddress ? (
                   <p>The trust account has not yet been configured</p>
                 ) : (
                   <form onSubmit={(ev) => this.handleTrustTransfer(ev)}>
-                    <label style={{marginTop: '10px'}}>Quantity of ABXT</label>
+                    <label style={{marginTop: '10px'}}>Quantity of KRT</label>
                     <input type='number' className='form-control' value={this.state.trustAmount} onChange={(ev) => this.handleTrustAmountChange(ev)} placeholder='Amount'/>
                     <input className='btn btn-primary' type='submit' value='Transfer' style={{marginTop: '10px'}} />
                   </form>
@@ -306,7 +306,7 @@ export class AdminForm extends React.Component<any, any> {
                 <h3>Configure Approver</h3>
                 { this.state.approver !== zeroAddress ? (
                   <div>
-                    <p style={{marginTop: '10px'}}>The approver address set for ABXT is {this.state.approver}</p>
+                    <p style={{marginTop: '10px'}}>The approver address set for KRT is {this.state.approver}</p>
                   </div>
                 ) : (
                   <form onSubmit={(ev) => this.handleApproverSubmit(ev)}>
@@ -322,7 +322,7 @@ export class AdminForm extends React.Component<any, any> {
                 <h3>Configure Trust Address</h3>
                 { this.state.trust !== zeroAddress ? (
                   <div>
-                    <p style={{marginTop: '10px'}}>The trust address set for ABXT is {this.state.trust}</p>
+                    <p style={{marginTop: '10px'}}>The trust address set for KRT is {this.state.trust}</p>
                   </div>
                 ) : (
                   <form onSubmit={(ev) => this.handleTrustSubmit(ev)}>
@@ -336,7 +336,7 @@ export class AdminForm extends React.Component<any, any> {
             <div className='row'>
               <div className='col-sm-12'>
                 <h3>Make Transferable</h3>
-                <p style={{marginTop: '10px'}}>The ABXT is currently <strong>{this.state.transferable ? 'transferable' : 'non-transferable'}</strong></p>
+                <p style={{marginTop: '10px'}}>The KRT is currently <strong>{this.state.transferable ? 'transferable' : 'non-transferable'}</strong></p>
                 { this.state.transferPending ? (
                   <p>A transfer state change is currently pending with the approver</p>
                 ) : (

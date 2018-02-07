@@ -11,7 +11,7 @@ import { Team } from './Team'
 import { Roadmap } from './Roadmap'
 // import { Blog } from './Blog'
 import { Faq } from './Faq'
-import { Token } from '../AbxToken/Token'
+import { Token } from '../KinesisRevenueToken/Token'
 import { Contact } from './Contact'
 
 export class Promo extends React.Component<null, null> {
