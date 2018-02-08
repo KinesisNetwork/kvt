@@ -4,9 +4,9 @@ import "zeppelin-solidity/contracts/token/StandardToken.sol";
 import "zeppelin-solidity/contracts/ownership/Ownable.sol";
 import "./MultiSigTransfer.sol";
 
-contract KinesisRevenueToken is BasicToken, Ownable {
-  string public name = "KinesisRevenueToken";
-  string public symbol = "KRT";
+contract KinesisVelocityToken is BasicToken, Ownable {
+  string public name = "KinesisVelocityToken";
+  string public symbol = "KVT";
   uint8 public decimals = 0;
   address public approver = address(0);
   address public trustAccount = address(0);
@@ -22,7 +22,7 @@ contract KinesisRevenueToken is BasicToken, Ownable {
   bool burnIsPending = false;
   bool toggleTransferablePending = false;
 
-  function KinesisRevenueToken() public {
+  function KinesisVelocityToken() public {
     totalSupply = INITIAL_SUPPLY;
     balances[msg.sender] = INITIAL_SUPPLY;
   }

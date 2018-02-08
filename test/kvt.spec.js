@@ -1,8 +1,8 @@
-const KinesisRevenueToken = artifacts.require('KinesisRevenueToken')
+const KinesisVelocityToken = artifacts.require('KinesisVelocityToken')
 const MultiSigTransfer = artifacts.require('MultiSigTransfer')
 const expect = require('chai').expect
 
-contract('KinesisRevenueToken', function(accounts) {
+contract('KinesisVelocityToken', function(accounts) {
   // The truffle test framework creates the contract from the first account in
   // the contract array
   const owner = accounts[0]
@@ -27,7 +27,7 @@ contract('KinesisRevenueToken', function(accounts) {
   }
 
 	beforeEach(async () => {
-    instance = await KinesisRevenueToken.new()
+    instance = await KinesisVelocityToken.new()
     await instance.setApprover(approver, {from: owner})
     await instance.setTrustAccount(trustAccount, {from: owner})
   })
@@ -109,9 +109,9 @@ contract('KinesisRevenueToken', function(accounts) {
     })
   })
 
-  describe('KinesisRevenueToken -- Constructor', () => {
+  describe('KinesisVelocityToken -- Constructor', () => {
     it('correctly sets the total supply to owner on contract initialisation', async () => {
-      let newToken = await KinesisRevenueToken.new()
+      let newToken = await KinesisVelocityToken.new()
 
       let totalSupply = await newToken.getTotalSupply()
       let ownerQty = await newToken.balanceOf(owner)

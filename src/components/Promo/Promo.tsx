@@ -9,7 +9,7 @@ import { Team } from './Team'
 import { Roadmap } from './Roadmap'
 // import { Blog } from './Blog'
 import { Faq } from './Faq'
-import { Token } from '../KinesisRevenueToken/Token'
+import { Token } from '../KinesisVelocityToken/Token'
 import { Contact } from './Contact'
 import { Navigation } from '../Navigation';
 import { Footer } from '../Footer';

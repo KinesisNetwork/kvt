@@ -2,7 +2,7 @@
 
 To dev the repo, run npm start for compilation watches, and sh local_start.sh for docker @ port 9000
 
-# Kinesis Revenue Token Crowdsale
+# Kinesis Velocity Token Crowdsale
 
 ## Local Development
 
@@ -14,3 +14,8 @@ To dev the repo, run npm start for compilation watches, and sh local_start.sh fo
 6. npm run dev
 7. Connect MetaMask to Ganache as a custem network
 8. Use the Ganache recovery nmonic to get balaces
+
+## Deploy to a network
+  
+1. Add network to truffle.js (Follow format of other networks)
+2. `truffle migrate --network [network name]`

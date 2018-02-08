@@ -18,7 +18,7 @@ export class ClientForm extends React.Component<any, any> {
   }
 
   async componentWillMount () {
-    const costInWei = (await this.props.kinesisRevenueTokenInstance.getPrice()).toNumber()
+    const costInWei = (await this.props.kinesisVelocityTokenInstance.getPrice()).toNumber()
     const costInEther = convertWeiToEther(costInWei)
     this.setState({costInWei, costInEther})
   }
@@ -27,7 +27,7 @@ export class ClientForm extends React.Component<any, any> {
     try {
       this.setState({loading: true})
 
-      await this.props.kinesisRevenueTokenInstance.buyToken(this.state.desiredQuantity, {value: this.state.costInWei * this.state.desiredQuantity, from: this.props.address})
+      await this.props.kinesisVelocityTokenInstance.buyToken(this.state.desiredQuantity, {value: this.state.costInWei * this.state.desiredQuantity, from: this.props.address})
 
       this.setState({
         successMessage: `
@@ -67,12 +67,12 @@ export class ClientForm extends React.Component<any, any> {
             <Wallet {...this.props} />
           </div>
           <div className='col-sm-6'>
-            <h3>Purchase KRT</h3>
+            <h3>Purchase KVT</h3>
             <form onSubmit={(ev) => this.handleSubmit(ev)}>
-              <label style={{marginTop: '10px'}}>Cost Per KRT (ETH)</label>
+              <label style={{marginTop: '10px'}}>Cost Per KVT (ETH)</label>
               <input type='text' className='form-control' value={this.state.costInEther} style={{backgroundColor: '#555555'}} disabled/>
               <label style={{marginTop: '10px'}}>Purchase Quantity</label>
-              <input type='number' className='form-control' value={this.state.desiredQuantity} onChange={(ev) => this.handleQuantityChange(ev)} placeholder='KRT Quantity'/>
+              <input type='number' className='form-control' value={this.state.desiredQuantity} onChange={(ev) => this.handleQuantityChange(ev)} placeholder='KVT Quantity'/>
               <label style={{marginTop: '10px'}}>Total Cost (ETH)</label>
               <input type='text' className='form-control' value={this.state.costInEther * this.state.desiredQuantity} style={{backgroundColor: '#555555'}} disabled/>
               <input className='btn btn-primary' type='submit' value='Purchase' style={{marginTop: '10px'}} />

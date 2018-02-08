@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom'
 import { NotFound } from './NotFound'
 import { Promo } from './Promo/Promo'
-import { TokenPage } from './KinesisRevenueToken/Page';
+import { TokenPage } from './KinesisVelocityToken/Page';
 
 export class App extends React.Component<null, null> {
   constructor(props: any) {
