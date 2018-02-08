@@ -5,16 +5,16 @@ export class Wallet extends React.Component<any, any> {
   constructor(props) {
     super(props)
     this.state = {
-      abxt: 0,
+      krt: 0,
       eth: 0,
-      abxtTotalSupply: 0
+      krtTotalSupply: 0
     }
   }
 
   async componentWillMount() {
     if (this.props.kinesisRevenueTokenInstance) {
-      const abxt = await this.props.kinesisRevenueTokenInstance.balanceOf(this.props.address)
-      const abxtTotalSupply = await this.props.kinesisRevenueTokenInstance.getTotalSupply()
+      const krt = await this.props.kinesisRevenueTokenInstance.balanceOf(this.props.address)
+      const krtTotalSupply = await this.props.kinesisRevenueTokenInstance.getTotalSupply()
 
       this.props.web3.eth.getBalance(this.props.address, (err, eth) => {
         if (err) {
@@ -22,7 +22,7 @@ export class Wallet extends React.Component<any, any> {
           return
         }
 
-        this.setState({abxt: abxt.toNumber(), abxtTotalSupply: abxtTotalSupply.toNumber(), eth: convertWeiToEther(eth.toNumber())})
+        this.setState({krt: krt.toNumber(), krtTotalSupply: krtTotalSupply.toNumber(), eth: convertWeiToEther(eth.toNumber())})
       })
     }
   }
@@ -32,9 +32,9 @@ export class Wallet extends React.Component<any, any> {
       <div>
         <h3>Wallet</h3>
         <p><strong>ETH</strong>: {this.state.eth}</p>
-        <p><strong>KRT</strong>: {this.state.abxt}</p>
-        <p><strong>KRT Total Supply</strong>: {this.state.abxtTotalSupply}</p>
-        <p><strong>KRT As A Percentage Of Total Supply</strong>: {(this.state.abxt / this.state.abxtTotalSupply * 100).toFixed(2)} %</p>
+        <p><strong>KRT</strong>: {this.state.krt}</p>
+        <p><strong>KRT Total Supply</strong>: {this.state.krtTotalSupply}</p>
+        <p><strong>KRT As A Percentage Of Total Supply</strong>: {(this.state.krt / this.state.krtTotalSupply * 100).toFixed(2)} %</p>
       </div>
     )
   }

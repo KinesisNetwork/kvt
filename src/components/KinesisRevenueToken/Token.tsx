@@ -77,20 +77,22 @@ export class Token extends React.Component<any, any> {
   public render() {
     return (
       <div>
-        <div className='container'>
-          <div className='section_title pt-80 mb-70 text-center'>
-            <h2 style={{color: '#ffd700'}}>KRT Token Offering</h2>
-            <p>Purchase Kinesis Revenue Token</p>
+        <section className='ico' id='token'>
+          <div className='container'>
+            <div className='section_title pt-80 mb-70 text-center'>
+              <h2>KRT Token Offering</h2>
+              <p>Purchase Kinesis Revenue Token</p>
+            </div>
+            <div className='row'>
+              {this.state.noWeb3 && <NoWeb3 />}
+              {this.state.noAddress && <NoAddress />}
+              {this.state.isAdmin && <AdminForm kinesisRevenueTokenInstance={this.state.kinesisRevenueTokenInstance} address={this.state.address} web3={this.state.web3} web3Provider={this.state.web3Provider} />}
+              {this.state.isApprover && <ApproverForm kinesisRevenueTokenInstance={this.state.kinesisRevenueTokenInstance} address={this.state.address} web3={this.state.web3} web3Provider={this.state.web3Provider} />}
+              {this.state.isTrust && <TrustForm kinesisRevenueTokenInstance={this.state.kinesisRevenueTokenInstance} address={this.state.address} web3={this.state.web3} web3Provider={this.state.web3Provider} />}
+              {!this.state.isAdmin && !this.state.isApprover && !this.state.isTrust && this.state.address && <ClientForm kinesisRevenueTokenInstance={this.state.kinesisRevenueTokenInstance} address={this.state.address} web3={this.state.web3} web3Provider={this.state.web3Provider} />}
+            </div>
           </div>
-          <div className='row'>
-            {this.state.noWeb3 && <NoWeb3 />}
-            {this.state.noAddress && <NoAddress />}
-            {this.state.isAdmin && <AdminForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} web3Provider={this.state.web3Provider} />}
-            {this.state.isApprover && <ApproverForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} web3Provider={this.state.web3Provider} />}
-            {this.state.isTrust && <TrustForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} web3Provider={this.state.web3Provider} />}
-            {!this.state.isAdmin && !this.state.isApprover && !this.state.isTrust && this.state.address && <ClientForm abxTokenInstance={this.state.abxTokenInstance} address={this.state.address} web3={this.state.web3} web3Provider={this.state.web3Provider} />}
-          </div>
-        </div>
+        </section>
       </div>
     )
   }

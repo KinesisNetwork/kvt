@@ -11,7 +11,7 @@
     "contract-deploy": "truffle migrate",
     "test": "truffle test"
   },
-  "author": "ABX",
+  "author": "Kinesis",
   "license": "ISC",
   "dependencies": {
     "@types/react-router-dom": "^4.2.2",
