@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Route,
   Link,
   Switch,
@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom'
 import { NotFound } from './NotFound'
 import { Promo } from './Promo/Promo'
+import { TokenPage } from './KinesisRevenueToken/Page';
 
 export class App extends React.Component<null, null> {
   constructor(props: any) {
@@ -16,9 +17,10 @@ export class App extends React.Component<null, null> {
 
   public render() {
     return (
-      <Router>
+      <Router basename="/">
         <Switch>
-          <Route path='/' component={Promo} />
+          <Route exact path='/' component={Promo} />
+          <Route path='/tokensale' component={TokenPage} />
           <Route path='/404' component={NotFound}/>
           <Redirect to='/404' />
         </Switch>
