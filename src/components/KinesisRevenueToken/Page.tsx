@@ -24,7 +24,6 @@ export class TokenPage extends React.Component<null, null> {
             <Navigation hideNavigation={true}/>
           </div>
         </header>
-        <Home />
         <Token /> 
         <Footer />
       </div>
