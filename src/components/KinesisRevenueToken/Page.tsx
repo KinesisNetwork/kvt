@@ -30,11 +30,3 @@ export class TokenPage extends React.Component<null, null> {
     )
   }
 }
-
-        // <div>
-        //   <section className='banner pt-80 style_2' data-stellar-background-ratio='.7' id='home'>
-        //     <div className='overlay' />
-        //     <div className='container' style={{textAlign: 'center'}}>
-        //     </div>
-        //   </section>
-        // </div>
