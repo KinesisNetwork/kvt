@@ -17,5 +17,7 @@ To dev the repo, run npm start for compilation watches, and sh local_start.sh fo
 
 ## Deploy to a network
   
+1. truffle compile
 1. Add network to truffle.js (Follow format of other networks)
-2. `truffle migrate --network [network name]`
+2. Make sure you have ethereum in the account specified in truffle.js - (If Ropsten use metamask faucet)
+3. `truffle migrate --network [network name]`
