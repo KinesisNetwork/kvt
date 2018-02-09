@@ -39,7 +39,6 @@ export class Promo extends React.Component<null, null> {
         <Roadmap />
         <Team />
         <Faq />
-        <Token />
         <Contact />
         <Footer />
       </div>
