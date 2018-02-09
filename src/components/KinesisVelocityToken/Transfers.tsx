@@ -27,7 +27,7 @@ export class Transfers extends React.Component<any, { transfers: Transfer[], isA
   }
 
   public async loadTransfers() {
-    const inst = this.props.kinesisRevenueTokenInstance
+    const inst = this.props.kinesisVelocityTokenInstance
     if (inst) {
       const isApprover = await inst.isApprover({from: this.props.address})
       const transferAddresses = (await inst.getTransfers()).reverse()
@@ -57,7 +57,7 @@ export class Transfers extends React.Component<any, { transfers: Transfer[], isA
   public async approveTransfer(contractAddress: string) {
     try {
       this.setState({loading: true})
-      await this.props.kinesisRevenueTokenInstance.approveTransfer(contractAddress, {from: this.props.address})
+      await this.props.kinesisVelocityTokenInstance.approveTransfer(contractAddress, {from: this.props.address})
       await this.loadTransfers()
       this.setState({loading: false})
     } catch (e) {
@@ -70,7 +70,7 @@ export class Transfers extends React.Component<any, { transfers: Transfer[], isA
       return (
         <div className='well' style={wellOverwride}>
           <strong>Target Address: </strong>{t.targetAddress}&nbsp;
-          <strong>KRT: </strong>{t.quantity}&nbsp;
+          <strong>KVT: </strong>{t.quantity}&nbsp;
           { t.pending && !this.state.isApprover && <span className='label label-info pull-right'>Pending</span> }
           { t.pending && this.state.isApprover && <span onClick={() => this.approveTransfer(t.contractAddress)} className='label label-primary pull-right' style={{cursor: 'pointer'}}>Approve</span> }
           { !t.pending && <span className='label label-success pull-right'>Complete</span> }

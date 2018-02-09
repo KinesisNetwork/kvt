@@ -20,7 +20,7 @@ export class TrustForm extends React.Component<any, any> {
     try {
       this.setState({loading: true})
 
-      await this.props.kinesisRevenueTokenInstance.trustTransfer(address, amount, {from: this.props.address})
+      await this.props.kinesisVelocityTokenInstance.trustTransfer(address, amount, {from: this.props.address})
 
       this.setState({
         successMessage: `Transfer submitted to the approver.`,
@@ -71,7 +71,7 @@ export class TrustForm extends React.Component<any, any> {
             <form onSubmit={(ev) => this.handleAdminTransfer(ev)}>
               <label style={{marginTop: '10px'}}>Target Address</label>
               <input type='text' className='form-control' value={this.state.targetAddress} onChange={(ev) => this.handleAddressChange(ev)} placeholder='Address'/>
-              <label style={{marginTop: '10px'}}>Quantity of KRT</label>
+              <label style={{marginTop: '10px'}}>Quantity of KVT</label>
               <input type='number' className='form-control' value={this.state.amount} onChange={(ev) => this.handleAmountChange(ev)} placeholder='Amount'/>
               <input className='btn btn-primary' type='submit' value='Transfer' style={{marginTop: '10px'}} />
             </form>

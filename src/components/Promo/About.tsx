@@ -14,7 +14,7 @@ export class About extends React.Component<null, null> {
             <div className='section_title text-center mb-60'>
               <h2>What does Kinesis offer?</h2>
               <p>Imagine this: a multifaceted yield system, empowering users to be financially rewarded based on their participation and the overall velocity (rate that money changes hands) of the Kinesis currencies. This concept will change the way the world views physical precious metals. It’s a revolutionary idea giving users a unique yield, derived purely from economic output rather than debt like fiat currency with fractional banking.</p>
-              <p>To take maximum advantage of the Kinesis potential for return, you must register for the Kinesis Revenue Token sale. Only holders of the Kinesis Revenue Token will be eligible to share in transaction fees associated with all Kinesis Currencies.</p>
+              <p>To take maximum advantage of the Kinesis potential for return, you must register for the Kinesis Velocity Token sale. Only holders of the Kinesis Velocity Token will be eligible to share in transaction fees associated with all Kinesis Currencies.</p>
             </div>
             {/* End of .section_title */}
             <div className='row text-center m-0'>
@@ -22,7 +22,7 @@ export class About extends React.Component<null, null> {
                 <div className='content'>
                   <img src='images/website-assets/01Security.png' />
                   <h3>Security</h3>
-                  <p>Kinesis has been built on tried and tested, industry leading blockchain platforms. Using the Ethereum network for the kinesis Revenue Token and Stellar for the Kinesis Currency, coupled with an industry leading exchange platform and firmly established world-class vaulting and independent auditing networks, the Kinesis Suite of Products have been designed with security and trust in mind.</p>
+                  <p>Kinesis has been built on tried and tested, industry leading blockchain platforms. Using the Ethereum network for the Kinesis Velocity Token and Stellar for the Kinesis Currency, coupled with an industry leading exchange platform and firmly established world-class vaulting and independent auditing networks, the Kinesis Suite of Products have been designed with security and trust in mind.</p>
                 </div>
                 {/* End of .content */}
               </div>
@@ -31,7 +31,7 @@ export class About extends React.Component<null, null> {
                 <div className='content'>
                   <img src='images/website-assets/03Backed.png' />
                   <h3>Initial Token Offering</h3>
-                  <p>The Kinesis Revenue Token (KRT) is an ERC20 Token. This Token enables the holders to share in transaction fees associated with the Kinesis suite of currencies. It goes without saying how attractive a substantial share in the transactional fees of a high velocity currency, backed by physical precious metals could be.</p>
+                  <p>The Kinesis Velocity Token (KVT) is an ERC20 Token. This Token enables the holders to share in transaction fees associated with the Kinesis suite of currencies. It goes without saying how attractive a substantial share in the transactional fees of a high velocity currency, backed by physical precious metals could be.</p>
                 </div>
                 {/* End of .content */}
               </div>

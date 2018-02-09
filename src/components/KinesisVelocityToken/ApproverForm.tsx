@@ -22,10 +22,10 @@ export class ApproverForm extends React.Component<any, any> {
   }
 
   public async componentDidMount() {
-    const pendingBurn = await this.props.kinesisRevenueTokenInstance.isBurnPending()
-    const transferPending = await this.props.kinesisRevenueTokenInstance.isToggleTransferablePending()
-    const transferable = await this.props.kinesisRevenueTokenInstance.getTransferableState()
-    const pendingPriceChangeInWei = (await this.props.kinesisRevenueTokenInstance.getPendingPriceChange()).toNumber()
+    const pendingBurn = await this.props.kinesisVelocityTokenInstance.isBurnPending()
+    const transferPending = await this.props.kinesisVelocityTokenInstance.isToggleTransferablePending()
+    const transferable = await this.props.kinesisVelocityTokenInstance.getTransferableState()
+    const pendingPriceChangeInWei = (await this.props.kinesisVelocityTokenInstance.getPendingPriceChange()).toNumber()
     const pendingPriceChangeInEth = convertWeiToEther(pendingPriceChangeInWei)
     this.setState({pendingBurn, transferable, transferPending, pendingPriceChangeInWei, pendingPriceChangeInEth})
   }
@@ -35,7 +35,7 @@ export class ApproverForm extends React.Component<any, any> {
       this.emptyBanners()
       this.setState({loading: true})
 
-      await this.props.kinesisRevenueTokenInstance.approveTransferableToggle({from: this.props.address})
+      await this.props.kinesisVelocityTokenInstance.approveTransferableToggle({from: this.props.address})
       this.setState({
         successMessage: `Transferable state updated`,
         loading: false,
@@ -50,9 +50,9 @@ export class ApproverForm extends React.Component<any, any> {
       this.emptyBanners()
       this.setState({loading: true})
 
-      await this.props.kinesisRevenueTokenInstance.approvePriceChange({from: this.props.address})
+      await this.props.kinesisVelocityTokenInstance.approvePriceChange({from: this.props.address})
       this.setState({
-        successMessage: `KRT price updated`,
+        successMessage: `KVT price updated`,
         loading: false,
       })
     } catch (e) {
@@ -65,9 +65,9 @@ export class ApproverForm extends React.Component<any, any> {
       this.emptyBanners()
       this.setState({loading: true})
 
-      await this.props.kinesisRevenueTokenInstance.approveBurn({from: this.props.address})
+      await this.props.kinesisVelocityTokenInstance.approveBurn({from: this.props.address})
       this.setState({
-        successMessage: `KRT crowdsale complete`,
+        successMessage: `KVT crowdsale complete`,
         loading: false,
       })
     } catch (e) {
@@ -80,7 +80,7 @@ export class ApproverForm extends React.Component<any, any> {
       this.emptyBanners()
       this.setState({loading: true})
 
-      await this.props.kinesisRevenueTokenInstance.cancelBurn({from: this.props.address})
+      await this.props.kinesisVelocityTokenInstance.cancelBurn({from: this.props.address})
       this.setState({
         successMessage: `Burn cancelled`,
         loading: false,
@@ -102,8 +102,8 @@ export class ApproverForm extends React.Component<any, any> {
             <Wallet {...this.props} />
           </div>
           <div className='col-sm-3'>
-            <h3>Make KRT Transferable</h3>
-            <p style={{marginTop: '10px'}}>The KRT is currently <strong>{this.state.transferable ? 'transferable' : 'non-transferable'}</strong></p>
+            <h3>Make KVT Transferable</h3>
+            <p style={{marginTop: '10px'}}>The KVT is currently <strong>{this.state.transferable ? 'transferable' : 'non-transferable'}</strong></p>
             { this.state.transferPending ? (
               <div>
                 <p>The owner has requested updating the transferable status to <strong>{this.state.transferable ? 'non-transferable' : 'transferable'}</strong></p>
@@ -122,7 +122,7 @@ export class ApproverForm extends React.Component<any, any> {
                 <button className='btn btn-warning' style={{marginTop: '10px'}} onClick={() => this.cancelBurn()}>Cancel Burn</button>
               </div>
             ) : (
-              <p style={{marginTop: '10px'}}>The KRT Owner has not yet requested this</p>
+              <p style={{marginTop: '10px'}}>The KVT Owner has not yet requested this</p>
             ) }
           </div>
           <div className='col-sm-3'>
@@ -133,7 +133,7 @@ export class ApproverForm extends React.Component<any, any> {
                 <button className='btn btn-primary' style={{marginTop: '10px'}} onClick={() => this.approvePriceChange()}>Approve Price Change</button>
               </div>
             ) : (
-              <p style={{marginTop: '10px'}}>The KRT Owner has no price change pending.</p>
+              <p style={{marginTop: '10px'}}>The KVT Owner has no price change pending.</p>
             ) }
           </div>
         </div>

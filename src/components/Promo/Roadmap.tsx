@@ -20,8 +20,8 @@ export class Roadmap extends React.Component<null, null> {
                 <li style={{fontSize: '14px', marginBottom: '8px'}}>2016: Conceptualizing the ways humanity could return to the Gold Standard.</li>
                 <li style={{fontSize: '14px', marginBottom: '8px'}}>Early 2017: Investigating smart-contract capabilities across multiple leading cryptocurrencies.</li>
                 <li style={{fontSize: '14px', marginBottom: '8px'}}>Mid 2017: The build and completion of the proprietary Primary Marketplace environment.</li>
-                <li style={{fontSize: '14px', marginBottom: '8px'}}>Late 2017: Development of both the unique and revolutionary Kinesis Currencies and Kinesis Revenue Token.</li>
-                <li style={{fontSize: '14px', marginBottom: '8px'}}>Early-Mid 2018: Launching the Kinesis Revenue Token.</li>
+                <li style={{fontSize: '14px', marginBottom: '8px'}}>Late 2017: Development of both the unique and revolutionary Kinesis Currencies and Kinesis Velocity Token.</li>
+                <li style={{fontSize: '14px', marginBottom: '8px'}}>Early-Mid 2018: Launching the Kinesis Velocity Token.</li>
                 <li style={{fontSize: '14px', marginBottom: '8px'}}>Mid 2018: The Launch of the first of the Kinesis Currencies, whereby each coin is backed 1:1 by 1g of 99.99% pure physical gold.</li>
               </ul>
             </div>
@@ -42,8 +42,8 @@ export class Roadmap extends React.Component<null, null> {
             </div>
             <div className='row text-center m-0'>
               <div className='col-sm-4'>
-                <h3><img style={{margin: '10px'}} src='images/website-assets/roadmap-icons/04.png' />  <span className='primary_color'>Kinesis Revenue Token</span></h3>
-                <p>The earning potential of such an attractive and unique coin is unequivocal. The Kinesis Revenue Token gives buyers a share of this awesome earning potential. Register your interest here.</p>
+                <h3><img style={{margin: '10px'}} src='images/website-assets/roadmap-icons/04.png' />  <span className='primary_color'>Kinesis Velocity Token</span></h3>
+                <p>The earning potential of such an attractive and unique coin is unequivocal. The Kinesis Velocity Token gives buyers a share of this awesome earning potential. Register your interest here.</p>
               </div>
               <div className='col-sm-4'>
                 <h3><img style={{margin: '10px'}} src='images/website-assets/roadmap-icons/06.png' />  <span className='primary_color'>Referral Opportunity</span></h3>

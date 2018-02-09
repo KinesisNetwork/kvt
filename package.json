@@ -5,13 +5,13 @@
   "main": "js/index.js",
   "scripts": {
     "start": "webpack --watch",
-    "webserver": "python -m http.server 9000",
+    "webserver": "python -m http.server 7000",
     "client-compile": "webpack -p --progress",
     "contract-compile": "truffle compile",
     "contract-deploy": "truffle migrate",
     "test": "truffle test"
   },
-  "author": "ABX",
+  "author": "Kinesis",
   "license": "ISC",
   "dependencies": {
     "@types/react-router-dom": "^4.2.2",
