@@ -16,7 +16,7 @@ contract KinesisVelocityToken is BasicToken, Ownable {
 	/* This is 0.1 ETH */
   uint256 public pricePerTokenInWei = 100000000000000000;
 
-  uint public INITIAL_SUPPLY = 1000000;
+  uint public INITIAL_SUPPLY = 250000;
   bool public isTransferable = false;
 
   bool burnIsPending = false;
