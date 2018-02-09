@@ -1,5 +1,5 @@
 // Ropsten MetaMask nmonic
-const ropstenNmonic = 'top chicken finish story close feature comfort vendor regret prize brush raw'
+const ropstenNmonic = 'candy maple cake sugar pudding cream honey rich smooth crumble sweet treat'
 
 // https://github.com/trufflesuite/truffle-hdwallet-provider
 const HDWalletProvider = require('truffle-hdwallet-provider')
@@ -16,7 +16,7 @@ module.exports = {
     ropsten: {
       provider: new HDWalletProvider(ropstenNmonic, 'https://ropsten.infura.io/'),
       network_id: 3,
-      gas: 2900000
+      gas: 3900000
     }
   }
 };
