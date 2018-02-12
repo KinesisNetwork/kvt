@@ -3,6 +3,7 @@ const loadTemplateJs = require('../../vendor/js/main.js')
 
 import { Home } from './Home'
 import { Intro } from './Intro'
+import { What } from './What'
 import { About } from './About'
 import { Ico } from './Ico'
 import { Team } from './Team'
@@ -34,6 +35,7 @@ export class Promo extends React.Component<null, null> {
         </header>
         <Home />
         <Intro />
+        <What />
         <About />
         <Ico />
         <Roadmap />
