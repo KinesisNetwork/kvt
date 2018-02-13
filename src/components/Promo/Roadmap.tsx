@@ -10,23 +10,23 @@ export class Roadmap extends React.Component<null, null> {
     return (
       <div className='roadmap-bg'>
         <section className='pt-80 pb-80' id='about'>
-          <div className='container'>
+          <div className='container roadmap-container'>
             <div className='section_title text-center mb-60'>
               <h2>Roadmap</h2>
               { /* <div className='progress'>
                 <div className='progress-bar' role='progressbar' style={{width: '25%', backgroundColor: '#ffd700'}} aria-valuenow="25" aria-valuemin='0' aria-valuemax='100'></div>
               </div> */ }
-              <ul style={{listStyleType: 'disc', textAlign: 'left'}}>
-                <li style={{fontSize: '14px', marginBottom: '8px'}}>2016: Conceptualizing the ways humanity could return to the Gold Standard.</li>
-                <li style={{fontSize: '14px', marginBottom: '8px'}}>Early 2017: Investigating smart-contract capabilities across multiple leading cryptocurrencies.</li>
-                <li style={{fontSize: '14px', marginBottom: '8px'}}>Mid 2017: The build and completion of the proprietary Primary Marketplace environment.</li>
-                <li style={{fontSize: '14px', marginBottom: '8px'}}>Late 2017: Development of both the unique and revolutionary Kinesis Currencies and Kinesis Velocity Token.</li>
-                <li style={{fontSize: '14px', marginBottom: '8px'}}>Early-Mid 2018: Launching the Kinesis Velocity Token.</li>
-                <li style={{fontSize: '14px', marginBottom: '8px'}}>Mid 2018: The Launch of the first of the Kinesis Currencies, whereby each coin is backed 1:1 by 1g of 99.99% pure physical gold.</li>
+              <ul style={{listStyleType: 'none', textAlign: 'left', color: 'white', marginLeft: '30px'}}>
+                <li style={{fontSize: '14px', marginBottom: '8px'}}><span className='primary_color' style={{fontWeight: 'bold'}}>2016:</span> Conceptualizing the ways humanity could return to the Gold Standard.</li>
+                <li style={{fontSize: '14px', marginBottom: '8px'}}><span className='primary_color' style={{fontWeight: 'bold'}}>Early 2017:</span> Investigating smart-contract capabilities across multiple leading cryptocurrencies.</li>
+                <li style={{fontSize: '14px', marginBottom: '8px'}}><span className='primary_color' style={{fontWeight: 'bold'}}>Mid 2017:</span> The build and completion of the proprietary Primary Marketplace environment.</li>
+                <li style={{fontSize: '14px', marginBottom: '8px'}}><span className='primary_color' style={{fontWeight: 'bold'}}>Late 2017:</span> Development of both the unique and revolutionary Kinesis Currencies and Kinesis Velocity Token.</li>
+                <li style={{fontSize: '14px', marginBottom: '8px'}}><span className='primary_color' style={{fontWeight: 'bold'}}>Early-Mid 2018:</span> Launching the Kinesis Velocity Token.</li>
+                <li style={{fontSize: '14px', marginBottom: '8px'}}><span className='primary_color' style={{fontWeight: 'bold'}}>Mid 2018:</span> The Launch of the first of the Kinesis Currencies, whereby each coin is backed 1:1 by 1g of 99.99% pure physical gold.</li>
               </ul>
             </div>
             {/* End of .section_title */}
-            <div className='row text-center m-0'>
+            <div className='row text-center m-0 roadmap-sections'>
               <div className='col-sm-4'>
                 <h3><img style={{margin: '10px'}} src='images/website-assets/roadmap-icons/01.png' />  <span className='primary_color'>Value</span></h3>
                 <p>Gold has long been known as an incredible store of value. Kinesis brings this security and stability to the world of digital currencies.</p>
@@ -40,7 +40,7 @@ export class Roadmap extends React.Component<null, null> {
                 <p>The Kinesis suite of digital currencies have been developed for future use in everyday life. A higher velocity means a higher yield.</p>
               </div>
             </div>
-            <div className='row text-center m-0'>
+            <div className='row text-center m-0 roadmap-sections'>
               <div className='col-sm-4'>
                 <h3><img style={{margin: '10px'}} src='images/website-assets/roadmap-icons/04.png' />  <span className='primary_color'>Kinesis Velocity Token</span></h3>
                 <p>The earning potential of such an attractive and unique coin is unequivocal. The Kinesis Velocity Token gives buyers a share of this awesome earning potential. Register your interest here.</p>

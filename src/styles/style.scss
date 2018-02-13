@@ -1,2 +1,20 @@
 $fa-font-path: "~font-awesome/fonts";
 @import '~font-awesome/scss/font-awesome.scss';
+
+.btn.wow:hover {
+  background-color: black !important;
+}
+
+h2.hero-text {
+  font-size: 35px;
+}
+
+.roadmap-sections p {
+  color: white;
+  text-align: left;
+}
+
+.roadmap-container {
+  background-color: rgba(8, 18, 45, 0.81);
+  padding: 60px;
+}
