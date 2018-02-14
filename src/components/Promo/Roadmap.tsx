@@ -9,13 +9,10 @@ export class Roadmap extends React.Component<null, null> {
 
     return (
       <div className='roadmap-bg'>
-        <section className='pt-80 pb-80' id='about'>
+        <section className='pt-80 pb-80' id='roadmap'>
           <div className='container roadmap-container'>
             <div className='section_title text-center mb-60'>
               <h2>Roadmap</h2>
-              { /* <div className='progress'>
-                <div className='progress-bar' role='progressbar' style={{width: '25%', backgroundColor: '#ffd700'}} aria-valuenow="25" aria-valuemin='0' aria-valuemax='100'></div>
-              </div> */ }
               <ul style={{listStyleType: 'none', textAlign: 'left', color: 'white'}}>
                 <li className='roadmap-entries'><span className='primary_color roadmap-year'>2016:</span> Conceptualizing the ways humanity could return to the Gold Standard.</li>
                 <li className='roadmap-entries'><span className='primary_color roadmap-year'>Early 2017:</span> Investigating smart-contract capabilities across multiple leading cryptocurrencies.</li>

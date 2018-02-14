@@ -14,7 +14,6 @@ export class Team extends React.Component<null, null> {
           <div className='container'>
             <div className='section_title mb-50 text-center'>
               <h2>A Team With a Wealth of Experience</h2>
-              <p>Short leadership bios etc.</p>
             </div>
             <div className='row'>
               <div className='col-sm-4 col-xs-6'>

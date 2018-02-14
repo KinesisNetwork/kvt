@@ -40,8 +40,8 @@ export class Ico extends React.Component<null, null> {
                 </div>
               </div>
               <div className='col-sm-6 col-md-6 col-lg-6 wow fadeInRight' style={{position: 'relative', height: '100%', verticalAlign: 'top'}}>
-                <div className='embed-responsive embed-responsive-16by9'>
-                  <iframe width={560} height={315} src='https://www.youtube.com/embed/2o8hGkicgjI' frameBorder={0} allowFullScreen />
+                <div style={{textAlign: 'center'}}>
+                  <img src='images/website-assets/kinesis-coin.png' style={{maxHeight: '440px'}}/>
                 </div>
               </div>
             </div>
