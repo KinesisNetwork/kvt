@@ -19,54 +19,33 @@ export class Team extends React.Component<null, null> {
               <div className='col-sm-4 col-xs-6'>
                 <div className='content'>
                   <div className='img_container'>
-                    <img src='images/team/1.jpg' alt='team' className='img-responsive' />
-                    <div className='overlay'>
-                      <ul className='social list-inline mt-5 mb-0'>
-                        <li><a href='#'><i className='fa fa-facebook' /></a></li>
-                        <li><a href='#'><i className='fa fa-twitter' /></a></li>
-                        <li><a href='#'><i className='fa fa-linkedin' /></a></li>
-                      </ul>
-                    </div>
+                    <img src='images/team/1.png' alt='team' className='img-responsive' />
                     <h3 className='team_info wow fadeInUp'>
-                      steve martin
-                      <span>founder &amp; ceo</span>
+                      Thomas Coughlin  
                     </h3>
+                    <span className='team_title'>Chief Executive Officer</span>
                   </div>
                 </div>
               </div>
               <div className='col-sm-4 col-xs-6'>
                 <div className='content'>
                   <div className='img_container'>
-                    <img src='images/team/2.jpg' alt='team' className='img-responsive' />
-                    <div className='overlay'>
-                      <ul className='social list-inline mt-5 mb-0'>
-                        <li><a href='#'><i className='fa fa-facebook' /></a></li>
-                        <li><a href='#'><i className='fa fa-twitter' /></a></li>
-                        <li><a href='#'><i className='fa fa-linkedin' /></a></li>
-                      </ul>
-                    </div>
+                    <img src='images/team/2.png' alt='team' className='img-responsive' />
                     <h3 className='team_info wow fadeInUp'>
-                      sarah samanta
-                      <span>UI Designer</span>
+                      Michael Coughlin
                     </h3>
+                    <span className='team_title'>Chief Financial Officer</span>
                   </div>
                 </div>
               </div>
               <div className='col-sm-4 col-xs-6'>
                 <div className='content'>
                   <div className='img_container'>
-                    <img src='images/team/3.jpg' alt='team' className='img-responsive' />
-                    <div className='overlay'>
-                      <ul className='social list-inline mt-5 mb-0'>
-                        <li><a href='#'><i className='fa fa-facebook' /></a></li>
-                        <li><a href='#'><i className='fa fa-twitter' /></a></li>
-                        <li><a href='#'><i className='fa fa-linkedin' /></a></li>
-                      </ul>
-                    </div>
+                    <img src='images/team/3.png' alt='team' className='img-responsive' />
                     <h3 className='team_info wow fadeInUp'>
-                      john doe
-                      <span>web designer</span>
+                      David Charles 
                     </h3>
+                    <span className='team_title'>Non-Executive Director</span>
                   </div>
                 </div>
               </div>
