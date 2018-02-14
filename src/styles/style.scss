@@ -1,12 +1,15 @@
 $fa-font-path: "~font-awesome/fonts";
 @import '~font-awesome/scss/font-awesome.scss';
-
+.section_title p {
+  font-size: 16px !important;
+}
 .btn.wow:hover {
   background-color: black !important;
 }
 
 h2.hero-text {
   font-size: 35px;
+  margin-bottom: 0px;
 }
 
 .roadmap-sections p {
@@ -15,6 +18,24 @@ h2.hero-text {
 }
 
 .roadmap-container {
-  background-color: rgba(8, 18, 45, 0.81);
+  background-color: rgba(20, 26, 41, 0.88);
   padding: 60px;
+}
+
+.display-more-button:hover, .display-less-button:hover {
+  font-weight: bold;
+  color: black;
+}
+
+.roadmap-entries {
+  font-size: 14px;
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.roadmap-entries .roadmap-year {
+  display: block;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: bold;
 }

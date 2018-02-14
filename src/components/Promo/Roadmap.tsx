@@ -16,13 +16,13 @@ export class Roadmap extends React.Component<null, null> {
               { /* <div className='progress'>
                 <div className='progress-bar' role='progressbar' style={{width: '25%', backgroundColor: '#ffd700'}} aria-valuenow="25" aria-valuemin='0' aria-valuemax='100'></div>
               </div> */ }
-              <ul style={{listStyleType: 'none', textAlign: 'left', color: 'white', marginLeft: '30px'}}>
-                <li style={{fontSize: '14px', marginBottom: '8px'}}><span className='primary_color' style={{fontWeight: 'bold'}}>2016:</span> Conceptualizing the ways humanity could return to the Gold Standard.</li>
-                <li style={{fontSize: '14px', marginBottom: '8px'}}><span className='primary_color' style={{fontWeight: 'bold'}}>Early 2017:</span> Investigating smart-contract capabilities across multiple leading cryptocurrencies.</li>
-                <li style={{fontSize: '14px', marginBottom: '8px'}}><span className='primary_color' style={{fontWeight: 'bold'}}>Mid 2017:</span> The build and completion of the proprietary Primary Marketplace environment.</li>
-                <li style={{fontSize: '14px', marginBottom: '8px'}}><span className='primary_color' style={{fontWeight: 'bold'}}>Late 2017:</span> Development of both the unique and revolutionary Kinesis Currencies and Kinesis Velocity Token.</li>
-                <li style={{fontSize: '14px', marginBottom: '8px'}}><span className='primary_color' style={{fontWeight: 'bold'}}>Early-Mid 2018:</span> Launching the Kinesis Velocity Token.</li>
-                <li style={{fontSize: '14px', marginBottom: '8px'}}><span className='primary_color' style={{fontWeight: 'bold'}}>Mid 2018:</span> The Launch of the first of the Kinesis Currencies, whereby each coin is backed 1:1 by 1g of 99.99% pure physical gold.</li>
+              <ul style={{listStyleType: 'none', textAlign: 'left', color: 'white'}}>
+                <li className='roadmap-entries'><span className='primary_color roadmap-year'>2016:</span> Conceptualizing the ways humanity could return to the Gold Standard.</li>
+                <li className='roadmap-entries'><span className='primary_color roadmap-year'>Early 2017:</span> Investigating smart-contract capabilities across multiple leading cryptocurrencies.</li>
+                <li className='roadmap-entries'><span className='primary_color roadmap-year'>Mid 2017:</span> The build and completion of the proprietary Primary Marketplace environment.</li>
+                <li className='roadmap-entries'><span className='primary_color roadmap-year'>Late 2017:</span> Development of both the unique and revolutionary Kinesis Currencies and Kinesis Velocity Token.</li>
+                <li className='roadmap-entries'><span className='primary_color roadmap-year'>Early-Mid 2018:</span> Launching the Kinesis Velocity Token.</li>
+                <li className='roadmap-entries'><span className='primary_color roadmap-year'>Mid 2018:</span> The Launch of the first of the Kinesis Currencies, whereby each coin is backed 1:1 by 1g of 99.99% pure physical gold.</li>
               </ul>
             </div>
             {/* End of .section_title */}
