@@ -22,9 +22,9 @@ export class Ico extends React.Component<null, null> {
                   </DisplayMore>
                 </div>
               </div>
-              <div className='col-sm-6 col-md-6 col-lg-6 wow fadeInRight'>
-                <div className='embed-responsive embed-responsive-16by9'>
-                  <img src='images/website-assets/CreditCard.png' />
+              <div className='col-sm-6 col-md-6 col-lg-6 wow fadeInRight' style={{position: 'relative', height: '100%', verticalAlign: 'top'}}>
+                <div style={{textAlign: 'center'}}>
+                  <img src='images/website-assets/CreditCard.png' style={{maxHeight: '350px'}}/>
                 </div>
               </div>
             </div>
