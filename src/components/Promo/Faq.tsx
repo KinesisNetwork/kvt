@@ -12,7 +12,7 @@ export class Faq extends React.Component<null, null> {
         <section className='faq pt-80 pb-50' id='faq'>
           <div className='container'>
             <div className='section_title mb-70 text-center'>
-              <h2><span className='primary_color'>ICO Frequently asked questions</span></h2>
+              <h2><span className='primary_color'>KVT Frequently asked questions</span></h2>
             </div>
             {/* End of .section_title */}
             <div className='row'>
