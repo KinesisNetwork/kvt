@@ -54,6 +54,24 @@ h3.team_info{
   margin-bottom: 30px;
 }
 
+.velocity-fast-facts li>p {
+  margin-left: 14px
+}
+.velocity-token-table {
+  width: 85%;
+  margin: auto;
+}
+.velocity-token-table td {
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  font-weight: 400 !important;
+  font-size: 13px;
+}
+.velocity-token-table tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+.velocity-token-table td {
+  padding: 5px;
+}
 
 // Roadmap styling
 #ico .is-table-row .col-sm-4 {

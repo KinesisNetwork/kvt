@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { DisplayMore } from '../DisplayMore';
+import { BuyingToken } from './BuyingToken'
 const Scroll: any = require('react-scroll')
 const ScrollLink = Scroll.Link
 
@@ -14,16 +15,14 @@ export class TokenOffering extends React.Component<null, null> {
       <div>
         <section className='services pt-80 pb-80' style={{color: 'white'}} id='token'>
           <div className='container'>
-            <div className='section_title text-center mb-60'>
+            <div className='section_title text-center'>
               <h2>Kinesis Velocity Token Offering</h2>
-            </div>
-            <div>
               <p>The Kinesis Velocity Token (KVT), named after the yield it presents to the holder, is your unique, time boxed opportunity to benefit from the boundless revenue generation potential of the future Kinesis cryptocurrency.</p>
               <p>Every Kinesis Velocity Token holder is entitled to a share of 20% of all transaction fees of the Kinesis cryptocurrency suite.</p>
               <p>With only 300,000 tokens on offer at a mere USD1000 each, this provides the astute investor with the potential for a substantial share in the transaction fees of this high velocity cryptocurrency</p>
               <p>Maximize your yield with the Kinesis Velocity Token:  Stake your claim to the massive earning potential of the digital currency of the future.</p>
-              <ScrollLink style={{ paddingLeft: '12px', paddingRight: '12px'}} className='ml-5 mr-5 mb-20 btn prehighlight' to='contact' spy={true} smooth={true} offset={0} duration={500}>Register Your Interest</ScrollLink>
-              <div className='container faq' style={{backgroundColor: 'rgba(0,0,0,0)', marginTop: '10px'}}>
+              <ScrollLink style={{ paddingLeft: '12px', paddingRight: '12px', marginBottom: '40px'}} className='ml-5 mr-5 mb-20 btn prehighlight' to='contact' spy={true} smooth={true} offset={0} duration={500}>Register Your Interest</ScrollLink>
+              <div className='container faq' style={{backgroundColor: 'rgba(0,0,0,0)', marginTop: '10px', maxWidth: '1000px' }}>
                 <div className='row'>
                   <div style={{width: '100%', marginLeft: '5px'}}>
                     <div>
@@ -39,10 +38,7 @@ export class TokenOffering extends React.Component<null, null> {
                           {/* End of .panel-heading */}
                           <div id='collapseBuyKvt' className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingBuyKvt'>
                             <div className='panel-body'>
-                              <p>
-                                Be ready with your Ethereum payment to receive your Kinesis Velocity Tokens directly into your ERC20 token compatible eWallet. At the nominated date and time, buy your Kinesis Tokens (KVT) following the user-friendly instructions on our website. 
-                              </p>
-                              <ScrollLink style={{ paddingLeft: '12px', paddingRight: '12px'}} className='ml-5 mr-5 mb-20 btn prehighlight' to='contact' spy={true} smooth={true} offset={0} duration={500}>Register Your Interest</ScrollLink>
+                              <BuyingToken />
                             </div>
                             {/* End of .panel-body */}
                           </div>
