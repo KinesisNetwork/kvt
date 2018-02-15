@@ -1,5 +1,5 @@
 import * as React from 'react'
-// import { Link as ScrolLink } from 'react-scroll'
+import { Link as ScrollLink } from 'react-scroll'
 
 export const BuyingToken: React.SFC = (props) => (
   <div>
@@ -8,7 +8,7 @@ export const BuyingToken: React.SFC = (props) => (
     </div>
     <div>
       <h3>Buying KVT</h3>
-      <p>Register your interest HERE.</p>
+      <p>Register your interest <ScrollLink to='contact' spy={true} smooth={true} offset={0} duration={500}><span style={{cursor: 'pointer'}}>HERE</span></ScrollLink>.</p>
       <p>Be ready with your Ethereum payment to receive your Kinesis Velocity Tokens directly into your ERC20 token compatible eWallet.</p>
       <p>At the nominated date and time, buy your Kinesis Tokens (KVT) y following the user-friendly instructions on our website.</p>
     </div>
