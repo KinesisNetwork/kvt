@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { DisplayMore } from '../DisplayMore';
 
 export class About extends React.Component<null, null> {
   constructor(props: any) {
@@ -29,7 +30,14 @@ export class About extends React.Component<null, null> {
                 <div className='content'>
                   <img src='images/website-assets/03Backed.png' />
                   <h3>Stability</h3>
-                  <p>The physical backing of Kinesis by precious metal creates stability in a marketplace plagued by volatility.</p>
+                  <p>
+                    Kinesis Inherently integrates the highest regarded store of value - gold, with the trust of blockchain technology, and the foresight of the digital currency revolution.  This physical backing creates stability in a marketplace plagued by uncertainty and volatility.
+                  </p>
+                  <DisplayMore style={{}}>
+                    <p style={{marginTop: '20px'}}>
+                      Theoretically, the price of a Kinesis coin should not drop below the spot price of its underlying physical precious metal, for if it should, arbitrage opportunity would present itself, causing the currency to correct back to the value of the metal. The price though should generally trade much higher than the spot price of the underlying; not only because of the efficiency of trade added to the underlying metal, but also the returns built into the currency model.
+                    </p>
+                  </DisplayMore>
                 </div>
                 {/* End of .content */}
               </div>
