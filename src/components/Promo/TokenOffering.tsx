@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { DisplayMore } from '../DisplayMore';
+import { BuyingToken } from './BuyingToken'
 const Scroll: any = require('react-scroll')
 const ScrollLink = Scroll.Link
 
@@ -39,10 +40,7 @@ export class TokenOffering extends React.Component<null, null> {
                           {/* End of .panel-heading */}
                           <div id='collapseBuyKvt' className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingBuyKvt'>
                             <div className='panel-body'>
-                              <p>
-                                Be ready with your Ethereum payment to receive your Kinesis Velocity Tokens directly into your ERC20 token compatible eWallet. At the nominated date and time, buy your Kinesis Tokens (KVT) following the user-friendly instructions on our website. 
-                              </p>
-                              <ScrollLink style={{ paddingLeft: '12px', paddingRight: '12px'}} className='ml-5 mr-5 mb-20 btn prehighlight' to='contact' spy={true} smooth={true} offset={0} duration={500}>Register Your Interest</ScrollLink>
+                              <BuyingToken />
                             </div>
                             {/* End of .panel-body */}
                           </div>
