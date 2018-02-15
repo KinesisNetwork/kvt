@@ -241,6 +241,7 @@ h3.team_info{
 
   .timeline li {
     padding: 2em 0;
+    padding-top: 4em;
   }
 
   .direction-l,
@@ -256,20 +257,20 @@ h3.team_info{
   }
 
   .flag {
-    background: rgb(255,255,255);
+    background: #253049;
     z-index: 15;
   }
 
   .direction-l .flag:before,
   .direction-r .flag:before {
     position: absolute;
-    top: -30px;
+    top: -18px;
     left: 50%;
     content: ' ';
     display: block;
     width: 12px;
     height: 12px;
-    margin-left: -9px;
+    margin-left: -6px;
     background: #fff;
     border-radius: 10px;
     border: 4px solid rgb(255,80,80);
@@ -286,7 +287,7 @@ h3.team_info{
     width: 0;
     margin-left: -8px;
     border: solid transparent;
-    border-bottom-color: rgb(255,255,255);
+    border-bottom-color: #253049;
     border-width: 8px;
     pointer-events: none;
   }
@@ -310,7 +311,7 @@ h3.team_info{
     position: relative;
     margin: 1em 0 0 0;
     padding: 1em;
-    background: rgb(245,245,245);
+    background: #253049;
     -webkit-box-shadow: 0 0 1px rgba(0,0,0,0.20);
     -moz-box-shadow: 0 0 1px rgba(0,0,0,0.20);
     box-shadow: 0 0 1px rgba(0,0,0,0.20);
