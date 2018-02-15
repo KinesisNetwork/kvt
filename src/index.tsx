@@ -16,6 +16,7 @@ import './styles/theme.scss'
 // Template JS
 import './vendor/js/misc/bootstrap.min.js'
 import './vendor/js/misc/plugins.js'
+import './vendor/js/misc/particles.js'
 
 ReactDOM.render(
   <App />,

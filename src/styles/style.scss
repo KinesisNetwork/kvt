@@ -1,2 +1,55 @@
 $fa-font-path: "~font-awesome/fonts";
 @import '~font-awesome/scss/font-awesome.scss';
+.section_title p {
+  font-size: 16px !important;
+}
+.btn.wow:hover {
+  background-color: black !important;
+}
+
+h2.hero-text {
+  font-size: 35px;
+  margin-bottom: 0px;
+}
+
+.roadmap-sections p {
+  color: white;
+  text-align: left;
+}
+
+.roadmap-container {
+  background-color: rgba(20, 26, 41, 0.88);
+  padding: 60px;
+}
+
+.display-more-button:hover, .display-less-button:hover {
+  font-weight: bold;
+  color: black;
+}
+
+.roadmap-entries {
+  font-size: 14px;
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.roadmap-entries .roadmap-year {
+  display: block;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+h3.team_info{
+  color: black;
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 0px;
+}
+
+.team_title {
+  text-align: center;
+  display:block;
+  margin: auto;
+  margin-bottom: 30px;
+}

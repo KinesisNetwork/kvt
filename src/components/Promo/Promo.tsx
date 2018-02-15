@@ -3,6 +3,7 @@ const loadTemplateJs = require('../../vendor/js/main.js')
 
 import { Home } from './Home'
 import { Intro } from './Intro'
+import { What } from './What'
 import { About } from './About'
 import { Ico } from './Ico'
 import { Team } from './Team'
@@ -13,6 +14,7 @@ import { Token } from '../KinesisVelocityToken/Token'
 import { Contact } from './Contact'
 import { Navigation } from '../Navigation';
 import { Footer } from '../Footer';
+import { TokenOffering } from './TokenOffering';
 
 export class Promo extends React.Component<null, null> {
   constructor(props: any) {
@@ -34,8 +36,10 @@ export class Promo extends React.Component<null, null> {
         </header>
         <Home />
         <Intro />
+        <What />
         <About />
         <Ico />
+        <TokenOffering />
         <Roadmap />
         <Team />
         <Faq />
