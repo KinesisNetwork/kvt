@@ -7,10 +7,10 @@ export const Intro: React.SFC = () => {
         <div className='container'>
           <div className='row'>
             <div className='col-sm-9'>
-              <h4 style={{color: 'black', lineHeight: '50px'}}><strong>Why Kinesis?</strong> Read our whitepaper to find out more.</h4>
+              <h4 style={{color: 'black', lineHeight: '50px'}}><strong>Why Kinesis?</strong> Read our blueprint to find out more.</h4>
             </div>
             <div className='col-sm-3'>
-              <a href='/documents/kinesis-blueprint-v10.pdf' target='_blank' className='btn wow fadeInRight' style={{marginBottom: 0, border: '2px solid black', backgroundColor: 'transparent'}}>Blueprint</a>
+              <a href='/documents/kinesis-blueprint.pdf' target='_blank' className='btn wow fadeInRight' style={{marginBottom: 0, border: '2px solid black', backgroundColor: 'transparent'}}>Blueprint</a>
             </div>
           </div>
         </div>
