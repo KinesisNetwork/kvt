@@ -23,6 +23,41 @@ export class TokenOffering extends React.Component<null, null> {
               <p>With only 300,000 tokens on offer at a mere USD1000 each, this provides the astute investor with the potential for a substantial share in the transaction fees of this high velocity cryptocurrency</p>
               <p>Maximize your yield with the Kinesis Velocity Token:  Stake your claim to the massive earning potential of the digital currency of the future.</p>
               <ScrollLink style={{ paddingLeft: '12px', paddingRight: '12px'}} className='ml-5 mr-5 mb-20 btn prehighlight' to='contact' spy={true} smooth={true} offset={0} duration={500}>Register Your Interest</ScrollLink>
+              <div className='container faq' style={{backgroundColor: 'rgba(0,0,0,0)', marginTop: '10px'}}>
+                <div className='row'>
+                  <div style={{width: '100%', marginLeft: '5px'}}>
+                    <div>
+                      <div className='panel-group' id='accordion' role='tablist' aria-multiselectable='true'>
+                        <div className='panel panel-default'>
+                          <div className='panel-heading' role='tab' id='headingBuyKvt'>
+                            <h4 className='panel-title'>
+                              <a role='button' className='collapsed' data-toggle='collapse' data-parent='#accordion' href='#collapseBuyKvt' aria-expanded='false' aria-controls='collapseBuyKvt'>
+                                How to buy KVT?<i className='fa fa-caret-up' />
+                              </a>
+                            </h4>
+                          </div>
+                          {/* End of .panel-heading */}
+                          <div id='collapseBuyKvt' className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingBuyKvt'>
+                            <div className='panel-body'>
+                              <p>
+                                Be ready with your Ethereum payment to receive your Kinesis Velocity Tokens directly into your ERC20 token compatible eWallet. At the nominated date and time, buy your Kinesis Tokens (KVT) following the user-friendly instructions on our website. 
+                              </p>
+                              <ScrollLink style={{ paddingLeft: '12px', paddingRight: '12px'}} className='ml-5 mr-5 mb-20 btn prehighlight' to='contact' spy={true} smooth={true} offset={0} duration={500}>Register Your Interest</ScrollLink>
+                            </div>
+                            {/* End of .panel-body */}
+                          </div>
+                          {/* End of .panel-collapse */}
+                        </div>
+                        {/* End of .panel */}
+                      </div>
+                      {/* End of .panel-group */}
+                    </div>
+                    {/* End of .content */}
+                  </div>
+                  {/* End of .col-sm-8 */}
+                </div>
+                {/* End of .row */}
+              </div>
             </div>
           </div>
         </section>
