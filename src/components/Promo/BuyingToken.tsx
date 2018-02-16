@@ -5,7 +5,7 @@ export const BuyingToken: React.SFC = (props) => (
   <div className='section_title text-center mb-60'>
     <div className='mt-30'>
       <div className='text-left'>
-        <p>Register your interest <ScrollLink to='contact' spy={true} smooth={true} offset={0} duration={500}><span style={{cursor: 'pointer'}}>HERE</span></ScrollLink>.</p>
+        <p>Register your interest <ScrollLink to='contact' spy={true} smooth={true} offset={0} duration={500}><span className='primary_color' style={{cursor: 'pointer'}}>HERE</span></ScrollLink>.</p>
         <p>Be ready with your Ethereum payment to receive your Kinesis Velocity Tokens directly into your ERC20 token compatible eWallet.
         At the nominated date and time, buy your Kinesis Tokens (KVT) by following the user-friendly instructions on our website.</p>
       </div>

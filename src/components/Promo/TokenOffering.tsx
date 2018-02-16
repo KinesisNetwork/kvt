@@ -17,10 +17,24 @@ export class TokenOffering extends React.Component<null, null> {
           <div className='container'>
             <div className='section_title text-center'>
               <h2>Kinesis Velocity Token Offering</h2>
-              <p>The Kinesis Velocity Token (KVT), named after the yield it presents to the holder, is your unique, time boxed opportunity to benefit from the boundless revenue generation potential of the future Kinesis cryptocurrency.</p>
-              <p>Every Kinesis Velocity Token holder is entitled to a share of 20% of all transaction fees of the Kinesis cryptocurrency suite.</p>
-              <p>With only 300,000 tokens on offer at a mere USD1000 each, this provides the astute investor with the potential for a substantial share in the transaction fees of this high velocity cryptocurrency</p>
-              <p>Maximize your yield with the Kinesis Velocity Token:  Stake your claim to the massive earning potential of the digital currency of the future.</p>
+
+
+              <p><strong>The Kinesis Velocity Token (KVT) offers an investor a one time only opportunity to: </strong></p>
+
+              <p>
+                <ul style={{listStyleType: 'circle', marginLeft: '40px'}}>
+                  <li>Benefit from sharing in 20% of all aggregated Kinesis cryptocurrency suite transaction fees and commercial centre commission;</li>
+                  <li>Benefit from potentially very significant capital gains in the KVTs; </li>
+                  <li>Access the extraordinary pre-ICO benefits on offer for the Kinesis cryptocurrency suite. </li>
+                </ul>
+              </p>
+
+              <p>These tokens are strictly limited in supply and being offered sequentially at phased discounted rates until reaching the full price and could sell out at anytime! The earlier an investor subscribes to the KVTs the greater the benefit they will receive. Please see KVT Schedule below.</p>
+
+              <p>If you believe that Kinesis has great potential and could be the monetary system of the future then KVTs provide the greatest exposure to Kinesis’ future success and they are only being offered once.</p>
+
+              <p>Stake your claim to the economic benefits of the monetary system of the future.</p>
+
               <ScrollLink style={{ paddingLeft: '12px', paddingRight: '12px', marginBottom: '40px'}} className='ml-5 mr-5 mb-20 btn prehighlight' to='contact' spy={true} smooth={true} offset={0} duration={500}>Register Your Interest</ScrollLink>
               <div className='container faq' style={{backgroundColor: 'rgba(0,0,0,0)', marginTop: '10px', maxWidth: '1000px' }}>
                 <div className='row'>
