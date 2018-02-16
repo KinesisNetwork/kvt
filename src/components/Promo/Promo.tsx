@@ -35,11 +35,11 @@ export class Promo extends React.Component<null, null> {
           </div>
         </header>
         <Home />
-        <Intro />
         <What />
         <About />
         <Ico />
         <TokenOffering />
+        <Intro />
         <Roadmap />
         <Team />
         <Faq />
