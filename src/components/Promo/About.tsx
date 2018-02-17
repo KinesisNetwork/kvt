@@ -21,7 +21,7 @@ export class About extends React.Component<null, null> {
                 <div className='content'>
                   <img src='images/website-assets/01Security.png' />
                   <h3>Security</h3>
-                  <p>Employing the highest standards of digital security across blockchain networks and data storage technologies, along with well-established ABX precious metal vaulting operations and secure exchange platforms, Kinesis system provides users with an institutional grade solution with the mininal of risk.</p>
+                  <p>Employing the highest standards of digital security across blockchain networks and data storage technologies, along with well-established ABX precious metal vaulting operations and secure exchange platforms, the Kinesis system provides users with an institutional grade solution with minimized risk.</p>
                 </div>
                 {/* End of .content */}
               </div>
