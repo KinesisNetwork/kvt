@@ -97,7 +97,7 @@ export class Faq extends React.Component<null, null> {
                       <div className='panel-heading' role='tab' id='headingFive'>
                         <h4 className='panel-title'>
                           <a className='collapsed' role='button' data-toggle='collapse' data-parent='#accordion' href='#collapseFive' aria-expanded='false' aria-controls='collapseFive'>
-                            How much can I buy?  <i className='fa fa-caret-up' />
+                            How many tokens are available for purchase?  <i className='fa fa-caret-up' />
                           </a>
                         </h4>
                       </div>
@@ -111,9 +111,9 @@ export class Faq extends React.Component<null, null> {
                       {/* End of .panel-collapse */}
                     </div>
                     <div className='panel panel-default'>
-                      <div className='panel-heading' role='tab' id='headingFive'>
+                      <div className='panel-heading' role='tab' id='headingYield'>
                         <h4 className='panel-title'>
-                          <a className='collapsed' role='button' data-toggle='collapse' data-parent='#accordion' href='#collapseYield' aria-expanded='false' aria-controls='collapseFive'>
+                          <a className='collapsed' role='button' data-toggle='collapse' data-parent='#accordion' href='#collapseYield' aria-expanded='false' aria-controls='collapseYield'>
                             What is the Kinesis yield structure?  <i className='fa fa-caret-up' />
                           </a>
                         </h4>
