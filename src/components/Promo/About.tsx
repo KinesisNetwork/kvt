@@ -21,7 +21,7 @@ export class About extends React.Component<null, null> {
                 <div className='content'>
                   <img src='images/website-assets/01Security.png' />
                   <h3>Security</h3>
-                  <p>Employing the highest standards of digital and physical security, providing users with an institutional grade risk minimised solution. Combining the very latest in blockchain and data storage technology with established industry leading physical bullion exchange and banking platforms.</p>
+                  <p>Employing the highest standards of digital security across blockchain networks and data storage technologies, along with well-established ABX precious metal vaulting operations and secure exchange platforms, Kinesis system provides users with an institutional grade solution with the mininal of risk.</p>
                 </div>
                 {/* End of .content */}
               </div>
@@ -39,7 +39,7 @@ export class About extends React.Component<null, null> {
                 <div className='content'>
                   <img src='images/website-assets/03Backed.png' />
                   <h3>Reward</h3>
-                  <p>Offering a completely unique multifaceted yield system, providing passive and active rewards for everyone wishing to participate in the revolutionary Kinesis Monetary System of shared economic wealth. </p>
+                  <p>Offering a completely unique, multifaceted yield system, providing passive and active rewards for everyone who participates in the revolutionary Kinesis Monetary System of shared economic wealth.</p>
                 </div>
                 {/* End of .content */}
               </div>
