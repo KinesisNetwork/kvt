@@ -29,7 +29,7 @@ export class TokenOffering extends React.Component<null, null> {
                 </ul>
               </p>
 
-              <p>These tokens are strictly limited in supply and being offered sequentially at phased discounted rates until reaching the full price and could sell out at anytime! The earlier an investor subscribes to the KVTs the greater the benefit they will receive. Please see KVT Schedule below.</p>
+              <p>These tokens are strictly limited in supply and being offered sequentially at phased discounted rates until reaching the full price and could sell out at anytime! The earlier an investor subscribes to the KVTs the greater the benefit they will receive. <ScrollLink to='roadmap' spy={true} smooth={true} offset={0} duration={500}><span className='primary_color' style={{cursor: 'pointer'}}>Please see KVT Schedule below.</span></ScrollLink></p>
 
               <p>If you believe that Kinesis has great potential and could be the monetary system of the future then KVTs provide the greatest exposure to Kinesis’ future success and they are only being offered once.</p>
 
@@ -65,7 +65,7 @@ export class TokenOffering extends React.Component<null, null> {
                           <div className='panel-heading' role='tab' id='headingBuyKvt'>
                             <h4 className='panel-title'>
                               <a role='button' className='collapsed' data-toggle='collapse' data-parent='#accordion' href='#collapseBuyKvt' aria-expanded='false' aria-controls='collapseBuyKvt'>
-                                How To Own KVT?<i className='fa fa-caret-up' />
+                                How To Buy KVT?<i className='fa fa-caret-up' />
                               </a>
                             </h4>
                           </div>
