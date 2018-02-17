@@ -86,7 +86,7 @@ export class Faq extends React.Component<null, null> {
                       {/* End of .panel-heading */}
                       <div id='collapseFour' className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingFour'>
                         <div className='panel-body'>
-                          Unsold Tokens will be retained to allow opportuntiies to purchase further KVT at a later date.
+                          Unsold Tokens will be retained to allow opportunities to purchase further KVT at a later date.
                         </div>
                         {/* End of .panel-body */}
                       </div>
@@ -184,14 +184,14 @@ export class Faq extends React.Component<null, null> {
                       <div className='panel-heading' role='tab' id='headingNine'>
                         <h4 className='panel-title'>
                           <a className='collapsed' role='button' data-toggle='collapse' data-parent='#accordion' href='#collapseNine' aria-expanded='false' aria-controls='collapseNine'>
-                            How does it link to the Kinesis, the cryptocurrency?  <i className='fa fa-caret-up' />
+                            How does it link to the Kinesis cryptocurrency?  <i className='fa fa-caret-up' />
                           </a>
                         </h4>
                       </div>
                       {/* End of .panel-heading */}
                       <div id='collapseNine' className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingNine'>
                         <div className='panel-body'>
-                          While the KVT offers ongoing share in fees on the kinesis currencies, it also offers the key to minting the kinesis coins. You will need to hold KVT in order to mint Kinesis.
+                          While the KVT offers ongoing share in fees on the kinesis currencies, it also offers the key to enjoy the Kinesis cryptocurrency pre-ICO benefits. You will need to hold KVT in order to enjoy these pre-ICO benefits. 
                         </div>
                         {/* End of .panel-body */}
                       </div>
@@ -235,24 +235,6 @@ export class Faq extends React.Component<null, null> {
                       {/* End of .panel-collapse */}
                     </div>
                     <div className='panel panel-default'>
-                      <div className='panel-heading' role='tab' id='headingOneKinesis'>
-                        <h4 className='panel-title'>
-                          <a role='button' className='collapsed' data-toggle='collapse' data-parent='#accordion' href='#collapseSafeKinesis' aria-expanded='false' aria-controls='collapseSafeKinesis'>
-                            How safe is it? <i className='fa fa-caret-up' />
-                          </a>
-                        </h4>
-                      </div>
-                      {/* End of .panel-heading */}
-                      <div id='collapseSafeKinesis' className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingOneKinesis'>
-                        <div className='panel-body'>
-                        It is the best in it’s class, a 1:1 full reserve Gold or Silver backed currency – a valuable and indestructible precious metal which has been recognised as money since civilisation began. As a fully asset-backed cryptocurrency, Kinesis is one of the safest and most reliable cryptocurrencies available.
-                        </div>
-                        {/* End of .panel-body */}
-                      </div>
-                      {/* End of .panel-collapse */}
-                    </div>
-                    {/* End of .panel */}
-                    <div className='panel panel-default'>
                       <div className='panel-heading' role='tab' id='headingTwoKinesis'>
                         <h4 className='panel-title'>
                           <a className='collapsed' role='button' data-toggle='collapse' data-parent='#accordion' href='#collapseTwoKinesis' aria-expanded='false' aria-controls='collapseTwoKinesis'>
@@ -274,7 +256,7 @@ export class Faq extends React.Component<null, null> {
                       <div className='panel-heading' role='tab' id='headingThreeKinesis'>
                         <h4 className='panel-title'>
                           <a className='collapsed' role='button' data-toggle='collapse' data-parent='#accordion' href='#collapseThreeKinesis' aria-expanded='false' aria-controls='collapseThreeKinesis'>
-                            Where is the bullion stored? <i className='fa fa-caret-up' />
+                            Where and how is the bullion stored? <i className='fa fa-caret-up' />
                           </a>
                         </h4>
                       </div>
@@ -282,6 +264,24 @@ export class Faq extends React.Component<null, null> {
                       <div id='collapseThreeKinesis' className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingThreeKinesis'>
                         <div className='panel-body'>
                           Each Kinesis coin directly allocates the corresponding weight of physical precious metal to the holder of the coin. The wholesale segregated coins operationally segregate the gold and silver bars by serial number and hallmark. These physical precious metals are stored within fully insured, world-class vaulting facilities in Sydney, Singapore, Hong Kong, Dubai, London, Liechtenstein, Zurich and New York. Furthermore, this bullion is stored under safe-keeping agreements on behalf of the legal beneficial owner with title always being maintained by the holder.
+                        </div>
+                        {/* End of .panel-body */}
+                      </div>
+                      {/* End of .panel-collapse */}
+                    </div>
+                    {/* End of .panel */}
+                    <div className='panel panel-default'>
+                      <div className='panel-heading' role='tab' id='headingOneKinesis'>
+                        <h4 className='panel-title'>
+                          <a role='button' className='collapsed' data-toggle='collapse' data-parent='#accordion' href='#collapseSafeKinesis' aria-expanded='false' aria-controls='collapseSafeKinesis'>
+                            How safe is it? <i className='fa fa-caret-up' />
+                          </a>
+                        </h4>
+                      </div>
+                      {/* End of .panel-heading */}
+                      <div id='collapseSafeKinesis' className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingOneKinesis'>
+                        <div className='panel-body'>
+                          It is the best in it’s class, a 1:1 full reserve Gold or Silver backed currency – a valuable and indestructible precious metal which has been recognised as money since civilisation began.  As a fully asset-backed cryptocurrency, Kinesis is one of the safest and most reliable cryptocurrency available.
                         </div>
                         {/* End of .panel-body */}
                       </div>
@@ -297,9 +297,9 @@ export class Faq extends React.Component<null, null> {
                         </h4>
                       </div>
                       {/* End of .panel-heading */}
-                      <div id='collapseFourKi' className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingFourKin'>
+                      <div id='collapseFourKin' className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingFourKin'>
                         <div className='panel-body'>
-                          Yes, as a holder of Kinesis, you are entitled to withdraw the bullion backing the coin and destroying said coin. The (withdrawal procedure and terms) must be followed.
+                          Yes, as a holder of Kinesis, you are entitled to withdraw the bullion you own via your currency coin at any point in time, in doing so destroying the coin and converting to its intrinsic metal value.
                         </div>
                         {/* End of .panel-body */}
                       </div>
