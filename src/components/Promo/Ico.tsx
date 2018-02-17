@@ -31,7 +31,7 @@ export class Ico extends React.Component<null, null> {
             <div className='row is-table-row'>
               <div className='col-sm-6'>
                 <div className='section_title mb-50 text-left'>
-                  <h2>Kinesis VISA Card</h2>
+                  <h2>Kinesis Debit Card</h2>
                   <p>The Kinesis suite of currencies have been designed for use in the real world, by everyday people. It may sound ambitious, but we believe the Kinesis suit of currencies will become a common global medium of exchange. For this to occur, there must be an easy and efficient way to utilize this medium of exchange. The Kinesis VISA card will enable those who holding Kinesis to spend this precious metal backed currency with ease.</p>
                   <DisplayMore style={{}}>
                     <p>Kinesis holders may also exchange Kinesis for other Fiat currency at will. Kinesis is taking digital currency and making it accessible to the common man. Couple this with the historically proven benefits of gold as a store of value and now add a yield, and you have a game changing digital currency available to the masses.</p>
@@ -55,25 +55,25 @@ export class Ico extends React.Component<null, null> {
                     </div>
                     <div className='col-sm-4'>
                       <h3><img style={{margin: '10px', filter: 'brightness(0)'}} src='images/website-assets/roadmap-icons/02.png' />  <span style={{color: 'black'}}>Yield</span></h3>
-                      <p>Without a yield, physical precious metals are incomparable to other financial products. Kinesis solves this age old problem by achieving something long sort after: a yield on physical precious metals.</p>
+                      <p>Without a yield, physical precious metals are incomparable to other financial products. Kinesis solves this age old problem by achieving something long sought after: a yield on physical precious metals. Kinesis attaches a highly unique multi-faceted yield system incomparable to anything available in the precious metals market.</p>
                     </div>
                     <div className='col-sm-4'>
                       <h3><img style={{margin: '10px', filter: 'brightness(0)'}} src='images/website-assets/roadmap-icons/03.png' />  <span style={{color: 'black'}}>Velocity</span></h3>
-                      <p>The Kinesis suite of digital currencies have been developed for future use in everyday life. A higher velocity means a higher yield.</p>
+                      <p>The Kinesis suite of digital currencies have been developed for ongoing use in everyday life. A higher velocity means a higher yield for all who participate in this currency system.</p>
                     </div>
                   </div>
                   <div className='row text-center m-0 roadmap-sections'>
                     <div className='col-sm-4'>
                       <h3><img style={{margin: '10px', filter: 'brightness(0)'}} src='images/website-assets/roadmap-icons/04.png' />  <span style={{color: 'black'}}>Kinesis Velocity Token</span></h3>
-                      <p>The earning potential of such an attractive and unique coin is unequivocal. The Kinesis Velocity Token gives buyers a share of this awesome earning potential. Register your interest here.</p>
+                      <p>A token with yield attached directly to the transactions of an entire global currency presents a unique opportunity for investment.  The earning potential provided by such a unique token is unequivocal.</p>
                     </div>
                     <div className='col-sm-4'>
                       <h3><img style={{margin: '10px', filter: 'brightness(0)'}} src='images/website-assets/roadmap-icons/06.png' />  <span style={{color: 'black'}}>Referral Opportunity</span></h3>
-                      <p>Kinesis offers the public a referral opportunity with integrity. Recruiters will receive a perpetual revenue share on all transaction fees on the eWallets they recruit. Learn more here.</p>
+                      <p>Kinesis offers the public a referral opportunity with integrity. Recruiters will receive a perpetual revenue share on all blockchain network transaction fees charged to the eWallets they recruit.</p>
                     </div>
                     <div className='col-sm-4'>
                       <h3><img style={{margin: '10px', filter: 'brightness(0)'}} src='images/website-assets/roadmap-icons/05.png' />  <span style={{color: 'black'}}>Debit Card</span></h3>
-                      <p>The Kinesis suit of currencies can be spent in the real world with merchants accepting this digital currency of the future. Kinesis can also be spent as the card allows for instant conversion to your native fiat currency.</p>
+                      <p>The Kinesis suit of currencies can be spent in tangible purchases with partner merchants accepting this digital currency. Kinesis can also be spent as the debit card will allow for instant conversion to the native fiat currency of a merchant.</p>
                     </div>
                   </div>
                 </div>
