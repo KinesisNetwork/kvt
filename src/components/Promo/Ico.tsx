@@ -16,9 +16,9 @@ export class Ico extends React.Component<null, null> {
               <div className='col-sm-6'>
                 <div className='section_title mb-50 text-left'>
                   <h2>Kinesis Currency</h2>
-                  <p>The Kinesis Currencies will be launched in May 2018.  This suite of currencies will be brought to life, minted and emitted from a unique wholesale marketplace developed and managed by Allocated Bullion Exchange (ABX), where buyers of the wholesale blocks of Kinesis Coins enjoy a lifetime yield on the transaction fees of the coins they mint.</p>
+                  <p>The Kinesis Currencies will be launched in May 2018.  This suite of currencies will be created, minted and emitted from a unique wholesale marketplace developed and managed by Allocated Bullion Exchange (ABX), where buyers of the wholesale blocks of Kinesis Coins enjoy a lifetime yield from their contribution to the currency.</p>
                   <DisplayMore style={{}}>
-                    <p>Each Kinesis coin represents physical precious metal on a 1:1 basis, meaning bullion is purchased simultaneously on minting and you are directly allocated title to it at the exact moment of purchase. Always and forever is every Kinesis coin directly connected to allocated physical precious metals.</p>
+                    <p>Each Kinesis coin represents physical precious metal allocated on a 1:1 basis, meaning bullion is purchased simultaneously on minting and each coin has bullion directly allocated to it from the moment of being minted into the kinesis system, for the life of the coin.</p>
                   </DisplayMore>
                 </div>
               </div>
