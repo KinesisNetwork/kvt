@@ -29,7 +29,7 @@ export class Navigation extends React.Component<{hideNavigation?: boolean}, null
             <ul className='nav navbar-nav navbar-right'>
               <li style={{cursor: 'pointer'}}><ScrollLink to='home' spy={true} smooth={true} offset={0} duration={500}>home</ScrollLink></li>
               <li style={{cursor: 'pointer'}}><ScrollLink to='about' spy={true} smooth={true} offset={0} duration={500}>about</ScrollLink></li>
-              <li style={{cursor: 'pointer'}}><ScrollLink to='ico' spy={true} smooth={true} offset={0} duration={500}>ico</ScrollLink></li>
+              <li style={{cursor: 'pointer'}}><ScrollLink to='ico' spy={true} smooth={true} offset={0} duration={500}>currency</ScrollLink></li>
               <li style={{cursor: 'pointer'}}><ScrollLink to='token' spy={true} smooth={true} offset={0} duration={500}>Token Offering</ScrollLink></li>
               <li style={{cursor: 'pointer'}}><ScrollLink to='roadmap' spy={true} smooth={true} offset={0} duration={500}>roadmap</ScrollLink></li>
               <li style={{cursor: 'pointer'}}><ScrollLink to='team' spy={true} smooth={true} offset={0} duration={500}>team</ScrollLink></li>

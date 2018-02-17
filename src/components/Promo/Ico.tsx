@@ -15,11 +15,10 @@ export class Ico extends React.Component<null, null> {
             <div className='row is-table-row'>
               <div className='col-sm-6'>
                 <div className='section_title mb-50 text-left'>
-                  <h2>Initial Coin Offering</h2>
-                  <p>The Kinesis suite of currencies are minted and emitted from a wholesale primary marketplace, where buyers of the wholesale lots of Kinesis Coins, the precious metal backed currency, may on-sell to retail buyers in a secondary marketplace. Each coin is backed by physical precious metal on a 1:1 ratio, meaning bullion must be purchased and allocated at the exact moment a Kinesis coin is created in the Primary Marketplace. It is for this reason that each and every coin must be ‘pre-mined’ prior to sale in the primary wholesale marketplace.</p>
+                  <h2>Kinesis Currency</h2>
+                  <p>The Kinesis Currencies will be launched in May 2018.  This suite of currencies will be brought to life, minted and emitted from a unique wholesale marketplace developed and managed by Allocated Bullion Exchange (ABX), where buyers of the wholesale blocks of Kinesis Coins enjoy a lifetime yield on the transaction fees of the coins they mint.</p>
                   <DisplayMore style={{}}>
-                    <p>The number of Kinesis coins of offer are limited to the amount of pure bullion there is in the world. The scarcity of bullion and the cosmic events required to create said precious metals, control the supply of Kinesis just as these forces control the supply of all precious physical metals. No derivatives, no futures, no paper: just 100% real, physical precious metals backed digital currency.</p>
-                    <p>This physical backing creates stability in a marketplace plagued by uncertainty and volatility. Theoretically, the price of a Kinesis coin should not drop below the spot price of its underlying physical precious metal, for if it should, arbitrage opportunity would present itself, causing the currency to correct back to the value of the metal. The price though should generally trade much higher than the spot price of the underlying; not only because of the efficiency of trade added, but also because of the tremendous yield potential which has for the first time in history now been added to physical precious metals. Click here to view the yield matrix to learn more.</p>
+                    <p>Each Kinesis coin represents physical precious metal on a 1:1 basis, meaning bullion is purchased simultaneously on minting and you are directly allocated title to it at the exact moment of purchase. Always and forever is every Kinesis coin directly connected to allocated physical precious metals.</p>
                   </DisplayMore>
                 </div>
               </div>

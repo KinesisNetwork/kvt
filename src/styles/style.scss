@@ -106,7 +106,7 @@ h3.team_info{
   background: -o-linear-gradient(top, rgba(80,80,80,0) 0%, rgb(80,80,80) 8%, rgb(80,80,80) 92%, rgba(80,80,80,0) 100%);
   background: -ms-linear-gradient(top, rgba(80,80,80,0) 0%, rgb(80,80,80) 8%, rgb(80,80,80) 92%, rgba(80,80,80,0) 100%);
   background: linear-gradient(to bottom, rgba(80,80,80,0) 0%, rgb(80,80,80) 8%, rgb(80,80,80) 92%, rgba(80,80,80,0) 100%);
-  
+
   z-index: 5;
 }
 
@@ -138,7 +138,7 @@ h3.team_info{
 .flag-wrapper {
   position: relative;
   display: inline-block;
-  
+
   text-align: center;
 }
 
@@ -215,7 +215,7 @@ h3.team_info{
 
 .time-wrapper {
   display: inline;
-  
+
   line-height: 1em;
   font-size: 0.66666em;
   color: rgb(250,80,80);
@@ -238,7 +238,7 @@ h3.team_info{
 
 .desc {
   margin: 1em 0.75em 0 0;
-  
+
   font-size: 0.77777em;
   font-style: italic;
   line-height: 1.5em;
@@ -333,7 +333,7 @@ h3.team_info{
     -webkit-box-shadow: 0 0 1px rgba(0,0,0,0.20);
     -moz-box-shadow: 0 0 1px rgba(0,0,0,0.20);
     box-shadow: 0 0 1px rgba(0,0,0,0.20);
-    
+
     z-index: 15;
   }
 
@@ -342,8 +342,16 @@ h3.team_info{
     position: relative;
     margin: 1em 1em 0 1em;
     padding: 1em;
-    
+
     z-index: 15;
+  }
+}
+
+.primary-link {
+  color: #ffd700;
+
+  &:hover {
+    color: #ffd700;
   }
 }
 

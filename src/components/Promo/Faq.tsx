@@ -31,7 +31,7 @@ export class Faq extends React.Component<null, null> {
                       <div id='collapseOne' className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingOne'>
                         <div className='panel-body'>
                           So that we can provide you with the information and relevant links to proceed to participate in the crowd-sale. We must also collect basic KYC (Know Your Customer) data, which we will protect and never disclose with a third party without informing you first.
-                          
+
                         </div>
                         {/* End of .panel-body */}
                       </div>
@@ -86,7 +86,7 @@ export class Faq extends React.Component<null, null> {
                       {/* End of .panel-heading */}
                       <div id='collapseFour' className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingFour'>
                         <div className='panel-body'>
-                          Unsold Tokens will be retained to allow opportuntiies to purchase further KVT at a later date. 
+                          Unsold Tokens will be retained to allow opportuntiies to purchase further KVT at a later date.
                         </div>
                         {/* End of .panel-body */}
                       </div>
@@ -97,7 +97,7 @@ export class Faq extends React.Component<null, null> {
                       <div className='panel-heading' role='tab' id='headingFive'>
                         <h4 className='panel-title'>
                           <a className='collapsed' role='button' data-toggle='collapse' data-parent='#accordion' href='#collapseFive' aria-expanded='false' aria-controls='collapseFive'>
-                            How many coins are available for purchase?  <i className='fa fa-caret-up' />
+                            How much can I buy?  <i className='fa fa-caret-up' />
                           </a>
                         </h4>
                       </div>
@@ -105,6 +105,23 @@ export class Faq extends React.Component<null, null> {
                       <div id='collapseFive' className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingFive'>
                         <div className='panel-body'>
                           Up to 300000 tokens, this is all that will be released.
+                        </div>
+                        {/* End of .panel-body */}
+                      </div>
+                      {/* End of .panel-collapse */}
+                    </div>
+                    <div className='panel panel-default'>
+                      <div className='panel-heading' role='tab' id='headingFive'>
+                        <h4 className='panel-title'>
+                          <a className='collapsed' role='button' data-toggle='collapse' data-parent='#accordion' href='#collapseYield' aria-expanded='false' aria-controls='collapseFive'>
+                            What is the Kinesis yield structure?  <i className='fa fa-caret-up' />
+                          </a>
+                        </h4>
+                      </div>
+                      {/* End of .panel-heading */}
+                      <div id='collapseYield' className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingFive'>
+                        <div className='panel-body'>
+                          A detailed discussion of our yield structure can be found <a href='/documents/kinesis-blueprint.pdf' className='primary-link' target='_blank'>here</a>. It offers excellent risk:reward ratios.
                         </div>
                         {/* End of .panel-body */}
                       </div>
@@ -122,7 +139,7 @@ export class Faq extends React.Component<null, null> {
                       {/* End of .panel-heading */}
                       <div id='collapseSix' className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingSix'>
                         <div className='panel-body'>
-                          Most Definitely. 
+                          Most Definitely.
                         </div>
                         {/* End of .panel-body */}
                       </div>
@@ -157,7 +174,7 @@ export class Faq extends React.Component<null, null> {
                       {/* End of .panel-heading */}
                       <div id='collapseEight' className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingEight'>
                         <div className='panel-body'>
-                          You will be advised directly as to the success of the token sale. 
+                          You will be advised directly as to the success of the token sale.
                         </div>
                       </div>
                       {/* End of .panel-collapse */}
@@ -167,7 +184,7 @@ export class Faq extends React.Component<null, null> {
                       <div className='panel-heading' role='tab' id='headingNine'>
                         <h4 className='panel-title'>
                           <a className='collapsed' role='button' data-toggle='collapse' data-parent='#accordion' href='#collapseNine' aria-expanded='false' aria-controls='collapseNine'>
-                            How does it link to the Kinesis, the crypto currency?  <i className='fa fa-caret-up' />
+                            How does it link to the Kinesis, the cryptocurrency?  <i className='fa fa-caret-up' />
                           </a>
                         </h4>
                       </div>
@@ -217,6 +234,23 @@ export class Faq extends React.Component<null, null> {
                       </div>
                       {/* End of .panel-collapse */}
                     </div>
+                    <div className='panel panel-default'>
+                      <div className='panel-heading' role='tab' id='headingOneKinesis'>
+                        <h4 className='panel-title'>
+                          <a role='button' className='collapsed' data-toggle='collapse' data-parent='#accordion' href='#collapseSafeKinesis' aria-expanded='false' aria-controls='collapseSafeKinesis'>
+                            How safe is it? <i className='fa fa-caret-up' />
+                          </a>
+                        </h4>
+                      </div>
+                      {/* End of .panel-heading */}
+                      <div id='collapseSafeKinesis' className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingOneKinesis'>
+                        <div className='panel-body'>
+                        It is the best in it’s class, a 1:1 full reserve Gold or Silver backed currency – a valuable and indestructible precious metal which has been recognised as money since civilisation began. As a fully asset-backed cryptocurrency, Kinesis is one of the safest and most reliable cryptocurrencies available.
+                        </div>
+                        {/* End of .panel-body */}
+                      </div>
+                      {/* End of .panel-collapse */}
+                    </div>
                     {/* End of .panel */}
                     <div className='panel panel-default'>
                       <div className='panel-heading' role='tab' id='headingTwoKinesis'>
@@ -247,7 +281,7 @@ export class Faq extends React.Component<null, null> {
                       {/* End of .panel-heading */}
                       <div id='collapseThreeKinesis' className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingThreeKinesis'>
                         <div className='panel-body'>
-                          Each Kinesis coin is backed 1:1 with physical precious metal. These physical precious metals are stored within fully insured, world-class vaulting facilities in Singapore and Dubai. Furthermore, this bullion is stored in trust, whereby legal beneficial ownership always lies with the holders of the Kinesis coins.
+                          Each Kinesis coin directly allocates the corresponding weight of physical precious metal to the holder of the coin. The wholesale segregated coins operationally segregate the gold and silver bars by serial number and hallmark. These physical precious metals are stored within fully insured, world-class vaulting facilities in Sydney, Singapore, Hong Kong, Dubai, London, Liechtenstein, Zurich and New York. Furthermore, this bullion is stored under safe-keeping agreements on behalf of the legal beneficial owner with title always being maintained by the holder.
                         </div>
                         {/* End of .panel-body */}
                       </div>

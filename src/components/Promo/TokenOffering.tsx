@@ -18,7 +18,6 @@ export class TokenOffering extends React.Component<null, null> {
             <div className='section_title text-center'>
               <h2>Kinesis Velocity Token Offering</h2>
 
-
               <p><strong>The Kinesis Velocity Token (KVT) offers an investor a one time only opportunity to: </strong></p>
 
               <p>
