@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { DisplayMore } from '../DisplayMore';
 import { BuyingToken } from './BuyingToken'
+import { MoreKvtInfo } from './MoreKvtInfo'
 const Scroll: any = require('react-scroll')
 const ScrollLink = Scroll.Link
 
@@ -41,10 +42,30 @@ export class TokenOffering extends React.Component<null, null> {
                     <div>
                       <div className='panel-group' id='accordion' role='tablist' aria-multiselectable='true'>
                         <div className='panel panel-default'>
+                          <div className='panel-heading' role='tab' id='headingMoreKvtInfo'>
+                            <h4 className='panel-title'>
+                              <a role='button' className='collapsed' data-toggle='collapse' data-parent='#accordion' href='#collapseMoreKvtInfo' aria-expanded='false' aria-controls='collapseMoreKvtInfo'>
+                                More KVT Details<i className='fa fa-caret-up' />
+                              </a>
+                            </h4>
+                          </div>
+                          {/* End of .panel-heading */}
+                          <div id='collapseMoreKvtInfo' className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingMoreKvtInfo'>
+                            <div className='panel-body'>
+                              <MoreKvtInfo />
+                            </div>
+                            {/* End of .panel-body */}
+                          </div>
+                          {/* End of .panel-collapse */}
+                        </div>
+                        {/* End of .panel */}
+                      </div>
+                      <div className='panel-group' id='accordion' role='tablist' aria-multiselectable='true'>
+                        <div className='panel panel-default'>
                           <div className='panel-heading' role='tab' id='headingBuyKvt'>
                             <h4 className='panel-title'>
                               <a role='button' className='collapsed' data-toggle='collapse' data-parent='#accordion' href='#collapseBuyKvt' aria-expanded='false' aria-controls='collapseBuyKvt'>
-                                How to buy KVT?<i className='fa fa-caret-up' />
+                                How To Own KVT?<i className='fa fa-caret-up' />
                               </a>
                             </h4>
                           </div>
