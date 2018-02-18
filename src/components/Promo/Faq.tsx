@@ -191,7 +191,7 @@ export class Faq extends React.Component<null, null> {
                       {/* End of .panel-heading */}
                       <div id='collapseNine' className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingNine'>
                         <div className='panel-body'>
-                          While the KVT offers ongoing share in fees on the kinesis currencies, it also offers the key to enjoy the Kinesis cryptocurrency pre-ICO benefits. You will need to hold KVT in order to enjoy these pre-ICO benefits.
+                          While the KVT offers ongoing share in fees on the kinesis currencies, it also offers the key to enjoy the Kinesis cryptocurrency pre-ICO benefits. You will need to hold at least 1 KVT in order to enjoy these pre-ICO benefits.
                         </div>
                         {/* End of .panel-body */}
                       </div>
@@ -228,7 +228,7 @@ export class Faq extends React.Component<null, null> {
                       {/* End of .panel-heading */}
                       <div id='collapseOneKinesis' className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingOneKinesis'>
                         <div className='panel-body'>
-                          No, the entirety of the Kinesis currency suite are backed by either 99.99% pure gold, or 99.5% pure silver. Kinesis NEVER utilizes futures/derivatives/paper contracts to back these real, physical backed currencies.
+                          No, the entirety of the Kinesis currency suite are backed by either pure gold, or pure silver. Kinesis NEVER utilizes futures/derivatives/paper contracts to back these real, physical backed currencies.
                         </div>
                         {/* End of .panel-body */}
                       </div>

@@ -29,7 +29,7 @@ export class About extends React.Component<null, null> {
               <div className='col-xs-6 col-sm-4 border-right'>
                 <div className='content'>
                   <img src='images/website-assets/02Integration.png' />
-                  <h3>Effeciency</h3>
+                  <h3>Efficiency</h3>
                   <p>Utilising the Stellar blockchain network with capabilities of +3,000 transactions per second and transaction confirmation times of 3-5 seconds, including complete ease of currency utilisation through extensive banking, payment and debit card facilities. </p>
                 </div>
                 {/* End of .content */}
