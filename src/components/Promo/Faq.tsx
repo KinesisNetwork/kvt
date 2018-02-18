@@ -191,7 +191,7 @@ export class Faq extends React.Component<null, null> {
                       {/* End of .panel-heading */}
                       <div id='collapseNine' className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingNine'>
                         <div className='panel-body'>
-                          While the KVT offers ongoing share in fees on the kinesis currencies, it also offers the key to enjoy the Kinesis cryptocurrency pre-ICO benefits. You will need to hold KVT in order to enjoy these pre-ICO benefits. 
+                          While the KVT offers ongoing share in fees on the kinesis currencies, it also offers the key to enjoy the Kinesis cryptocurrency pre-ICO benefits. You will need to hold KVT in order to enjoy these pre-ICO benefits.
                         </div>
                         {/* End of .panel-body */}
                       </div>
@@ -291,7 +291,7 @@ export class Faq extends React.Component<null, null> {
                     <div className='panel panel-default'>
                       <div className='panel-heading' role='tab' id='headingFourKin'>
                         <h4 className='panel-title'>
-                          <a className='collapsed' role='button' data-toggle='collapse' data-parent='#accordion' href='#collapseFourKi' aria-expanded='false' aria-controls='collapseFourKi'>
+                          <a className='collapsed' role='button' data-toggle='collapse' data-parent='#accordion' href='#collapseFourKin' aria-expanded='false' aria-controls='collapseFourKin'>
                             Can I redeem the bullion which is backing my Kinesis coin? <i className='fa fa-caret-up' />
                           </a>
                         </h4>

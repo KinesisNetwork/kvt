@@ -21,7 +21,7 @@ export class Team extends React.Component<null, null> {
                   <div className='img_container'>
                     <img src='images/team/1.png' alt='team' className='img-responsive' style={{maxWidth: '200px'}}/>
                     <h3 className='team_info wow fadeInUp'>
-                      Thomas Coughlin  
+                      Thomas Coughlin
                     </h3>
                     <span className='team_title'>Chief Executive Officer</span>
                     <p>Thomas Coughlin is the Chief Executive Officer (CEO) of Kinesis Limited as well as Allocated Bullion Exchange (ABX). He has worked in the investment, funds management and bullion industries for approximately seventeen years. His professional portfolio management career spans the foundation of the boutique investment company, TRAC Financial, to the establishment of a highly successful Absolute Return Fund.</p>
@@ -51,7 +51,7 @@ export class Team extends React.Component<null, null> {
                   <div className='img_container'>
                     <img src='images/team/3.png' alt='team' className='img-responsive' style={{maxWidth: '200px'}}/>
                     <h3 className='team_info wow fadeInUp'>
-                      David Charles 
+                      David Charles
                     </h3>
                     <span className='team_title'>Non-Executive Director</span>
                     <p>David Charles is a Director of the Allocated Bullion Exchange. A lawyer by trade, David has protected and advanced the interests of some of the largest and most prominent entities in the world, across four continents.</p>
@@ -119,7 +119,7 @@ export class Team extends React.Component<null, null> {
                       Ben Brideaux
                     </h3>
                     <span className='team_title'>Global Project Manager</span>
-                      <p>Ben is the Compliance specialist and Global Project Manager, ably managing the programs of work across all projects which constitute the Kinesis ecosystem Ben works closely with the business divisions across 4 continents, working closely with the CTO to ensure project delivery and system development alignment.</p>
+                      <p>Ben Brideaux is the Compliance specialist and Global Project Manager, ably managing the programs of work across all projects which constitute the Kinesis ecosystem Ben works closely with the business divisions across 4 continents, working closely with the CTO to ensure project delivery and system development alignment.</p>
                     <DisplayMore style={{fontWeight: 'bold'}}>
                       <p>A lawyer by trade, Ben additionally brings to the team a wealth of experience in Legal Compliance, with specialist knowledge in the precious metals market along with the cryptocurrency domain.  Ben oversees global identity verification and anti-money laundering implementations, ensuring industry standard compliance is met on all global client facing processes.</p>
                     </DisplayMore>
@@ -148,7 +148,7 @@ export class Team extends React.Component<null, null> {
                   <div className='img_container'>
                     <img src='images/team/9.jpg' alt='team' className='img-responsive' style={{maxWidth: '200px'}} />
                     <h3 className='team_info wow fadeInUp'>
-                      Dan Ryan 
+                      Dan Ryan
                     </h3>
                     <span className='team_title'>General Council</span>
                       <p>Dan Ryan is a commercial and technology lawyer with over 15 years’ high-level advisory and transactional experience in Asia. Mr Ryan began his career working for leading international law firms (Baker & McKenzie, Freshfields) in their corporate, intellectual property and technology groups before moving to senior in-house roles.</p>
