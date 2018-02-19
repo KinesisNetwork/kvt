@@ -67,7 +67,7 @@ export const MoreKvtInfo: React.SFC = (props) => (
         </tr>
         <tr>
           <th className='col-md-4 text-right'>Token holder rights & benefits</th>
-          <td className='col-md-8 text-left'>20% of all transaction fees of Kinesis cryptocurrency suite. 20% of all commission received from the Kinesis Commercial Centre (KCC). The exclusive right to participate in the Kinesis currency ICO with pre-ICO preferential rates.</td>
+          <td className='col-md-8 text-left'>20% of all transaction fees of Kinesis digital currency suite. 20% of all commission received from the Kinesis Commercial Centre (KCC). The exclusive right to participate in the Kinesis currency ICO with pre-ICO preferential rates.</td>
         </tr>
         <tr>
           <th className='col-md-4 text-right'>Token Issuance date</th>

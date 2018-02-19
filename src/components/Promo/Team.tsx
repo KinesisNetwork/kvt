@@ -119,9 +119,9 @@ export class Team extends React.Component<null, null> {
                       Ben Brideaux
                     </h3>
                     <span className='team_title'>Global Project Manager</span>
-                      <p>Ben Brideaux is the Compliance specialist and Global Project Manager, ably managing the programs of work across all projects which constitute the Kinesis ecosystem Ben works closely with the business divisions across 4 continents, working closely with the CTO to ensure project delivery and system development alignment.</p>
+                      <p>Ben Brideaux is the Global Project Manager across all projects which constitute the ABX and Kinesis ecosystems. Ben works closely with the business divisions across 4 continents, and with the CTO to ensure project delivery and system development alignment.</p>
                     <DisplayMore style={{fontWeight: 'bold'}}>
-                      <p>A lawyer by trade, Ben additionally brings to the team a wealth of experience in Legal Compliance, with specialist knowledge in the precious metals market along with the cryptocurrency domain.  Ben oversees global identity verification and anti-money laundering implementations, ensuring industry standard compliance is met on all global client facing processes.</p>
+                      <p>A lawyer by trade, Ben additionally brings to the team a wealth of experience in the precious metals industry along with the cryptocurrency domain. Ben oversees global identity verification and anti-money laundering implementations, ensuring industry standards of security are met.</p>
                     </DisplayMore>
                   </div>
                 </div>
@@ -150,7 +150,7 @@ export class Team extends React.Component<null, null> {
                     <h3 className='team_info wow fadeInUp'>
                       Dan Ryan
                     </h3>
-                    <span className='team_title'>Legal Council</span>
+                    <span className='team_title'>Legal Counsel</span>
                       <p>Dan Ryan is a commercial and technology lawyer with over 15 years’ high-level advisory and transactional experience in Asia. Mr Ryan began his career working for leading international law firms (Baker & McKenzie, Freshfields) in their corporate, intellectual property and technology groups before moving to senior in-house roles.</p>
                     <DisplayMore style={{fontWeight: 'bold'}}>
                       <p>He has served as a director on a range of boards – from publicly-listed multinationals, to fast-moving technology start-ups. In addition to his legal background, he reads and speaks Mandarin to a very high professional level, and has particular expertise in the China market.</p>
