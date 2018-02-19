@@ -118,10 +118,10 @@ export class Team extends React.Component<null, null> {
                     <h3 className='team_info wow fadeInUp'>
                       Ben Brideaux
                     </h3>
-                    <span className='team_title'>Global Project Manager</span>
-                      <p>Ben Brideaux is the Global Project Manager across all projects which constitute the ABX and Kinesis ecosystems. Ben works closely with the business divisions across 4 continents, and with the CTO to ensure project delivery and system development alignment.</p>
+                    <span className='team_title'>Head of Projects</span>
+                      <p>Ben Brideaux is the Head of Projects, providing project management oversight across all projects which constitute the ABX and Kinesis ecosystems. Ben works closely with the business divisions across 4 continents, and with the CTO to ensure project delivery and system development alignment. Ben integrates the business project management demands with the Agile approaches utlilsed in the software development teams to enable smooth communication between the two domains</p>
                     <DisplayMore style={{fontWeight: 'bold'}}>
-                      <p>A lawyer by trade, Ben additionally brings to the team a wealth of experience in the precious metals industry along with the cryptocurrency domain. Ben oversees global identity verification and anti-money laundering implementations, ensuring industry standards of security are met.</p>
+                      <p>A lawyer by trade, Ben additionally brings to the team a wealth of experience in the precious metals industry along with the crypo currency domain, offering a valuable combination of organisational project alignment with the requirements of ABX and Kinesis as they develop.  </p>
                     </DisplayMore>
                   </div>
                 </div>
@@ -151,9 +151,9 @@ export class Team extends React.Component<null, null> {
                       Dan Ryan
                     </h3>
                     <span className='team_title'>Legal Counsel</span>
-                      <p>Dan Ryan is a commercial and technology lawyer with over 15 years’ high-level advisory and transactional experience in Asia. Mr Ryan began his career working for leading international law firms (Baker & McKenzie, Freshfields) in their corporate, intellectual property and technology groups before moving to senior in-house roles.</p>
+                      <p>Dan Ryan is a commercial and technology lawyer with over 15 years’ high-level advisory and transactional experience in Asia. Mr Ryan began his career working for leading international law firms (Baker & McKenzie, Freshfields) in their corporate, intellectual property and technology groups before moving to senior in-house roles. </p>
                     <DisplayMore style={{fontWeight: 'bold'}}>
-                      <p>He has served as a director on a range of boards – from publicly-listed multinationals, to fast-moving technology start-ups. In addition to his legal background, he reads and speaks Mandarin to a very high professional level, and has particular expertise in the China market.</p>
+                      <p>Dan advises on legal requirements of a global precious metals exchange, along with the jurisdictional requirements in the crypto space. He oversees global identity verification and anti-money laundering implementations, ensuring industry standards of security are met. In addition to his legal background, he reads and speaks Mandarin to a very high professional level, and has particular expertise in the China market. </p>
                     </DisplayMore>
                   </div>
                 </div>
