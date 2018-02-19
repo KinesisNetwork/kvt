@@ -184,14 +184,14 @@ export class Faq extends React.Component<null, null> {
                       <div className='panel-heading' role='tab' id='headingNine'>
                         <h4 className='panel-title'>
                           <a className='collapsed' role='button' data-toggle='collapse' data-parent='#accordion' href='#collapseNine' aria-expanded='false' aria-controls='collapseNine'>
-                            How does it link to the Kinesis cryptocurrency?  <i className='fa fa-caret-up' />
+                            How does it link to the Kinesis digital currency?  <i className='fa fa-caret-up' />
                           </a>
                         </h4>
                       </div>
                       {/* End of .panel-heading */}
                       <div id='collapseNine' className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingNine'>
                         <div className='panel-body'>
-                          While the KVT offers ongoing share in fees on the kinesis currencies, it also offers the key to enjoy the Kinesis cryptocurrency pre-ICO benefits. You will need to hold at least 1 KVT in order to enjoy these pre-ICO benefits.
+                          While the KVT offers ongoing share in fees on the kinesis currencies, it also offers the key to enjoy the Kinesis digital currency pre-ICO benefits. You will need to hold at least 1 KVT in order to enjoy these pre-ICO benefits.
                         </div>
                         {/* End of .panel-body */}
                       </div>
@@ -281,7 +281,7 @@ export class Faq extends React.Component<null, null> {
                       {/* End of .panel-heading */}
                       <div id='collapseSafeKinesis' className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingOneKinesis'>
                         <div className='panel-body'>
-                          It is the best in it’s class, a 1:1 full reserve Gold or Silver backed currency – a valuable and indestructible precious metal which has been recognised as money since civilisation began.  As a fully asset-backed cryptocurrency, Kinesis is one of the safest and most reliable cryptocurrency available.
+                          It is the best in it’s class, a 1:1 full reserve Gold or Silver backed currency – a valuable and indestructible precious metal which has been recognised as money since civilisation began.  As a fully asset-backed digital currency, Kinesis is one of the safest and most reliable digital currency available.
                         </div>
                         {/* End of .panel-body */}
                       </div>
