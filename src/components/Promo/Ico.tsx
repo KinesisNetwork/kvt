@@ -32,7 +32,10 @@ export class Ico extends React.Component<null, null> {
               <div className='col-sm-6'>
                 <div className='section_title mb-50 text-left'>
                   <h2>Kinesis Debit Card</h2>
-                  <p>The Kinesis suite of currencies can be spent in tangible purchases with partner merchants accepting this digital currency. Kinesis can also be spent via the debit card which allows for an instant conversion to the native fiat currency of a merchant.</p>
+                  <p>The Kinesis suite of currencies have been designed for use in the real world, by everyday people. We believe the Kinesis suite of currencies will become a common global medium of exchange. For this to occur, there must be an easy and efficient way to utilise the currency. The Kinesis Debit Card will enable those who hold Kinesis to spend this precious metal backed currency with ease.</p>
+                  <DisplayMore style={{}}>
+                    <p>Kinesis holders may also exchange Kinesis for other Fiat currency at will. Kinesis is taking digital currency and making it accessible to the common man. Couple this with the historically proven benefits of gold as a store of value and now add a yield, and you have a game changing digital currency available to the masses.</p>
+                  </DisplayMore>
                 </div>
               </div>
               <div className='col-sm-6 col-md-6 col-lg-6 wow fadeInRight' style={{ position: 'relative', height: '100%', verticalAlign: 'top' }}>
