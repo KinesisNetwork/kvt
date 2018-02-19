@@ -150,7 +150,7 @@ export class Team extends React.Component<null, null> {
                     <h3 className='team_info wow fadeInUp'>
                       Dan Ryan
                     </h3>
-                    <span className='team_title'>General Council</span>
+                    <span className='team_title'>Legal Council</span>
                       <p>Dan Ryan is a commercial and technology lawyer with over 15 years’ high-level advisory and transactional experience in Asia. Mr Ryan began his career working for leading international law firms (Baker & McKenzie, Freshfields) in their corporate, intellectual property and technology groups before moving to senior in-house roles.</p>
                     <DisplayMore style={{fontWeight: 'bold'}}>
                       <p>He has served as a director on a range of boards – from publicly-listed multinationals, to fast-moving technology start-ups. In addition to his legal background, he reads and speaks Mandarin to a very high professional level, and has particular expertise in the China market.</p>

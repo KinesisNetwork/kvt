@@ -5,23 +5,24 @@ export const MoreKvtInfo: React.SFC = (props) => (
   <div className='section_title text-center mb-60'>
     <div className='mt-30'>
       <div className='text-left'>
-        <p>Kinesis velocity tokens are strictly limited in supply with no subsequent additional releases permitted.</p>
-        <p>KVT are being offered sequentially in phases of incrementing price rates until reaching the full price  WIth limited supply the quantity available in each phase can not be guarantees and could sell out at anytime!   Pre-sale of KVT will be offered at up to 25% discount on maximum token price of Ether equivalent of $1000 USD.</p>
-        <p>The earlier the investments in KVTs the greater the benefit to the investor as the currency comes into circulation. Please see KVT Release Schedule <ScrollLink to='roadmap' spy={true} smooth={true} offset={0} duration={500}><span className='primary_color' style={{cursor: 'pointer'}}>here</span></ScrollLink>.</p>
-        <p>If you believe that Kinesis has great potential and could be the monetary system of the future then KVTs provide the greatest exposure to Kinesis’ future success and they are only being offered once.</p>
+        <p>Kinesis velocity tokens are legally and technically limited in supply to 300,000, with no further dilutional releases permitted beyond this level. Any excess tokens not subscribed for will be held by Kinesis Limited and may or may not be sold at a subsequent time no sooner than 1 May 2019 at the prevailing market rates.</p>
+        <p>KVTs are being offered sequentially at incremental discount rates until reaching the full price.  With limited supply, the quantity available in each phase cannot be guaranteed and could sell out at anytime!  The pre-sale of KVTs will be offered at a 25% discount on the full token price of $1,000 USD or Ether equivalent.</p>
+        <p>The earlier the investment in KVTs, the greater the discount benefit is to the investor. Please see KVT Release Schedule <ScrollLink to='roadmap' spy={true} smooth={true} offset={0} duration={500}><span className='primary_color' style={{cursor: 'pointer'}}>here</span></ScrollLink>.</p>
+        <p>If you believe that Kinesis has great potential and could be the monetary system of the future then KVTs provide the greatest exposure to Kinesis’ future success.</p>
       </div>
     </div>
     <div className='mt-40'>
-      <h3>Kinesis Velocity Token Fast Facts</h3>
+      <h3>Kinesis Velocity Token ITO Fast Facts</h3>
       <ol className="velocity-fast-facts" style={{listStyleType: 'upper-roman', paddingLeft: '20px', maxWidth: '800px', margin: '0 auto', textAlign: 'left'}}>
-        <li><p>Each Kinesis Velocity Token empowers the holder to share in a 20% share of all transaction fees associated with each Kinesis Currency.</p></li>
-        <li><p>Pre-Sale firm commitments are entitled to a 25% discount. This is a limited opportunity and ends on 1st March 2018.</p></li>
-        <li><p>You may purchase the Kinesis Velocity Token with Ethereum, or Fiat currency.</p></li>
-        <li><p>Tokens may become tradeable on secondary marketplaces and pricing will depend on general market forces</p></li>
+        <li><p>The purchase of a KVT provides exclusive access to the Kinesis digital currency pre-ICO benefits launching on 1 May 2018.</p></li>
+        <li><p>Each Kinesis Velocity Token empowers the holder to share in an aggregated pool of 20% of all transaction fees associated with every Kinesis digital currency and a 20% share of commissions from KCC.</p></li>
+        <li><p>Discounts are incremental and strictly time limited.</p></li>
+        <li><p>Pre-Sale firm commitments are entitled to a 25% discount. This is a limited opportunity that ends on 1st March 2018.</p></li>
+        <li><p>You may purchase KVTs with Ethereum or Fiat currency.</p></li>
+        <li><p>Tokens will become tradeable on secondary marketplaces and pricing will depend on general market forces.</p></li>
       </ol>
       <p>
         <i style={{fontSize: '16px'}}>
-          Pre-sale discounts of up to 25% are currently on offer.
           Read our <a href='/documents/kinesis-blueprint.pdf' className='primary-link' target='_blank'>blueprint</a> for more information.
         </i>
       </p>

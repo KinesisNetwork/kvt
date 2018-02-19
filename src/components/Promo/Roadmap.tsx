@@ -29,7 +29,7 @@ export class Roadmap extends React.Component<null, null> {
                   <div className="direction-r">
                     <div className="flag-wrapper">
                       <span className="flag">KVT Pre-Sale Opens</span>
-                      <span className="time-wrapper"><span className="time">7 Feb 2018</span></span>
+                      <span className="time-wrapper"><span className="time">14 Feb 2018</span></span>
                     </div>
                     <div className="desc">(25% Discount)</div>
                   </div>
