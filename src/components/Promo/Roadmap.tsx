@@ -88,7 +88,7 @@ export class Roadmap extends React.Component<null, null> {
                   <div className="direction-r">
                     <div className="flag-wrapper">
                       <span className="flag">Kinesis Currency Blockchain Trade Begins</span>
-                      <span className="time-wrapper"><span className="time">1 September 2018</span></span>
+                      <span className="time-wrapper"><span className="time">1 October 2018</span></span>
                     </div>
                     <div className="desc">(Post ICO Yield Rates)</div>
                   </div>
