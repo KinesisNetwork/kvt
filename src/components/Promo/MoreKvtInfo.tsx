@@ -43,7 +43,7 @@ export const MoreKvtInfo: React.SFC = (props) => (
         </tr>
         <tr>
           <th className='col-md-4 text-right'>Public Sale Timing</th>
-          <td className='col-md-8 text-left'>1 March 2018</td>
+          <td className='col-md-8 text-left'>1 May 2018</td>
         </tr>
         <tr>
           <th className='col-md-4 text-right'>Pre-Sale Discount</th>
