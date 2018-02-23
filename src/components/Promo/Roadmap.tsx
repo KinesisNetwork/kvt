@@ -37,8 +37,8 @@ export class Roadmap extends React.Component<null, null> {
                 <li>
                   <div className="direction-l">
                     <div className="flag-wrapper">
-                      <span className="flag">KVT Public Sale Opens</span>
-                      <span className="time-wrapper"><span className="time">31 March 2018</span></span>
+                      <span className="flag">KVT Pre-Sale Phase 2</span>
+                      <span className="time-wrapper"><span className="time">15 March 2018</span></span>
                     </div>
                     <div className="desc">(15% Discount)</div>
                   </div>
@@ -47,8 +47,8 @@ export class Roadmap extends React.Component<null, null> {
                 <li>
                   <div className="direction-r">
                     <div className="flag-wrapper">
-                      <span className="flag">KVT Public Sale Phase 2</span>
-                      <span className="time-wrapper"><span className="time">15 April 2018</span></span>
+                      <span className="flag">KVT Pre-Sale Phase 3</span>
+                      <span className="time-wrapper"><span className="time">1 April 2018</span></span>
                     </div>
                     <div className="desc">(10% Discount)</div>
                   </div>
@@ -57,8 +57,8 @@ export class Roadmap extends React.Component<null, null> {
                 <li>
                   <div className="direction-l">
                     <div className="flag-wrapper">
-                      <span className="flag">KVT Public Sale Phase 3</span>
-                      <span className="time-wrapper"><span className="time">30 April 2018</span></span>
+                      <span className="flag">KVT Pre-Sale Phase 4</span>
+                      <span className="time-wrapper"><span className="time">15 April 2018</span></span>
                     </div>
                     <div className="desc">(5% Discount)</div>
                   </div>
@@ -67,8 +67,8 @@ export class Roadmap extends React.Component<null, null> {
                 <li>
                   <div className="direction-r">
                     <div className="flag-wrapper">
-                      <span className="flag">KVT Public Sale Phase 4</span>
-                      <span className="time-wrapper"><span className="time">15 May 2018</span></span>
+                      <span className="flag">KVT Public Sale</span>
+                      <span className="time-wrapper"><span className="time">1 May 2018</span></span>
                     </div>
                     <div className="desc">(Full Price)</div>
                   </div>
@@ -77,8 +77,8 @@ export class Roadmap extends React.Component<null, null> {
                 <li>
                   <div className="direction-l">
                     <div className="flag-wrapper">
-                      <span className="flag">Kinesis Currency ICO</span>
-                      <span className="time-wrapper"><span className="time">30 May 2018</span></span>
+                      <span className="flag">Kinesis Currency ICO Launch</span>
+                      <span className="time-wrapper"><span className="time">1 July 2018</span></span>
                     </div>
                     <div className="desc">(Pre-ICO Yield Rates)</div>
                   </div>
@@ -87,8 +87,8 @@ export class Roadmap extends React.Component<null, null> {
                 <li>
                   <div className="direction-r">
                     <div className="flag-wrapper">
-                      <span className="flag">Kinesis Currency KBN Trade</span>
-                      <span className="time-wrapper"><span className="time">1 Aug 2018</span></span>
+                      <span className="flag">Kinesis Currency Blockchain Trade Begins</span>
+                      <span className="time-wrapper"><span className="time">1 September 2018</span></span>
                     </div>
                     <div className="desc">(Post ICO Yield Rates)</div>
                   </div>
