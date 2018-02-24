@@ -34,6 +34,8 @@ export class TokenOffering extends React.Component<null, null> {
               <p>KVTs are in limited supply, with phased discounted rates applying. The earlier one invests the greater the discount.</p>
               <p>Stake your claim to the economic benefits of the monetary system of the future.</p>
               <ScrollLink style={{ paddingLeft: '12px', paddingRight: '12px', marginBottom: '40px'}} className='ml-5 mr-5 mb-20 btn prehighlight' to='contact' spy={true} smooth={true} offset={0} duration={500}>Register Your Interest</ScrollLink>
+              <a style={{ paddingLeft: '12px', paddingRight: '12px', marginBottom: '40px'}} href='/corporate_kvt_signup.html' className='ml-5 mr-5 mb-20 btn prehighlight'>Corporate Sign Up</a>
+              <a style={{ paddingLeft: '12px', paddingRight: '12px', marginBottom: '40px'}} href='/individual_kvt_signup.html' className='ml-5 mr-5 mb-20 btn prehighlight'>Individual Sign Up</a>
 
               <div className='container faq' style={{backgroundColor: 'rgba(0,0,0,0)', marginTop: '10px', maxWidth: '1000px' }}>
                 <div className='row'>
