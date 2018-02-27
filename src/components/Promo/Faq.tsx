@@ -39,6 +39,37 @@ export class Faq extends React.Component<null, null> {
                     </div>
                     {/* End of .panel */}
                     <div className='panel panel-default'>
+                      <div className='panel-heading' role='tab' id='headingOnePt5'>
+                        <h4 className='panel-title'>
+                          <a role='button' className='collapsed' data-toggle='collapse' data-parent='#accordion' href='#collapseOnePt5' aria-expanded='false' aria-controls='collapseOnePt5'>
+                            How do I get and setup my eWallet?<i className='fa fa-caret-up' />
+                          </a>
+                        </h4>
+                      </div>
+                      {/* End of .panel-heading */}
+                      <div id='collapseOnePt5' className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingOnePt5'>
+                        <div className='panel-body'>
+                          Ensure that you have your Ethereum ERC20 compatible eWallet ready. If you don't already have one, the following are compatible options:
+                          <p>
+                            <ul>
+                            <li>Metamask</li>
+                            <li>MyEtherWallet</li>
+                            <li>Mist</li>
+                            <li>Parity</li>
+                            <li>imToken</li>
+                            <li>Trust</li>
+                            <li>Cipher</li>
+                          </ul>
+                          </p>
+                          There are many others out there. It is the user’s responsibility to perform the required research and choose the best ERC20-compliant wallet for them. We are not able to verify the security and functionality of any third-party eWallets and cannot take any responsibility for damages caused by using them.
+                          <p><span> <a href="/documents/eWallet_Setup_Guide_PDF_Application.pdf" target="_blank"  className='primary_color' style={{cursor: 'pointer'}}>eWallet Setup Guide</a></span></p>
+                        </div>
+                        {/* End of .panel-body */}
+                      </div>
+                      {/* End of .panel-collapse */}
+                    </div>
+                    {/* End of .panel */}
+                    <div className='panel panel-default'>
                       <div className='panel-heading' role='tab' id='headingTwo'>
                         <h4 className='panel-title'>
                           <a className='collapsed' role='button' data-toggle='collapse' data-parent='#accordion' href='#collapseTwo' aria-expanded='false' aria-controls='collapseTwo'>
