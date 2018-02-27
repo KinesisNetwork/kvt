@@ -5,7 +5,22 @@ export const BuyingToken: React.SFC = (props) => (
   <div className='section_title text-center mb-60'>
     <div className='mt-30'>
       <div className='text-left'>
-        <p>Register your interest <ScrollLink to='contact' spy={true} smooth={true} offset={0} duration={500}><span className='primary_color' style={{cursor: 'pointer'}}>HERE</span></ScrollLink>.</p>
+        <p>Register your interest <ScrollLink to='contact' spy={true} sBinocularmooth={true} offset={0} duration={500}><span className='primary_color' style={{cursor: 'pointer'}}>HERE</span></ScrollLink>.  You will then be sent a link to an application form.</p>
+        <p>Ensure that you have your Ethereum ERC20 compatible eWallet ready. If you don't already have one, the following are compatible options: </p>
+        <p><ul>
+          <li>Metamask</li>
+          <li>MyEtherWallet</li>
+          <li>Mist</li>
+          <li>Parity</li>
+          <li>imToken</li>
+          <li>Trust</li>
+          <li>Cipher</li>
+        </ul>
+        </p>
+        <p>There are many others out there. It is the user’s responsibility to perform the required research and choose the best ERC20-compliant wallet for them. We are not able to verify the security and functionality of any third-party eWallets and cannot take any responsibility for damages caused by using them.</p>
+        <p>
+          <a href="/documents/eWallet_Setup_Guide_PDF_Application.pdf" target="_blank"  className='primary_color' style={{cursor: 'pointer'}}>eWallet Setup Guide</a>
+        </p>
         <p>Send either Ethereum or fiat as payment to receive your Kinesis Velocity Tokens directly into your ERC20 token compatible eWallet.
         Before it’s too late, buy your Kinesis Tokens (KVT) following the user-friendly instructions on our website.</p>
       </div>
