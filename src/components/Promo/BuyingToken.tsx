@@ -7,7 +7,7 @@ export const BuyingToken: React.SFC = (props) => (
       <div className='text-left'>
         <p>Register your interest <ScrollLink to='contact' spy={true} sBinocularmooth={true} offset={0} duration={500}><span className='primary_color' style={{cursor: 'pointer'}}>HERE</span></ScrollLink>.  You will then be sent a link to an application form.</p>
         <p>Ensure that you have your Ethereum ERC20 compatible eWallet ready. If you don't already have one, the following are compatible options: </p>
-        <ul>
+        <p><ul>
           <li>Metamask</li>
           <li>MyEtherWallet</li>
           <li>Mist</li>
@@ -16,6 +16,7 @@ export const BuyingToken: React.SFC = (props) => (
           <li>Trust</li>
           <li>Cipher</li>
         </ul>
+        </p>
         <p>There are many others out there. It is the user’s responsibility to perform the required research and choose the best ERC20-compliant wallet for them. We are not able to verify the security and functionality of any third-party eWallets and cannot take any responsibility for damages caused by using them.</p>
         <p>
           <a href="/documents/eWallet_Setup_Guide_PDF_Application.pdf" target="_blank"  className='primary_color' style={{cursor: 'pointer'}}>eWallet Setup Guide</a>
