@@ -12,6 +12,20 @@ export class Contact extends React.Component<null, {firstName: string, lastName:
     this.setState({botCheck: true})
   }
 
+  private validateInput(email: string, firstName: string, lastName: string): boolean {
+    if (!email || !firstName || !lastName) {
+      this.setState({warningMessage: 'All fields are required'})
+      return false
+    }
+
+    if (firstName.length < 2 || lastName.length < 2) {
+      this.setState({warningMessage: 'Names must be 2 or more letters'})
+      return false
+    }
+
+    return true
+  }
+
   public async handleSubmit(e) {
     e.preventDefault()
     this.setState({warningMessage: '', successMessage: ''})
@@ -21,8 +35,8 @@ export class Contact extends React.Component<null, {firstName: string, lastName:
       return
     }
 
-    if (!this.state.email) {
-      this.setState({warningMessage: 'Please enter an email address'})
+    const { email, firstName, lastName } = this.state
+    if (!this.validateInput(email, firstName, lastName)) {
       return
     }
 
@@ -33,9 +47,9 @@ export class Contact extends React.Component<null, {firstName: string, lastName:
         ? 'https://npml7kwhfj.execute-api.ap-southeast-2.amazonaws.com/prod/KinesisPromoEmailer'
         : 'https://kkke5k92gb.execute-api.ap-southeast-2.amazonaws.com/Production/KinesisPromoEmailer'
       await axios.post(url, {
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        email: this.state.email
+        firstName,
+        lastName,
+        email,
       })
 
       this.setState({successMessage: 'Thank you for registering', loading: false})
@@ -66,12 +80,12 @@ export class Contact extends React.Component<null, {firstName: string, lastName:
                   <div className='row'>
                     <div className='form-group col-sm-12'>
                       <label className='sr-only'>First Name</label>
-                      <input type='text' className='form-control' name='firstName' value={this.state.firstName} onChange={(ev) => this.handleField(ev)} placeholder='First Name *' />
+                      <input type='text' className='form-control' name='firstName' value={this.state.firstName} onChange={(ev) => this.handleField(ev)} placeholder='First Name *' required />
                     </div>
                     {/* End of .form-group */}
                     <div className='form-group col-sm-12'>
                       <label className='sr-only'>Last Name</label>
-                      <input type='text' className='form-control' name='lastName' value={this.state.lastName} onChange={(ev) => this.handleField(ev)} placeholder='Last Name *' />
+                      <input type='text' className='form-control' name='lastName' value={this.state.lastName} onChange={(ev) => this.handleField(ev)} placeholder='Last Name *' required />
                     </div>
                     {/* End of .form-group */}
                     <div className='form-group col-sm-12'>

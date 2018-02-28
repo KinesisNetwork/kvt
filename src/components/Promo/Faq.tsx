@@ -80,7 +80,7 @@ export class Faq extends React.Component<null, null> {
                       {/* End of .panel-heading */}
                       <div id='collapseTwo' className='panel-collapse collapse' role='tabpanel' aria-labelledby='headingTwo'>
                         <div className='panel-body'>
-                          Ether of Fiat
+                          Ether or Fiat
                         </div>
                         {/* End of .panel-body */}
                       </div>
