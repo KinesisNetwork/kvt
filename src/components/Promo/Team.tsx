@@ -72,7 +72,7 @@ export class Team extends React.Component<null, null> {
                       David Underwood
                     </h3>
                     <span className='team_title'>Non-Executive Director</span>
-                    <p>David Underwood graduated as a teacher from the University of Southern Queensland in 1974 and worked with the Queensland Department of Education until 1977.  During his time in Queensland Parliament he was the Shadow Minister of Health, Education, Tourism and National Parks serving numerous Parliamentary Committees.  Following his resignation from Parliament, he was a consultant to business and industry for a number of years prior to becoming the Mayor of Ipswich City for four years until local government amalgamation of Ipswich City and Moreton Shire in 1995.  David has been a shareholder in ABX since its inception, and brings a wealth of experience and policy expertise to the Board </p>
+                    <p>David Underwood graduated as a teacher from the University of Southern Queensland in 1974 and worked with the Queensland Department of Education until 1977.  During his time in Queensland Parliament he was the Shadow Minister of Health, Education, Tourism and National Parks serving numerous Parliamentary Committees.</p>
                     <DisplayMore style={{fontWeight: 'bold'}}>
                       <p> Following his resignation from Parliament, he was a consultant to business and industry for a number of years prior to becoming the Mayor of Ipswich City for four years until local government amalgamation of Ipswich City and Moreton Shire in 1995.  David has been a shareholder in ABX since its inception, and brings a wealth of experience and policy expertise to the Board </p>
                     </DisplayMore>
@@ -121,7 +121,7 @@ export class Team extends React.Component<null, null> {
                     <span className='team_title'>Head of Projects</span>
                       <p>Ben Brideaux is the Head of Projects, providing project management oversight across all projects which constitute the ABX and Kinesis ecosystems. Ben works closely with the business divisions across 4 continents, and with the CTO to ensure project delivery and system development alignment. Ben integrates the business project management demands with the Agile approaches utlilsed in the software development teams to enable smooth communication between the two domains</p>
                     <DisplayMore style={{fontWeight: 'bold'}}>
-                      <p>A lawyer by trade, Ben additionally brings to the team a wealth of experience in the precious metals industry along with the crypo currency domain, offering a valuable combination of organisational project alignment with the requirements of ABX and Kinesis as they develop.  </p>
+                      <p>A lawyer by trade, Ben additionally brings to the team a wealth of experience in the precious metals industry along with the crypto currency domain, offering a valuable combination of organisational project alignment with the requirements of ABX and Kinesis as they develop.  </p>
                     </DisplayMore>
                   </div>
                 </div>
@@ -134,9 +134,9 @@ export class Team extends React.Component<null, null> {
                       Richard Melbourne
                     </h3>
                     <span className='team_title'>Head of Member Services</span>
-                    <p>Richard Melbourne is Head of Member Services at Allocated Bullion Exchange (ABX). Richard has spent the past decade within the Financial Services industry as asenior investment advisor and head of operations at both boutique specialty investment firms, along with internationally respected investment houses. Richard has always been in customer facing roles and understands thesignificant value of delivering excellence in customer experience.</p>
+                    <p>Richard Melbourne is Head of Member Services at Allocated Bullion Exchange (ABX). Richard has spent the past decade within the Financial Services industry as senior investment advisor and head of operations at both boutique specialty investment firms, along with internationally respected investment houses. Richard has always been in customer facing roles and understands the significant value of delivering excellence in customer experience.</p>
                     <DisplayMore style={{fontWeight: 'bold'}}>
-                      <p>Richard holds a Bachelor of Business, majoring in both management and finance from Griffith University and has also studied international markets abroad at The University of Sheffield in the UK. His experience building relationships with institutional and sophisticated clients, each fromhighly varying industries, underpins the unrivaled level of customer satisfaction he aims to deliver in this role. </p>
+                      <p>Richard holds a Bachelor of Business, majoring in both management and finance from Griffith University and has also studied international markets abroad at The University of Sheffield in the UK. His experience building relationships with institutional and sophisticated clients, each from highly varying industries, underpins the unrivaled level of customer satisfaction he aims to deliver in this role. </p>
                     </DisplayMore>
                   </div>
                 </div>
@@ -166,7 +166,7 @@ export class Team extends React.Component<null, null> {
                       Peter Magan
                     </h3>
                     <span className='team_title'>Operations Manager</span>
-                    <p>Peter is a highly experienced financial services professional with extensive knowledge of trading, operations and systems for multiple financial instruments and products in theEuropean, North American and Asian markets.</p>
+                    <p>Peter is a highly experienced financial services professional with extensive knowledge of trading, operations and systems for multiple financial instruments and products in the European, North American and Asian markets.</p>
                     <DisplayMore style={{fontWeight: 'bold'}}>
                       <p>With over 25 years of wide ranging business experience, Peter held avariety of Back and Middle Office positions with top tier financial institutions in London before moving to Singapore to head up the establishment of regional Asia Pacific Futures Middle Offices, firstly for MF Global and then ICAP.</p>
                     </DisplayMore>
