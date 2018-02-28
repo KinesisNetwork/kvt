@@ -29,7 +29,10 @@ export class Contact extends React.Component<null, {firstName: string, lastName:
     this.setState({loading: true})
 
     try {
-      await axios.post('https://kkke5k92gb.execute-api.ap-southeast-2.amazonaws.com/Production/KinesisPromoEmailer', {
+      const url = location.host.includes('integration') || location.host.includes('localhost')
+        ? 'https://npml7kwhfj.execute-api.ap-southeast-2.amazonaws.com/prod/KinesisPromoEmailer'
+        : 'https://kkke5k92gb.execute-api.ap-southeast-2.amazonaws.com/Production/KinesisPromoEmailer'
+      await axios.post(url, {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
         email: this.state.email
