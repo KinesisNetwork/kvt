@@ -43,23 +43,23 @@ export const MoreKvtInfo: React.SFC = (props) => (
         </tr>
         <tr>
           <th className='col-md-4 text-right'>Public Sale Timing</th>
-          <td className='col-md-8 text-left'>1 May 2018</td>
+          <td className='col-md-8 text-left'>1 May 2018 to 30 June 2018</td>
         </tr>
         <tr>
           <th className='col-md-4 text-right'>Pre-Sale Discount</th>
-          <td className='col-md-8 text-left'>25%</td>
+          <td className='col-md-8 text-left'>5-25%</td>
         </tr>
         <tr>
           <th className='col-md-4 text-right'>Issue price of Tokens</th>
-          <td className='col-md-8 text-left'>USD$1000</td>
+          <td className='col-md-8 text-left'>US$1,000</td>
         </tr>
         <tr>
           <th className='col-md-4 text-right'>Sale Size Limits</th>
-          <td className='col-md-8 text-left'>Technically and legally hard capped at 300,000 KVTs. Post 250,000 subscribed a maximum of 5 KVTs available per subscriber for this offer. KVTs not sold will be held for a subsequent issue no sooner than 1 May 2019 at the prevailing market price.</td>
+          <td className='col-md-8 text-left'>Technically and legally hard capped at 300,000 KVTs.</td>
         </tr>
         <tr>
-          <th className='col-md-4 text-right'>Further Token Issuance</th>
-          <td className='col-md-8 text-left'>No, there will never be any dilution to the rights of KVT holders</td>
+          <th className='col-md-4 text-right'>Further Token Issues</th>
+          <td className='col-md-8 text-left'>There will never be any dilution to the rights of KVT holders</td>
         </tr>
         <tr>
           <th className='col-md-4 text-right'>Secured methods of token purchase</th>
@@ -71,11 +71,11 @@ export const MoreKvtInfo: React.SFC = (props) => (
         </tr>
         <tr>
           <th className='col-md-4 text-right'>Token Issuance date</th>
-          <td className='col-md-8 text-left'>Immediately as subscribed</td>
+          <td className='col-md-8 text-left'>1 May 2018 and thereafter upon subscription</td>
         </tr>
         <tr>
           <th className='col-md-4 text-right'>Token Activation date</th>
-          <td className='col-md-8 text-left'>Latest 1 May 2018</td>
+          <td className='col-md-8 text-left'>Latest 1 July 2018</td>
         </tr>
         <tr>
           <th className='col-md-4 text-right'>Token Buy-Back Program</th>
