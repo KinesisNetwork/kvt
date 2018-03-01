@@ -36,6 +36,7 @@ export class Navigation extends React.Component<{hideNavigation?: boolean}, null
               <li style={{cursor: 'pointer'}}><ScrollLink to='faq' spy={true} smooth={true} offset={0} duration={500}>faq</ScrollLink></li>
               { /*  <li style={{cursor: 'pointer'}}><ScrollLink to='blog' spy={true} smooth={true} offset={0} duration={500}>blog</ScrollLink></li> */ }
               <li style={{cursor: 'pointer'}}><ScrollLink to='contact' spy={true} smooth={true} offset={0} duration={500}>Register</ScrollLink></li>
+              <li style={{cursor: 'pointer'}}><ScrollLink to='token' spy={true} smooth={true} offset={0} duration={500}>Buy Now</ScrollLink></li>
             </ul>
           </div>
           )}
