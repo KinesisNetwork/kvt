@@ -62,7 +62,7 @@ export class Faq extends React.Component<null, null> {
                           </ul>
                           </p>
                           There are many others out there. It is the user’s responsibility to perform the required research and choose the best ERC20-compliant wallet for them. We are not able to verify the security and functionality of any third-party eWallets and cannot take any responsibility for damages caused by using them.
-                          <p><span> <a href="/documents/eWallet_Setup_Guide_PDF_Application.pdf" target="_blank"  className='primary_color' style={{cursor: 'pointer'}}>eWallet Setup Guide</a></span></p>
+                          <p><span> <a href="/documents/eWallet_Setup_Guide_Web_Application.pdf" target="_blank"  className='primary_color' style={{cursor: 'pointer'}}>eWallet Setup Guide</a></span></p>
                         </div>
                         {/* End of .panel-body */}
                       </div>
