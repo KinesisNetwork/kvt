@@ -18,6 +18,9 @@ import './vendor/js/misc/bootstrap.min.js'
 import './vendor/js/misc/plugins.js'
 import './vendor/js/misc/particles.js'
 
+const w: any = window
+w.getReferrer()
+
 ReactDOM.render(
   <App />,
   document.getElementById('example')
