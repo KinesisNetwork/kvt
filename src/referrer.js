@@ -20,9 +20,9 @@ window.getReferrer = function () {
       }
     }
 
-    console.log('hit and referrer is ' + referrer)
     return referrer
   } catch (e) {
+    console.error(e)
     return
   }
 }
