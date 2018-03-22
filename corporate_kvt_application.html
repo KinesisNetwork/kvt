@@ -40,27 +40,10 @@
 </head>
 
 <body>
+  <script src='/src/referrer.js' type='text/javascript'></script>
   <script>
     window.onload = function() {
-      var storage = window.localStorage
-      var urlParams = window.location.search
-      var refferer
-
-      if (window.URLSearchParams) {
-        refferer = new window.URLSearchParams(urlParams).get('r')
-      } else {
-        if (urlParams.length > 0) {
-          refferer = urlParams.split('=')[1]
-        }
-      }
-
-      if (typeof(storage) !== 'undefined') {
-        if (refferer) {
-          storage.setItem('kvtReferrer', refferer)
-        } else {
-          refferer = storage.getItem('kvtReferrer', refferer)
-        }
-      }
+      referrer = window.getReferrer()
 
       var baseFrame = document.createElement('iframe')
       baseFrame.setAttribute('id', 'JotFormIFrame-80511286474861')
@@ -71,8 +54,8 @@
       baseFrame.setAttribute('style', 'width: 1px; min-width: 100%; border:none;')
 
       var baseUrl = 'https://form.jotform.co/80511286474861'
-      if (refferer) {
-        var url = baseUrl + '?r=' + refferer
+      if (referrer) {
+        var url = baseUrl + '?r=' + referrer
         baseFrame.setAttribute('src', url)
       } else {
         baseFrame.setAttribute('src', baseUrl)
