@@ -16,6 +16,8 @@ export class Footer extends React.Component<null, null> {
               <li><a href='https://www.twitter.com/kinesismoney'><i className='fa fa-twitter' /></a></li>
               <li><a href='https://www.linkedin.com/company/kinesismoney'><i className='fa fa-linkedin' /></a></li>
               <li><a href='https://www.youtube.com/channel/UCXJEH6DxUixkTYhH4XxI7kQ'><i className='fa fa-youtube' /></a></li>
+              <li><a href='https://medium.com/@kinesis'><i className='fa fa-medium'/></a></li>
+              <li><a href='https://t.me/joinchat/EOydSFH1fCXODvEMPKPNPw'><i className='fa fa-telegram'/></a></li>
             </ul>
           </div>
         </div>
