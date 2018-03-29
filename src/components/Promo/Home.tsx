@@ -23,7 +23,7 @@ export class Home extends React.Component<null, null> {
             <div style={{paddingTop: '30px'}}>
             <ScrollLink style={{ paddingLeft: '12px', paddingRight: '12px'}} className='ml-5 mr-5 mb-20 btn prehighlight' to='contact' spy={true} smooth={true} offset={0} duration={500}>Register Your Interest</ScrollLink>
             <br />
-            <a style={{ paddingLeft: '12px', paddingRight: '12px'}} className='ml-5 mr-5 mb-20 btn prehighlight' href='https://medium.com/@kinesis' target='_blank'>Kinesis Telegram Group</a>
+            <a style={{ paddingLeft: '12px', paddingRight: '12px'}} className='ml-5 mr-5 mb-20 btn prehighlight' href='https://medium.com/@kinesis/kinesis-on-telegram-6c825eb7c641' target='_blank'>Kinesis Telegram Group</a>
             </div>
           </div>
         </section>
