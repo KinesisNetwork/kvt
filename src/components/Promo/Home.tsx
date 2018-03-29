@@ -22,6 +22,8 @@ export class Home extends React.Component<null, null> {
             <h2 className='hero-text mb-10 light_color'>A new monetary system for a successful and sustainable future</h2>
             <div style={{paddingTop: '30px'}}>
             <ScrollLink style={{ paddingLeft: '12px', paddingRight: '12px'}} className='ml-5 mr-5 mb-20 btn prehighlight' to='contact' spy={true} smooth={true} offset={0} duration={500}>Register Your Interest</ScrollLink>
+            <br />
+            <a style={{ paddingLeft: '12px', paddingRight: '12px'}} className='ml-5 mr-5 mb-20 btn prehighlight' href='https://medium.com/@kinesis' target='_blank'>Kinesis Telegram Group</a>
             </div>
           </div>
         </section>
