@@ -13,6 +13,11 @@ export class Ico extends React.Component<null, null> {
         <section className='video ptb-100 bg-off' id='ico'>
           <div className='container'>
             <div className='row is-table-row'>
+              <div className='col-sm-6 col-md-6 col-lg-6 wow fadeInRight' style={{ position: 'relative', height: '100%', verticalAlign: 'top' }}>
+                <div style={{ textAlign: 'center' }}>
+                  <img src='images/website-assets/kinesis-coin.png' style={{ maxHeight: '380px' }} />
+                </div>
+              </div>
               <div className='col-sm-6'>
                 <div className='section_title mb-50 text-left'>
                   <h2>Kinesis Currency</h2>
@@ -20,11 +25,6 @@ export class Ico extends React.Component<null, null> {
                   <DisplayMore style={{}}>
                     <p>Each Kinesis coin represents physical precious metal allocated on a 1:1 basis. Bullion is purchased simultaneously when a Kinesis coin is minted and each coin has bullion directly allocated to it from the moment of being minted into the kinesis system, for the life of the coin.</p>
                   </DisplayMore>
-                </div>
-              </div>
-              <div className='col-sm-6 col-md-6 col-lg-6 wow fadeInRight' style={{ position: 'relative', height: '100%', verticalAlign: 'top' }}>
-                <div style={{ textAlign: 'center' }}>
-                  <img src='images/website-assets/kinesis-coin.png' style={{ maxHeight: '380px' }} />
                 </div>
               </div>
             </div>

@@ -10,11 +10,12 @@ import { Team } from './Team'
 import { Roadmap } from './Roadmap'
 // import { Blog } from './Blog'
 import { Faq } from './Faq'
+import { Referrer } from './Referrer'
 import { Token } from '../KinesisVelocityToken/Token'
 import { Contact } from './Contact'
-import { Navigation } from '../Navigation';
-import { Footer } from '../Footer';
-import { TokenOffering } from './TokenOffering';
+import { Navigation } from '../Navigation'
+import { Footer } from '../Footer'
+import { TokenOffering } from './TokenOffering'
 
 export class Promo extends React.Component<null, null> {
   constructor(props: any) {
@@ -40,6 +41,7 @@ export class Promo extends React.Component<null, null> {
         <Ico />
         <TokenOffering />
         <Intro />
+        <Referrer />
         <Roadmap />
         <Team />
         <Faq />
