@@ -111,7 +111,7 @@ export class Team extends React.Component<null, null> {
           </div>
           </div>
             <div className='row'>
-              <div className='col-sm-6 col-xs-12'>
+              <div className='col-sm-4 col-xs-12'>
                 <div className='content'>
                   <div className='img_container'>
                     <img src='images/team/7.png' alt='team' className='img-responsive' style={{maxWidth: '200px'}} />
@@ -126,14 +126,14 @@ export class Team extends React.Component<null, null> {
                   </div>
                 </div>
               </div>
-              <div className='col-sm-6 col-xs-12'>
+              <div className='col-sm-4 col-xs-12'>
                 <div className='content'>
                   <div className='img_container'>
                     <img src='images/team/8.png' alt='team' className='img-responsive' style={{maxWidth: '200px'}} />
                     <h3 className='team_info wow fadeInUp'>
                       Richard Melbourne
                     </h3>
-                    <span className='team_title'>Head of Member Services</span>
+                    <span className='team_title'>Head of Operations and Member Services</span>
                     <p>Richard Melbourne is Head of Member Services at Allocated Bullion Exchange (ABX). Richard has spent the past decade within the Financial Services industry as senior investment advisor and head of operations at both boutique specialty investment firms, along with internationally respected investment houses. Richard has always been in customer facing roles and understands the significant value of delivering excellence in customer experience.</p>
                     <DisplayMore style={{fontWeight: 'bold'}}>
                       <p>Richard holds a Bachelor of Business, majoring in both management and finance from Griffith University and has also studied international markets abroad at The University of Sheffield in the UK. His experience building relationships with institutional and sophisticated clients, each from highly varying industries, underpins the unrivaled level of customer satisfaction he aims to deliver in this role. </p>
@@ -141,9 +141,7 @@ export class Team extends React.Component<null, null> {
                   </div>
                 </div>
               </div>
-          </div>
-            <div className='row'>
-              <div className='col-sm-6 col-xs-12'>
+              <div className='col-sm-4 col-xs-12'>
                 <div className='content'>
                   <div className='img_container'>
                     <img src='images/team/9.jpg' alt='team' className='img-responsive' style={{maxWidth: '200px'}} />
@@ -154,21 +152,6 @@ export class Team extends React.Component<null, null> {
                       <p>Dan Ryan is a commercial and technology lawyer with over 15 years’ high-level advisory and transactional experience in Asia. Mr Ryan began his career working for leading international law firms (Baker & McKenzie, Freshfields) in their corporate, intellectual property and technology groups before moving to senior in-house roles. </p>
                     <DisplayMore style={{fontWeight: 'bold'}}>
                       <p>Dan advises on legal requirements of a global precious metals exchange, along with the jurisdictional requirements in the crypto space. He oversees global identity verification and anti-money laundering implementations, ensuring industry standards of security are met. In addition to his legal background, he reads and speaks Mandarin to a very high professional level, and has particular expertise in the China market. </p>
-                    </DisplayMore>
-                  </div>
-                </div>
-              </div>
-              <div className='col-sm-6 col-xs-12'>
-                <div className='content'>
-                  <div className='img_container'>
-                    <img src='images/team/10.jpg' alt='team' className='img-responsive' style={{maxWidth: '200px'}} />
-                    <h3 className='team_info wow fadeInUp'>
-                      Peter Magan
-                    </h3>
-                    <span className='team_title'>Operations Manager</span>
-                    <p>Peter is a highly experienced financial services professional with extensive knowledge of trading, operations and systems for multiple financial instruments and products in the European, North American and Asian markets.</p>
-                    <DisplayMore style={{fontWeight: 'bold'}}>
-                      <p>With over 25 years of wide ranging business experience, Peter held avariety of Back and Middle Office positions with top tier financial institutions in London before moving to Singapore to head up the establishment of regional Asia Pacific Futures Middle Offices, firstly for MF Global and then ICAP.</p>
                     </DisplayMore>
                   </div>
                 </div>
