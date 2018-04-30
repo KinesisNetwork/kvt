@@ -67,27 +67,37 @@ export class Roadmap extends React.Component<null, null> {
                 <li>
                   <div className="direction-r">
                     <div className="flag-wrapper">
-                      <span className="flag">KVT Public Sale</span>
+                      <span className="flag">KVT Pre-Sale Phase 5</span>
                       <span className="time-wrapper"><span className="time">1 May 2018</span></span>
                     </div>
-                    <div className="desc">(Full Price)</div>
+                    <div className="desc">(2.5% Discount)</div>
                   </div>
                 </li>
 
                 <li>
                   <div className="direction-l">
                     <div className="flag-wrapper">
-                      <span className="flag">Kinesis Currency ICO Launch</span>
+                      <span className="flag">KVT Public Sale</span>
                       <span className="time-wrapper"><span className="time">1 July 2018</span></span>
                     </div>
-                    <div className="desc">(Pre-ICO Yield Rates)</div>
+                    <div className="desc">(Full Price)</div>
                   </div>
                 </li>
 
                 <li>
                   <div className="direction-r">
                     <div className="flag-wrapper">
-                      <span className="flag">Kinesis Currency Blockchain Trade Begins</span>
+                      <span className="flag">Kinesis Currency ICO Launch</span>
+                      <span className="time-wrapper"><span className="time">1 September 2018</span></span>
+                    </div>
+                    <div className="desc">(Pre-ICO Yield Rates)</div>
+                  </div>
+                </li>
+
+                <li>
+                  <div className="direction-l">
+                    <div className="flag-wrapper">
+                      <span className="flag">Kinesis Currency Trade Begins</span>
                       <span className="time-wrapper"><span className="time">1 October 2018</span></span>
                     </div>
                     <div className="desc">(Post ICO Yield Rates)</div>
@@ -105,4 +115,3 @@ export class Roadmap extends React.Component<null, null> {
     )
   }
 }
-
