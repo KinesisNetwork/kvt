@@ -20,7 +20,7 @@ export class Roadmap extends React.Component<null, null> {
                 <li className='roadmap-entries'><span className='primary_color roadmap-year'>Mid 2017:</span> The build and completion of the proprietary Primary Marketplace environment.</li>
                 <li className='roadmap-entries'><span className='primary_color roadmap-year'>Late 2017:</span> Development of both the unique and revolutionary Kinesis Currencies and Kinesis Velocity Token.</li>
                 <li className='roadmap-entries'><span className='primary_color roadmap-year'>Early-Mid 2018:</span> Launching the Kinesis Velocity Token.</li>
-                <li className='roadmap-entries'><span className='primary_color roadmap-year'>Mid 2018:</span> The Launch of the first of the Kinesis Currencies, whereby each coin is backed 1:1 by 1g of 99.99% pure physical gold.</li>
+                <li className='roadmap-entries'><span className='primary_color roadmap-year'>Late 2018:</span> The launch of the first of the Kinesis Currencies, whereby each coin is backed 1:1 by 1g of 99.99% pure physical gold.</li>
               </ul>
               <h2 style={{marginTop: '80px'}}>KVT & ICO Release Schedule</h2>
               <ul className="timeline">
