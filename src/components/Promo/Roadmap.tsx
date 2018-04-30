@@ -20,7 +20,7 @@ export class Roadmap extends React.Component<null, null> {
                 <li className='roadmap-entries'><span className='primary_color roadmap-year'>Mid 2017:</span> The build and completion of the proprietary Primary Marketplace environment.</li>
                 <li className='roadmap-entries'><span className='primary_color roadmap-year'>Late 2017:</span> Development of both the unique and revolutionary Kinesis Currencies and Kinesis Velocity Token.</li>
                 <li className='roadmap-entries'><span className='primary_color roadmap-year'>Early-Mid 2018:</span> Launching the Kinesis Velocity Token.</li>
-                <li className='roadmap-entries'><span className='primary_color roadmap-year'>Mid 2018:</span> The Launch of the first of the Kinesis Currencies, whereby each coin is backed 1:1 by 1g of 99.99% pure physical gold.</li>
+                <li className='roadmap-entries'><span className='primary_color roadmap-year'>Late 2018:</span> The launch of the first of the Kinesis Currencies, whereby each coin is backed 1:1 by 1g of 99.99% pure physical gold.</li>
               </ul>
               <h2 style={{marginTop: '80px'}}>KVT & ICO Release Schedule</h2>
               <ul className="timeline">
@@ -67,27 +67,37 @@ export class Roadmap extends React.Component<null, null> {
                 <li>
                   <div className="direction-r">
                     <div className="flag-wrapper">
-                      <span className="flag">KVT Public Sale</span>
+                      <span className="flag">KVT Pre-Sale Phase 5</span>
                       <span className="time-wrapper"><span className="time">1 May 2018</span></span>
                     </div>
-                    <div className="desc">(Full Price)</div>
+                    <div className="desc">(2.5% Discount)</div>
                   </div>
                 </li>
 
                 <li>
                   <div className="direction-l">
                     <div className="flag-wrapper">
-                      <span className="flag">Kinesis Currency ICO Launch</span>
+                      <span className="flag">KVT Public Sale</span>
                       <span className="time-wrapper"><span className="time">1 July 2018</span></span>
                     </div>
-                    <div className="desc">(Pre-ICO Yield Rates)</div>
+                    <div className="desc">(Full Price)</div>
                   </div>
                 </li>
 
                 <li>
                   <div className="direction-r">
                     <div className="flag-wrapper">
-                      <span className="flag">Kinesis Currency Blockchain Trade Begins</span>
+                      <span className="flag">Kinesis Currency ICO Launch</span>
+                      <span className="time-wrapper"><span className="time">1 September 2018</span></span>
+                    </div>
+                    <div className="desc">(Pre-ICO Yield Rates)</div>
+                  </div>
+                </li>
+
+                <li>
+                  <div className="direction-l">
+                    <div className="flag-wrapper">
+                      <span className="flag">Kinesis Currency Trade Begins</span>
                       <span className="time-wrapper"><span className="time">1 October 2018</span></span>
                     </div>
                     <div className="desc">(Post ICO Yield Rates)</div>
@@ -105,4 +115,3 @@ export class Roadmap extends React.Component<null, null> {
     )
   }
 }
-

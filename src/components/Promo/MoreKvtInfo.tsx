@@ -14,10 +14,10 @@ export const MoreKvtInfo: React.SFC = (props) => (
     <div className='mt-40'>
       <h3>Kinesis Velocity Token ITO Fast Facts</h3>
       <ol className="velocity-fast-facts" style={{listStyleType: 'upper-roman', paddingLeft: '20px', maxWidth: '800px', margin: '0 auto', textAlign: 'left'}}>
-        <li><p>The purchase of a KVT provides exclusive access to the Kinesis digital currency pre-ICO benefits launching on 1 May 2018.</p></li>
+        <li><p>The purchase of a KVT provides exclusive access to the Kinesis digital currency pre-ICO benefits launching on 1 July 2018.</p></li>
         <li><p>Each Kinesis Velocity Token empowers the holder to share in an aggregated pool of 20% of all transaction fees associated with every Kinesis digital currency and a 20% share of commissions from KCC.</p></li>
         <li><p>Discounts are incremental and strictly time limited.</p></li>
-        <li><p>Pre-Sale firm commitments are entitled to a 25% discount. This is a limited opportunity that ends on 1st March 2018.</p></li>
+        <li><p>Pre-Sale firm commitments are entitled to a discount. This is a limited opportunity that ends on 30th June 2018.</p></li>
         <li><p>You may purchase KVTs with Ethereum or Fiat currency.</p></li>
         <li><p>Tokens will become tradeable on secondary marketplaces and pricing will depend on general market forces.</p></li>
       </ol>
@@ -39,15 +39,15 @@ export const MoreKvtInfo: React.SFC = (props) => (
         </tr>
         <tr>
           <th className='col-md-4 text-right'>Pre-Sale Timing</th>
-          <td className='col-md-8 text-left'>14 February 2018</td>
+          <td className='col-md-8 text-left'>14 February 2018 to 30 June 2018</td>
         </tr>
         <tr>
           <th className='col-md-4 text-right'>Public Sale Timing</th>
-          <td className='col-md-8 text-left'>1 May 2018 to 30 June 2018</td>
+          <td className='col-md-8 text-left'>1 July 2018 to 31 August 2018</td>
         </tr>
         <tr>
           <th className='col-md-4 text-right'>Pre-Sale Discount</th>
-          <td className='col-md-8 text-left'>5-25%</td>
+          <td className='col-md-8 text-left'>2.5%-25%</td>
         </tr>
         <tr>
           <th className='col-md-4 text-right'>Issue price of Tokens</th>
@@ -71,11 +71,11 @@ export const MoreKvtInfo: React.SFC = (props) => (
         </tr>
         <tr>
           <th className='col-md-4 text-right'>Token Issuance date</th>
-          <td className='col-md-8 text-left'>1 May 2018 and thereafter upon subscription</td>
+          <td className='col-md-8 text-left'>1 July 2018 and thereafter upon subscription</td>
         </tr>
         <tr>
           <th className='col-md-4 text-right'>Token Activation date</th>
-          <td className='col-md-8 text-left'>Latest 1 July 2018</td>
+          <td className='col-md-8 text-left'>Latest 31 August 2018</td>
         </tr>
         <tr>
           <th className='col-md-4 text-right'>Token Buy-Back Program</th>

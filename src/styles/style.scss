@@ -82,7 +82,6 @@ h3.team_info{
 
 .timeline {
   position: relative;
-  width: 660px;
   margin: 0 auto;
   margin-top: 20px;
   padding: 1em 0;
@@ -96,7 +95,7 @@ h3.team_info{
   top: 0;
   content: ' ';
   display: block;
-  width: 6px;
+  width: 5px;
   height: 100%;
   margin-left: -3px;
   background: rgb(80,80,80);
@@ -106,12 +105,11 @@ h3.team_info{
   background: -o-linear-gradient(top, rgba(80,80,80,0) 0%, rgb(80,80,80) 8%, rgb(80,80,80) 92%, rgba(80,80,80,0) 100%);
   background: -ms-linear-gradient(top, rgba(80,80,80,0) 0%, rgb(80,80,80) 8%, rgb(80,80,80) 92%, rgba(80,80,80,0) 100%);
   background: linear-gradient(to bottom, rgba(80,80,80,0) 0%, rgb(80,80,80) 8%, rgb(80,80,80) 92%, rgba(80,80,80,0) 100%);
-
-  z-index: 5;
 }
 
 .timeline li {
   padding: 1em 0;
+  position: relative;
 }
 
 .timeline li:after {
@@ -124,21 +122,20 @@ h3.team_info{
 
 .direction-l {
   position: relative;
-  width: 300px;
-  float: left;
   text-align: right;
+  right: 50%;
+  transform: translateX(-30px);
 }
 
 .direction-r {
   position: relative;
-  width: 300px;
-  float: right;
+  left: 50%;
+  transform: translateX(29px);
 }
 
 .flag-wrapper {
   position: relative;
   display: inline-block;
-
   text-align: center;
 }
 
@@ -172,8 +169,8 @@ h3.team_info{
   right: -36px;
   content: ' ';
   display: block;
-  width: 12px;
-  height: 12px;
+  width: 13px;
+  height: 13px;
   margin-top: -10px;
   background: #fff;
   border-radius: 10px;
@@ -250,7 +247,7 @@ h3.team_info{
 
 /* ================ Timeline Media Queries ================ */
 
-@media screen and (max-width: 660px) {
+@media screen and (max-width: 700px) {
 
   .timeline {
     width: 100%;
@@ -266,12 +263,16 @@ h3.team_info{
   .direction-r {
     float: none;
     width: 100%;
+    left: 0;
+    right: 0;
+    transform: none;
 
     text-align: center;
   }
 
   .flag-wrapper {
     text-align: center;
+    display: block;
   }
 
   .flag {
@@ -333,7 +334,7 @@ h3.team_info{
     -webkit-box-shadow: 0 0 1px rgba(0,0,0,0.20);
     -moz-box-shadow: 0 0 1px rgba(0,0,0,0.20);
     box-shadow: 0 0 1px rgba(0,0,0,0.20);
-
+    display: inline-block;
     z-index: 15;
   }
 
