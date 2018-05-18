@@ -1,0 +1,25 @@
+{
+  "name": "transfer_helper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "transfer.js",
+  "scripts": {
+    "start": "./dist/index.js",
+    "watch": "tsc -w",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.15.1",
+    "dotenv": "^5.0.1",
+    "ethereumjs-util": "^5.2.0",
+    "typescript": "^2.8.3",
+    "web3": "^1.0.0-beta.34"
+  },
+  "devDependencies": {
+    "@types/node": "^10.1.0"
+  }
+}
