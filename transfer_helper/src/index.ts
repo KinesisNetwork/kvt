@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-require('dotenv').config()
 
 import program from 'commander'
 import { transferFromCSV, Network } from './transfer'
@@ -13,6 +12,6 @@ const [filename, env] = program.args
 
 transferFromCSV(filename, env as Network)
   .catch((err) => {
-    console.error(err)
+    console.error(err.message)
     process.exit(1)
   })

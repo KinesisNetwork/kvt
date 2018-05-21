@@ -21,7 +21,7 @@ export interface EnvironmentVariables {
   contractAddress: string
 }
 
-type Networks = {[key in Network]?: string}
+type Networks = { [key in Network]?: string }
 const NETWORKS: Networks = {
   [Network.local]: 'http://localhost:8545',
   [Network.test]: 'https://ropsten.infura.io/',
@@ -34,8 +34,12 @@ export async function transferFromCSV(filename: string, network = Network.local)
   const client = new Token(web3, environment)
   await client.validateIsOwner()
 
-  const transfers = await getDetailsFromCSV(filename)
-  await client.createTransfers(transfers)
+  const transfers = getDetailsFromCSV(filename)
+  if (areValidTransfers(transfers, web3)) {
+    await client.createTransfers(transfers)
+  } else {
+    logInvalidTransfers(transfers, web3)
+  }
 }
 
 function validateEnvironment(web3: Web3): EnvironmentVariables {
@@ -52,10 +56,22 @@ function validateEnvironment(web3: Web3): EnvironmentVariables {
   }
 }
 
-async function getDetailsFromCSV(filename: string): Promise<Transfer[]> {
+function getDetailsFromCSV(filename: string): Transfer[] {
   const file = fs.readFileSync(filename, 'utf8')
   return file.split('\n')
     .map((line) => line.split(','))
-    .map(([amount, to]) => ({amount, to}))
-    .filter(({amount, to}) => amount && to)
+    .map(([amount, to]) => ({ amount, to }))
+    .filter(({ amount, to }) => amount && to)
+}
+
+function areValidTransfers(transfers: Transfer[], web3: Web3): boolean {
+  return transfers.every(({ to }) => web3.utils.isAddress(to))
+}
+
+function logInvalidTransfers(transfers: Transfer[], web3: Web3) {
+  transfers.forEach(({ to }, index) => {
+    if (!web3.utils.isAddress(to)) {
+      console.error(`Address ${to} is invalid on line ${index + 1}`)
+    }
+  })
 }
