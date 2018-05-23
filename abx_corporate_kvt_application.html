@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/images/favicon/site.webmanifest">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  <title>Kinesis</title>
+  <!-- MLG - Google Tag Manager -->
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({
+        'gtm.start': new Date().getTime(),
+        event: 'gtm.js'
+      });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src =
+        'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-N4JQ39R');
+  </script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114337053-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-114337053-1');
+  </script>
+  <style>
+    html,
+    body {
+      height: 100% !important;
+      margin: 0;
+      padding: 0;
+    }
+
+    iframe {
+      min-height: 100% !important;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- MLG - Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N4JQ39R" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <iframe id="JotFormIFrame-81057747274867" onload="window.parent.scrollTo(0,0)" allowtransparency="true" allowfullscreen="true"
+    allow="geolocation; microphone; camera" src="https://form.jotform.co/81057747274867" frameborder="0" style="width: 1px;
+    min-width: 100%;
+    height:539px;
+    border:none;" scrolling="no">
+  </iframe>
+  <script type="text/javascript">
+    var ifr = document.getElementById("JotFormIFrame-81057747274867");
+    if (window.location.href && window.location.href.indexOf("?") > -1) {
+      var get = window.location.href.substr(window.location.href.indexOf("?") + 1);
+      if (ifr && get.length > 0) {
+        var src = ifr.src;
+        src = src.indexOf("?") > -1 ? src + "&" + get : src + "?" + get;
+        ifr.src = src;
+      }
+    }
+    window.handleIFrameMessage = function (e) {
+      var args = e.data.split(":");
+      if (args.length > 2) { iframe = document.getElementById("JotFormIFrame-" + args[(args.length - 1)]); } else { iframe = document.getElementById("JotFormIFrame"); }
+      if (!iframe) { return; }
+      switch (args[0]) {
+        case "scrollIntoView":
+          iframe.scrollIntoView();
+          break;
+        case "setHeight":
+          iframe.style.height = args[1] + "px";
+          break;
+        case "collapseErrorPage":
+          if (iframe.clientHeight > window.innerHeight) {
+            iframe.style.height = window.innerHeight + "px";
+          }
+          break;
+        case "reloadPage":
+          window.location.reload();
+          break;
+        case "loadScript":
+          var src = args[1];
+          if (args.length > 3) {
+            src = args[1] + ':' + args[2];
+          }
+          var script = document.createElement('script');
+          script.src = src;
+          script.type = 'text/javascript';
+          document.body.appendChild(script);
+          break;
+        case "exitFullscreen":
+          if (window.document.exitFullscreen) window.document.exitFullscreen();
+          else if (window.document.mozCancelFullScreen) window.document.mozCancelFullScreen();
+          else if (window.document.mozCancelFullscreen) window.document.mozCancelFullScreen();
+          else if (window.document.webkitExitFullscreen) window.document.webkitExitFullscreen();
+          else if (window.document.msExitFullscreen) window.document.msExitFullscreen();
+          break;
+      }
+      var isJotForm = (e.origin.indexOf("jotform") > -1) ? true : false;
+      if (isJotForm && "contentWindow" in iframe && "postMessage" in iframe.contentWindow) {
+        var urls = { "docurl": encodeURIComponent(document.URL), "referrer": encodeURIComponent(document.referrer) };
+        iframe.contentWindow.postMessage(JSON.stringify({ "type": "urls", "value": urls }), "*");
+      }
+    };
+    if (window.addEventListener) {
+      window.addEventListener("message", handleIFrameMessage, false);
+    } else if (window.attachEvent) {
+      window.attachEvent("onmessage", handleIFrameMessage);
+    }
+  </script>
+</body>
+
+</html>
