@@ -38,6 +38,7 @@ export class Navigation extends React.Component<{hideNavigation?: boolean}, null
               <li style={{cursor: 'pointer'}}><ScrollLink to='contact' spy={true} smooth={true} offset={0} duration={500}>Register</ScrollLink></li>
               <li style={{cursor: 'pointer'}}><ScrollLink to='referrer' spy={true} smooth={true} offset={0} duration={500}>Referral Program</ScrollLink></li>
               <li style={{cursor: 'pointer'}}><ScrollLink to='token' spy={true} smooth={true} offset={0} duration={500}>Buy Now</ScrollLink></li>
+              <li style={{cursor: 'pointer'}}><a target='_blank' href='/documents/Kinesis_Privacy_Policy.pdf'>Privacy Policy</a></li>
             </ul>
           </div>
           )}
