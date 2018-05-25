@@ -10,7 +10,7 @@ export class About extends React.Component<null, null> {
 
     return (
       <div>
-        <section className='services pt-80 pb-80' style={{color: 'white'}} id='about'>
+        <section className='services pt-80 pb-80' style={{ color: 'white' }} id='about'>
           <div className='container'>
             <div className='section_title text-center mb-60'>
               <h2>Our Three Pillars</h2>
@@ -30,7 +30,7 @@ export class About extends React.Component<null, null> {
                 <div className='content'>
                   <img src='images/website-assets/02Integration.png' />
                   <h3>Efficiency</h3>
-                  <p>Utilising the Stellar blockchain network with capabilities of +3,000 transactions per second and transaction confirmation times of 3-5 seconds, including complete ease of currency utilisation through extensive banking, payment and debit card facilities. </p>
+                  <p>Utilising the Stellar blockchain network with capabilities of +3,000 transactions per second and transaction confirmation times of 3-5 seconds, including complete ease of currency utilisation through extensive financial, payment and debit card facilities. </p>
                 </div>
                 {/* End of .content */}
               </div>
