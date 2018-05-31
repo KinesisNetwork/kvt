@@ -9,6 +9,10 @@ const zeroAddress = '0x0000000000000000000000000000000000000000'
 export class AdminForm extends React.Component<any, any> {
   constructor(props) {
     super(props)
+
+    const baseStates = ['request', 'approve']
+    const states = this.props.isOwner ? baseStates.concat(['owner']) : baseStates
+
     this.state = {
       successMessage: '',
       errorMessage: '',
@@ -21,22 +25,26 @@ export class AdminForm extends React.Component<any, any> {
       newSellPriceInWei: 0,
       newSellPriceInEther: 0,
       loading: false,
-      pendingBurn: false,
       transferable: false,
       transferPending: false,
-      approver: '',
-      trust: ''
+      states,
+      currentState: states[0],
+      fundsInTrust: 0
     }
   }
 
   public async componentDidMount () {
     const currentSellPriceInWei = (await this.props.kinesisVelocityTokenInstance.getPrice()).toNumber()
-    const pendingBurn = await this.props.kinesisVelocityTokenInstance.isBurnPending()
     const transferPending = await this.props.kinesisVelocityTokenInstance.isToggleTransferablePending()
     const transferable = await this.props.kinesisVelocityTokenInstance.getTransferableState()
-    const trust = await this.props.kinesisVelocityTokenInstance.getTrustAccount()
-    const approver = await this.props.kinesisVelocityTokenInstance.getApprover()
-    this.setState({currentSellPriceInWei, currentSellPriceInEther: convertWeiToEther(currentSellPriceInWei), pendingBurn, transferable, transferPending, trust, approver})
+    const fundsInTrust = await this.props.kinesisVelocityTokenInstance.balanceOf(this.props.address)
+    this.setState({
+      currentSellPriceInWei,
+      currentSellPriceInEther: convertWeiToEther(currentSellPriceInWei),
+      transferable,
+      transferPending,
+      fundsInTrust
+    })
   }
 
   public async makeTransferable(enable: boolean) {
@@ -53,37 +61,6 @@ export class AdminForm extends React.Component<any, any> {
       this.setState({errorMessage: e.message, loading: false})
     }
   }
-
-  public async startBurn() {
-    try {
-      this.emptyBanners()
-      this.setState({loading: true})
-
-      await this.props.kinesisVelocityTokenInstance.startBurn({from: this.props.address})
-      this.setState({
-        successMessage: `Request for burn submitted to the approver`,
-        loading: false,
-      })
-    } catch (e) {
-      this.setState({errorMessage: e.message, loading: false})
-    }
-  }
-
-  public async cancelBurn() {
-    try {
-      this.emptyBanners()
-      this.setState({loading: true})
-
-      await this.props.kinesisVelocityTokenInstance.cancelBurn({from: this.props.address})
-      this.setState({
-        successMessage: `Burn cancelled`,
-        loading: false,
-      })
-    } catch (e) {
-      this.setState({errorMessage: e.message, loading: false})
-    }
-  }
-
 
   public async transferToAddress(address, amount) {
     try {
@@ -118,13 +95,13 @@ export class AdminForm extends React.Component<any, any> {
     }
   }
 
-  public async setApprover() {
+  public async setAdmin() {
     try {
       this.setState({loading: true})
 
-      await this.props.kinesisVelocityTokenInstance.setApprover(this.state.approverAddress, {from: this.props.address})
+      await this.props.kinesisVelocityTokenInstance.setAdmin(this.state.adminAddress, {from: this.props.address})
       this.setState({
-        successMessage: `The approver has now been set`,
+        successMessage: `The admin has been added`,
         loading: false,
       })
     } catch (e) {
@@ -132,13 +109,13 @@ export class AdminForm extends React.Component<any, any> {
     }
   }
 
-  public async setTrust() {
+  public async removeAdmin() {
     try {
       this.setState({loading: true})
 
-      await this.props.kinesisVelocityTokenInstance.setTrustAccount(this.state.trustAddress, {from: this.props.address})
+      await this.props.kinesisVelocityTokenInstance.removeAdmin(this.state.adminAddress, {from: this.props.address})
       this.setState({
-        successMessage: `The trust account has now been set`,
+        successMessage: `The admin has been removed`,
         loading: false,
       })
     } catch (e) {
@@ -162,12 +139,8 @@ export class AdminForm extends React.Component<any, any> {
     this.setState({newSellPriceInEther: event.target.value, newSellPriceInWei: convertEtherToWei(event.target.value)})
   }
 
-  handleApproverAddressChange(event) {
-    this.setState({approverAddress: event.target.value})
-  }
-
-  handleTrustAddressChange(event) {
-    this.setState({trustAddress: event.target.value})
+  handleAdminAddressChange(event) {
+    this.setState({adminAddress: event.target.value})
   }
 
   handleAdminTransfer(event) {
@@ -191,7 +164,7 @@ export class AdminForm extends React.Component<any, any> {
       return
     }
 
-    this.transferToAddress(this.state.trust, this.state.trustAmount)
+    this.transferToAddress(zeroAddress, this.state.trustAmount)
   }
 
   handlePriceSubmit(event) {
@@ -206,28 +179,20 @@ export class AdminForm extends React.Component<any, any> {
     this.updateSellPrice()
   }
 
-  handleApproverSubmit(event) {
+  handleAdminSubmit(event, set) {
     event.preventDefault()
     this.emptyBanners()
 
-    if (!this.state.approverAddress) {
-      this.setState({warningMessage: 'An approver address is required'})
+    if (!this.state.adminAddress) {
+      this.setState({warningMessage: 'An admin address is required'})
       return
     }
 
-    this.setApprover()
-  }
-
-  handleTrustSubmit(event) {
-    event.preventDefault()
-    this.emptyBanners()
-
-    if (!this.state.trustAddress) {
-      this.setState({warningMessage: 'A trust address is required'})
-      return
+    if (set) {
+      this.setAdmin()
+    } else {
+      this.removeAdmin()
     }
-
-    this.setTrust()
   }
 
   public emptyBanners() {
@@ -283,53 +248,22 @@ export class AdminForm extends React.Component<any, any> {
                 </form>
               </div>
             </div>
-            <div className='row'>
-              <div className='col-sm-12'>
-                <h3>End Crowdsale</h3>
-                { this.state.pendingBurn ? (
-                  <div>
-                    <p style={{marginTop: '10px'}}>Cancel the burn request. This will be effective immediately</p>
-                    <button className='btn btn-warning' style={{marginTop: '10px'}} onClick={() => this.cancelBurn()}>Cancel Burn</button>
-                  </div>
-                ) : (
-                  <div>
-                    <p style={{marginTop: '10px'}}>This action will be approved prior to the remaining tokens being burnt</p>
-                    <button className='btn btn-primary' style={{marginTop: '10px'}} onClick={() => this.startBurn()}>Request Burn</button>
-                  </div>
-                ) }
-              </div>
-            </div> 
           </div>
           <div className='col-sm-3'>
             <div className='row' style={{marginBottom: '25px'}}>
               <div className='col-sm-12'>
-                <h3>Configure Approver</h3>
-                { this.state.approver !== zeroAddress ? (
+                <h3>Configure Administrators</h3>
+                { this.props.isOwner ? (
                   <div>
-                    <p style={{marginTop: '10px'}}>The approver address set for KVT is {this.state.approver}</p>
+                    <p style={{marginTop: '10px'}}>Only the owner can add and remove administrators</p>
                   </div>
                 ) : (
-                  <form onSubmit={(ev) => this.handleApproverSubmit(ev)}>
-                    <label style={{marginTop: '10px'}}>Approver Address</label>
-                    <input type='text' className='form-control' value={this.state.approverAddress} onChange={(ev) => this.handleApproverAddressChange(ev)} placeholder='Address'/>
-                    <input className='btn btn-primary' type='submit' value='Set' style={{marginTop: '10px'}} />
-                  </form>
-                ) }
-              </div>
-            </div> 
-            <div className='row' style={{marginBottom: '25px'}}>
-              <div className='col-sm-12'>
-                <h3>Configure Trust Address</h3>
-                { this.state.trust !== zeroAddress ? (
                   <div>
-                    <p style={{marginTop: '10px'}}>The trust address set for KVT is {this.state.trust}</p>
+                    <label style={{marginTop: '10px'}}>Admin Address</label>
+                    <input type='text' className='form-control' value={this.state.adminAddress} onChange={(ev) => this.handleAdminAddressChange(ev)} placeholder='Address'/>
+                    <button className='btn btn-primary' style={{marginTop: '10px'}} onClick={(ev) => this.handleAdminSubmit(ev, true)}>Add</button>
+                    <button className='btn btn-primary' style={{marginTop: '10px'}} onClick={(ev) => this.handleAdminSubmit(ev, false)}>Remove</button>
                   </div>
-                ) : (
-                  <form onSubmit={(ev) => this.handleTrustSubmit(ev)}>
-                    <label style={{marginTop: '10px'}}>Trust Address</label>
-                    <input type='text' className='form-control' value={this.state.trustAddress} onChange={(ev) => this.handleTrustAddressChange(ev)} placeholder='Address'/>
-                    <input className='btn btn-primary' type='submit' value='Set' style={{marginTop: '10px'}} />
-                  </form>
                 ) }
               </div>
             </div> 
@@ -338,7 +272,7 @@ export class AdminForm extends React.Component<any, any> {
                 <h3>Make Transferable</h3>
                 <p style={{marginTop: '10px'}}>The KVT is currently <strong>{this.state.transferable ? 'transferable' : 'non-transferable'}</strong></p>
                 { this.state.transferPending ? (
-                  <p>A transfer state change is currently pending with the approver</p>
+                  <p>A transfer state change is currently pending</p>
                 ) : (
                   <div>
                     { this.state.transferable ? (
@@ -349,7 +283,7 @@ export class AdminForm extends React.Component<any, any> {
                   </div>
                 ) }
               </div>
-            </div> 
+            </div>
           </div>
         </div>
         <div className='row'>

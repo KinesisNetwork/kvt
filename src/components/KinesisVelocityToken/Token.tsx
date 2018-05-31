@@ -22,8 +22,7 @@ export class Token extends React.Component<any, any> {
       noAddress: false,
       address: null,
       isAdmin: false,
-      isApprover: false,
-      isTrust: false,
+      isOwner: false,
     }
   }
 
@@ -64,15 +63,13 @@ export class Token extends React.Component<any, any> {
         kinesisVelocityToken.setProvider(this.state.web3Provider)
 
         const tokenInstance = await kinesisVelocityToken.deployed()
-        const isAdmin = await tokenInstance.isOwner({from: account})
-        const isApprover = await tokenInstance.isApprover({from: account})
-        const isTrust = await tokenInstance.isTrustAccount({from: account})
+        const isOwner = await tokenInstance.isOwner({from: account})
+        const isAdmin = await tokenInstance.isAdmin({from: account})
 
-        this.setState({isAdmin, isApprover, isTrust, kinesisVelocityTokenInstance: tokenInstance, address: account})
+        this.setState({isAdmin, isOwner, kinesisVelocityTokenInstance: tokenInstance, address: account})
       }
     })
   }
-
 
   public render() {
     return (
@@ -86,10 +83,25 @@ export class Token extends React.Component<any, any> {
             <div className='row'>
               {this.state.noWeb3 && <NoWeb3 />}
               {this.state.noAddress && <NoAddress />}
-              {this.state.isAdmin && <AdminForm kinesisVelocityTokenInstance={this.state.kinesisVelocityTokenInstance} address={this.state.address} web3={this.state.web3} web3Provider={this.state.web3Provider} />}
-              {this.state.isApprover && <ApproverForm kinesisVelocityTokenInstance={this.state.kinesisVelocityTokenInstance} address={this.state.address} web3={this.state.web3} web3Provider={this.state.web3Provider} />}
-              {this.state.isTrust && <TrustForm kinesisVelocityTokenInstance={this.state.kinesisVelocityTokenInstance} address={this.state.address} web3={this.state.web3} web3Provider={this.state.web3Provider} />}
-              {!this.state.isAdmin && !this.state.isApprover && !this.state.isTrust && this.state.address && <ClientForm kinesisVelocityTokenInstance={this.state.kinesisVelocityTokenInstance} address={this.state.address} web3={this.state.web3} web3Provider={this.state.web3Provider} />}
+              {
+                this.state.isAdmin &&
+                  <AdminForm
+                    kinesisVelocityTokenInstance={this.state.kinesisVelocityTokenInstance}
+                    address={this.state.address}
+                    isOwner={this.state.isOwner}
+                    web3={this.state.web3}
+                    web3Provider={this.state.web3Provider}
+                  />
+              }
+              {
+                !this.state.isAdmin && this.state.address &&
+                  <ClientForm
+                    kinesisVelocityTokenInstance={this.state.kinesisVelocityTokenInstance}
+                    address={this.state.address}
+                    web3={this.state.web3}
+                    web3Provider={this.state.web3Provider}
+                  />
+              }
             </div>
           </div>
         </section>
