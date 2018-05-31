@@ -86,10 +86,13 @@ export class Token extends React.Component<any, any> {
               {this.state.noAddress && <NoAddress />}
               {
                 this.state.isAdmin &&
-                  <select onChange={(ev) => this.setState({action: ev.target.value})}>
-                    <option value='request'>Request</option>
-                    <option value='approve'>Approve</option>
-                  </select>
+                  <div className='form-group'>
+                    <label>Administrative Action</label>
+                    <select className='form-control' onChange={(ev) => this.setState({action: ev.target.value})}>
+                      <option value='request'>Request</option>
+                      <option value='approve'>Approve</option>
+                    </select>
+                  </div>
               }
               {
                 this.state.isAdmin && this.state.action === 'request' &&

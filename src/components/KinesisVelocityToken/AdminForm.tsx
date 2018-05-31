@@ -309,8 +309,8 @@ export class AdminForm extends React.Component<any, any> {
                   <div>
                     <label style={{marginTop: '10px'}}>Admin Address</label>
                     <input type='text' className='form-control' value={this.state.adminAddress} onChange={(ev) => this.handleAdminAddressChange(ev)} placeholder='Address'/>
-                    <button className='btn btn-primary' style={{marginTop: '10px'}} onClick={(ev) => this.handleAdminSubmit(ev, true)}>Add</button>
-                    <button className='btn btn-primary' style={{marginTop: '10px'}} onClick={(ev) => this.handleAdminSubmit(ev, false)}>Remove</button>
+                    <button className='btn btn-primary' style={{marginTop: '10px', minWidth: '100px', marginRight: '10px'}} onClick={(ev) => this.handleAdminSubmit(ev, true)}>Add</button>
+                    <button className='btn btn-primary' style={{marginTop: '10px', minWidth: '100px'}} onClick={(ev) => this.handleAdminSubmit(ev, false)}>Remove</button>
                   </div>
                 ) }
               </div>
