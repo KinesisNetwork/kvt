@@ -102,7 +102,11 @@ contract KinesisVelocityToken is BasicToken, Ownable, RBAC {
   * @param _value The amount to be transferred.
   */
   function _transfer(address _to, address _from, uint256 _value) private returns (bool) {
-    require(_to != address(0));
+    // We allow admins to transfer to the zero address, to reserve the funds
+    if (!hasRole(_from, ADMIN_ROLE)) {
+      require(_to != address(0));
+    }
+
     require(_value <= balances[_from]);
 
     // SafeMath.sub will throw if there is not enough balance.
