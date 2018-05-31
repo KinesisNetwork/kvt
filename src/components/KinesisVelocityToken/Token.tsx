@@ -8,7 +8,6 @@ import {NoWeb3} from './NoWeb3'
 import {NoAddress} from './NoAddress'
 import {AdminForm} from './AdminForm'
 import {ApproverForm} from './ApproverForm'
-import {TrustForm} from './TrustForm'
 import {ClientForm} from './ClientForm'
 
 export class Token extends React.Component<any, any> {
