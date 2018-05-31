@@ -102,7 +102,7 @@ export class ApproverForm extends React.Component<any, any> {
           }
         </div>
         <div className='row'>
-          <Transfers {...this.props} />
+          <Transfers {...this.props} isApprover={true} />
         </div>
       </div>
     )

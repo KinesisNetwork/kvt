@@ -23,6 +23,7 @@ export class Token extends React.Component<any, any> {
       address: null,
       isAdmin: false,
       isOwner: false,
+      action: 'request'
     }
   }
 
@@ -85,7 +86,24 @@ export class Token extends React.Component<any, any> {
               {this.state.noAddress && <NoAddress />}
               {
                 this.state.isAdmin &&
+                  <select onChange={(ev) => this.setState({action: ev.target.value})}>
+                    <option value='request'>Request</option>
+                    <option value='approve'>Approve</option>
+                  </select>
+              }
+              {
+                this.state.isAdmin && this.state.action === 'request' &&
                   <AdminForm
+                    kinesisVelocityTokenInstance={this.state.kinesisVelocityTokenInstance}
+                    address={this.state.address}
+                    isOwner={this.state.isOwner}
+                    web3={this.state.web3}
+                    web3Provider={this.state.web3Provider}
+                  />
+              }
+              {
+                this.state.isAdmin && this.state.action === 'approve' &&
+                  <ApproverForm
                     kinesisVelocityTokenInstance={this.state.kinesisVelocityTokenInstance}
                     address={this.state.address}
                     isOwner={this.state.isOwner}
