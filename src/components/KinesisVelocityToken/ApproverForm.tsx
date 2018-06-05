@@ -14,7 +14,6 @@ export class ApproverForm extends React.Component<any, any> {
       pendingPriceChangeInWei: 0,
       pendingPriceChangeInEth: 0,
       pendingMakeTransferable: false,
-      pendingBurn: false,
       loading: false,
       transferPending: false,
       transferable: false
@@ -22,12 +21,11 @@ export class ApproverForm extends React.Component<any, any> {
   }
 
   public async componentDidMount() {
-    const pendingBurn = await this.props.kinesisVelocityTokenInstance.isBurnPending()
     const transferPending = await this.props.kinesisVelocityTokenInstance.isToggleTransferablePending()
     const transferable = await this.props.kinesisVelocityTokenInstance.getTransferableState()
     const pendingPriceChangeInWei = (await this.props.kinesisVelocityTokenInstance.getPendingPriceChange()).toNumber()
     const pendingPriceChangeInEth = convertWeiToEther(pendingPriceChangeInWei)
-    this.setState({pendingBurn, transferable, transferPending, pendingPriceChangeInWei, pendingPriceChangeInEth})
+    this.setState({transferable, transferPending, pendingPriceChangeInWei, pendingPriceChangeInEth})
   }
 
   public async approveTransferableToggle() {
@@ -60,36 +58,6 @@ export class ApproverForm extends React.Component<any, any> {
     }
   }
 
-  public async endCrowdsale() {
-    try {
-      this.emptyBanners()
-      this.setState({loading: true})
-
-      await this.props.kinesisVelocityTokenInstance.approveBurn({from: this.props.address})
-      this.setState({
-        successMessage: `KVT crowdsale complete`,
-        loading: false,
-      })
-    } catch (e) {
-      this.setState({errorMessage: e.message, loading: false})
-    }
-  }
-
-  public async cancelBurn() {
-    try {
-      this.emptyBanners()
-      this.setState({loading: true})
-
-      await this.props.kinesisVelocityTokenInstance.cancelBurn({from: this.props.address})
-      this.setState({
-        successMessage: `Burn cancelled`,
-        loading: false,
-      })
-    } catch (e) {
-      this.setState({errorMessage: e.message, loading: false})
-    }
-  }
-
   public emptyBanners() {
     this.setState({warningMessage: '', successMessage: '', errorMessage: ''})
   }
@@ -114,18 +82,6 @@ export class ApproverForm extends React.Component<any, any> {
             ) }
           </div>
           <div className='col-sm-3'>
-            <h3>End Crowdsale</h3>
-            { this.state.pendingBurn ? (
-              <div>
-                <p style={{marginTop: '10px'}}>Approving this will permanently end the crowdsale. Proceed with caution.</p>
-                <button className='btn btn-primary' style={{marginTop: '10px'}} onClick={() => this.endCrowdsale()}>End Crowdsale</button>
-                <button className='btn btn-warning' style={{marginTop: '10px'}} onClick={() => this.cancelBurn()}>Cancel Burn</button>
-              </div>
-            ) : (
-              <p style={{marginTop: '10px'}}>The KVT Owner has not yet requested this</p>
-            ) }
-          </div>
-          <div className='col-sm-3'>
             <h3>Approve Price Change</h3>
             { this.state.pendingPriceChangeInWei !== 0 ? (
               <div>
@@ -146,7 +102,7 @@ export class ApproverForm extends React.Component<any, any> {
           }
         </div>
         <div className='row'>
-          <Transfers {...this.props} />
+          <Transfers {...this.props} isApprover={true} />
         </div>
       </div>
     )
