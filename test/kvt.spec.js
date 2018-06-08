@@ -585,6 +585,26 @@ contract('KinesisVelocityToken', function (accounts) {
       expect(await instance.isBurnPending()).to.eql(false)
     })
 
+    it('fails when trying to approve burn that is not requested', async () => {
+      try {
+        await instance.approveBurn({ from: owner })
+        expect(false).to.eql(true)
+      } catch (e) {
+        expect(e.message).to.eql(revertMessage)
+        expect((await instance.getTotalSupply()).toNumber()).to.eql(tokenSupply)
+      }
+    })
+
+    it('does not allow another burn to be requested while one is already there', async () => {
+      await instance.startBurn(50, { from: owner })
+      try {
+        await instance.startBurn(100, { from: owner })
+        expect(false).to.eql(true)
+      } catch (e) {
+        expect(e.message).to.eql(revertMessage)
+      }
+    })
+
     it('does not allow non-admin to cancel burn', async () => {
       await instance.startBurn(50, { from: owner })
 
@@ -630,6 +650,16 @@ contract('KinesisVelocityToken', function (accounts) {
       } catch (e) {
         expect(e.message).to.eql(revertMessage)
       }
+    })
+
+    it('takes out the specified amount from owner balance and total supply', async () => {
+      await instance.startBurn(500, { from: owner })
+      expect((await instance.getTotalSupply()).toNumber()).to.eql(tokenSupply)
+      expect((await instance.balanceOf(owner)).toNumber()).to.eql(tokenSupply)
+
+      await instance.approveBurn({ from: approverOne })
+      expect((await instance.getTotalSupply()).toNumber()).to.eql(tokenSupply - 500)
+      expect((await instance.balanceOf(owner)).toNumber()).to.eql(tokenSupply - 500)
     })
   })
 })
