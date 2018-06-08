@@ -177,5 +177,47 @@ contract KinesisVelocityToken is BasicToken, Ownable, RBAC {
 
   function getTransfers() public view returns (address[]) {
     return transfers;
+  } 
+  
+  /* Multi sig for burning unsold tokens */
+  bool burnIsPending = false;
+  uint256 numberToBurn = 0;
+  address burnRequester = address(0);
+
+  function burnTokens() internal {
+    balances[owner] = balances[owner].sub(numberToBurn);
+    totalSupply = totalSupply.sub(numberToBurn);
+    burnIsPending = false;
+    numberToBurn = 0;
+    burnRequester = address(0);
+  }
+
+  function startBurn(uint256 burnable) public onlyRole(ADMIN_ROLE) {
+    require(burnIsPending == false);
+    require(balances[owner] >= burnable);
+    burnIsPending = true;
+    numberToBurn = burnable;
+    burnRequester = msg.sender;
+  }
+
+  function cancelBurn() public onlyRole(ADMIN_ROLE) {
+    burnIsPending = false;
+    numberToBurn = 0;
+    burnRequester = address(0);
+  }
+
+  function isBurnPending() public view returns (bool) {
+    return burnIsPending;
+  }
+
+  function pendingBurnNumber() public view returns (uint256) {
+    return numberToBurn;
+  }
+
+  function approveBurn() public onlyRole(ADMIN_ROLE) {
+    require(msg.sender != burnRequester);
+    require(balances[owner] >= numberToBurn);
+    require(burnIsPending == true);
+    burnTokens();
   }
 }

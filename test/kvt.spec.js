@@ -554,4 +554,82 @@ contract('KinesisVelocityToken', function (accounts) {
       expect(postApprovalInvestorBalance).to.eql(250)
     })
   })
+
+  describe.only('burning tokens', () => {
+    it('sets burn to pending', async () => {
+      await instance.startBurn(50, { from: owner })
+      const isBurnPending = await instance.isBurnPending()
+      expect(isBurnPending).to.eql(true)
+      const numberToBurn = await instance.pendingBurnNumber()
+      expect(numberToBurn.toNumber()).to.eql(50)
+    })
+
+    it('allows start and cancel of burn from all admins', async () => {
+      const startThenCancel = async (user) => {
+        await instance.startBurn(50, { from: user })
+        expect(await instance.isBurnPending()).to.eql(true)
+
+        await instance.cancelBurn({ from: user })
+        expect(await instance.isBurnPending()).to.eql(false)
+      }
+      await [owner, approverOne, approverTwo].reduce((chain, user) => chain.then(() => startThenCancel(user)), Promise.resolve())
+    })
+
+    it('does not allow non-admin to create burn', async () => {
+      try {
+        await instance.startBurn(50, { from: investorOne })
+        expect(false).to.eql(true)
+      } catch (e) {
+        expect(e.message).to.eql(revertMessage)
+      }
+      expect(await instance.isBurnPending()).to.eql(false)
+    })
+
+    it('does not allow non-admin to cancel burn', async () => {
+      await instance.startBurn(50, { from: owner })
+
+      try {
+        await instance.cancelBurn({ from: investorOne })
+        expect(false).that.eql(true)
+      } catch (e) {
+        expect(e.message).to.eql(revertMessage)
+      }
+      expect(await instance.isBurnPending()).to.eql(true)
+    })
+
+    it('requires a different user to approve burn', async () => {
+      await instance.startBurn(50, { from: owner })
+
+      try {
+        await instance.approveBurn({ from: owner })
+        expect(false).to.eql(true)
+      } catch (e) {
+        expect(e.message).to.eql(revertMessage)
+      }
+
+      await instance.approveBurn({ from: approverOne })
+
+      const newTotal = await instance.getTotalSupply()
+      expect(newTotal.toNumber()).to.eql(tokenSupply - 50)
+    })
+
+    it('disallows start burn of more than in owner balance', async () => {
+      try {
+        await instance.startBurn(tokenSupply + 1, { from: owner })
+        expect(false).to.eql(true)
+      } catch (e) {
+        expect(e.message).to.eql(revertMessage)
+      }
+    })
+    it('disallows approve burn of more than in owner balance', async () => {
+      await instance.startBurn(tokenSupply, { from: owner })
+      await approveTransferToAddress(investorOne, 5)
+      try {
+        await instance.approveBurn({ from: approverOne })
+        expect(false).to.eql(true)
+      } catch (e) {
+        expect(e.message).to.eql(revertMessage)
+      }
+    })
+  })
 })
