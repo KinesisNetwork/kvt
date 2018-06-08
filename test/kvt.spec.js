@@ -555,7 +555,7 @@ contract('KinesisVelocityToken', function (accounts) {
     })
   })
 
-  describe.only('burning tokens', () => {
+  describe('burning tokens', () => {
     it('sets burn to pending', async () => {
       await instance.startBurn(50, { from: owner })
       const isBurnPending = await instance.isBurnPending()
