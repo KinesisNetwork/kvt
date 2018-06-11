@@ -192,7 +192,7 @@ contract KinesisVelocityToken is BasicToken, Ownable, RBAC {
     burnRequester = address(0);
   }
 
-  function startBurn(uint256 burnable) public onlyRole(ADMIN_ROLE) {
+  function requestBurn(uint256 burnable) public onlyRole(ADMIN_ROLE) {
     require(burnIsPending == false);
     require(balances[owner] >= burnable);
     burnIsPending = true;
@@ -212,6 +212,10 @@ contract KinesisVelocityToken is BasicToken, Ownable, RBAC {
 
   function pendingBurnNumber() public view returns (uint256) {
     return numberToBurn;
+  }
+
+  function getBurnRequester() public view returns (address) {
+    return burnRequester;
   }
 
   function approveBurn() public onlyRole(ADMIN_ROLE) {
