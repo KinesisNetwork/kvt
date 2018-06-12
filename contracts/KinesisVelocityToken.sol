@@ -1,15 +1,15 @@
-pragma solidity ^0.4.17;
+pragma solidity ^0.4.23;
 
-import "zeppelin-solidity/contracts/token/StandardToken.sol";
+import "zeppelin-solidity/contracts/token/ERC20/StandardToken.sol";
 import "zeppelin-solidity/contracts/ownership/Ownable.sol";
+import "zeppelin-solidity/contracts/ownership/rbac/RBAC.sol";
 import "./MultiSigTransfer.sol";
 
-contract KinesisVelocityToken is BasicToken, Ownable {
+contract KinesisVelocityToken is BasicToken, Ownable, RBAC {
   string public name = "KinesisVelocityToken";
   string public symbol = "KVT";
   uint8 public decimals = 0;
-  address public approver = address(0);
-  address public trustAccount = address(0);
+  string public constant ADMIN_ROLE = "admin";
 
   address[] public transfers;
 
@@ -17,48 +17,39 @@ contract KinesisVelocityToken is BasicToken, Ownable {
   uint256 public pricePerTokenInWei = 100000000000000000;
 
   uint public INITIAL_SUPPLY = 300000;
+  uint public totalSupply = 0;
+
   bool public isTransferable = false;
-
-  bool burnIsPending = false;
   bool toggleTransferablePending = false;
+  address transferToggleRequester = address(0);
 
-  function KinesisVelocityToken() public {
+  /*
+    We treat the God address as our trust account.
+    Only whitelisted admins can move funds from this account
+  */
+  address trustAccount = address(0);
+
+  constructor() public {
     totalSupply = INITIAL_SUPPLY;
     balances[msg.sender] = INITIAL_SUPPLY;
+    addRole(msg.sender, ADMIN_ROLE);
   }
-  /* We will use this check to determine if the person viewing the page is the owner of the smart contract */
+
 	function isOwner() public view returns (bool) {
 		return owner == msg.sender;
 	}
 
-  function isApprover() public view returns (bool) {
-    return approver == msg.sender;
+  function isAdmin() public view returns (bool) {
+    /* Inherited from Whitelist.sol */
+    return hasRole(msg.sender, ADMIN_ROLE);
   }
 
-  function isTrustAccount() public view returns (bool) {
-    return trustAccount == msg.sender;
+  function setAdmin(address newAdmin) public onlyOwner {
+    return addRole(newAdmin, ADMIN_ROLE);
   }
 
-  function setApprover(address newApprover) public onlyOwner {
-    require(approver == address(0));
-    require(newApprover != owner);
-    require(newApprover != trustAccount);
-    approver = newApprover;
-  }
-
-  function getApprover() public view returns (address) {
-    return approver;
-  }
-
-  function setTrustAccount(address newTrust) public onlyOwner {
-    require(trustAccount == address(0));
-    require(newTrust != owner);
-    require(newTrust != approver);
-    trustAccount = newTrust;
-  }
-
-  function getTrustAccount() public view returns (address) {
-    return trustAccount;
+  function removeAdmin(address oldAdmin) public onlyOwner {
+    return removeRole(oldAdmin, ADMIN_ROLE);
   }
 
   /* Multi-Signature on Transferable state */
@@ -70,34 +61,39 @@ contract KinesisVelocityToken is BasicToken, Ownable {
     return toggleTransferablePending;
   }
 
-  function setTransferable(bool toState) public onlyOwner {
+  function setTransferable(bool toState) public onlyRole(ADMIN_ROLE) {
     require(isTransferable != toState);
     toggleTransferablePending = true;
+    transferToggleRequester = msg.sender;
   }
 
-  function approveTransferableToggle() public {
-    require(msg.sender == approver);
+  function approveTransferableToggle() public onlyRole(ADMIN_ROLE) {
     require(toggleTransferablePending == true);
+    require(transferToggleRequester != msg.sender);
     isTransferable = !isTransferable;
     toggleTransferablePending = false;
+    transferToggleRequester = address(0);
   }
 
   /* Multi-Signature on Price Changes */
   uint256 pendingPriceChange = 0;
+  address priceChangeRequester = address(0);
 
   function getPendingPriceChange() public view returns (uint256) {
     return pendingPriceChange;
   }
 
-  function requestPriceChange(uint priceChangeInWei) public onlyOwner {
+  function requestPriceChange(uint priceChangeInWei) public onlyRole(ADMIN_ROLE) {
     pendingPriceChange = priceChangeInWei;
+    priceChangeRequester = msg.sender;
   }
 
-  function approvePriceChange() public {
-    require(msg.sender == approver);
+  function approvePriceChange() public onlyRole(ADMIN_ROLE) {
+    require(msg.sender != priceChangeRequester);
     require(pendingPriceChange != 0);
     pricePerTokenInWei = pendingPriceChange;
     pendingPriceChange = 0;
+    priceChangeRequester = address(0);
   }
 
   /**
@@ -106,13 +102,17 @@ contract KinesisVelocityToken is BasicToken, Ownable {
   * @param _value The amount to be transferred.
   */
   function _transfer(address _to, address _from, uint256 _value) private returns (bool) {
-    require(_to != address(0));
+    // We allow admins to transfer to the zero address, to reserve the funds
+    if (!hasRole(_from, ADMIN_ROLE)) {
+      require(_to != address(0));
+    }
+
     require(_value <= balances[_from]);
 
     // SafeMath.sub will throw if there is not enough balance.
     balances[_from] = balances[_from].sub(_value);
     balances[_to] = balances[_to].add(_value);
-    Transfer(_from, _to, _value);
+    emit Transfer(_from, _to, _value);
     return true;
   }
 
@@ -120,72 +120,50 @@ contract KinesisVelocityToken is BasicToken, Ownable {
     if (_to != owner) {
       require(isTransferable == true);
     }
-    require(msg.sender != owner && msg.sender != trustAccount);
+
+    require(!hasRole(msg.sender, ADMIN_ROLE));
     return _transfer(_to, msg.sender, _value);
   }
 
-  function trustTransfer(address to, uint32 quantity) public {
-    require(msg.sender == trustAccount);
-    newMultiSigTransfer(trustAccount, to, quantity);
+  /* Transfer funds from the Trust 0x00 Address to the desired location */
+  function trustTransfer(address to, uint32 quantity) public onlyRole(ADMIN_ROLE) {
+    newMultiSigTransfer(trustAccount, to, msg.sender, quantity);
   }
 
-  function adminTransfer(address to, uint32 quantity) public onlyOwner {
-    newMultiSigTransfer(owner, to, quantity);
+  function adminTransfer(address to, uint32 quantity) public onlyRole(ADMIN_ROLE) {
+    newMultiSigTransfer(owner, to, msg.sender, quantity);
   }
 
-  function newMultiSigTransfer(address from, address to, uint32 quantity) internal {
-    address newTransfer = new MultiSigTransfer(quantity, to, from);
+  function newMultiSigTransfer(address from, address to, address requester, uint32 quantity) internal {
+    address newTransfer = new MultiSigTransfer(quantity, to, from, requester);
     transfers.push(newTransfer);
   }
 
-  function approveTransfer(address approvedTransfer) public returns (bool) {
-    require(msg.sender == approver);
+  function approveTransfer(address approvedTransfer) public onlyRole(ADMIN_ROLE) returns (bool) {
     MultiSigTransfer transferToApprove = MultiSigTransfer(approvedTransfer);
     uint32 transferQuantity = transferToApprove.getQuantity();
     address deliveryAddress = transferToApprove.getTargetAddress();
     address fromAddress = transferToApprove.getFromAddress();
+    address requesterAddress = transferToApprove.getRequesterAddress();
+    require(msg.sender != requesterAddress);
     transferToApprove.approveTransfer();
     return _transfer(deliveryAddress, fromAddress, transferQuantity);
+  }
+
+  function denyTransfer(address approvedTransfer) public onlyRole(ADMIN_ROLE) returns (bool) {
+    MultiSigTransfer transferToApprove = MultiSigTransfer(approvedTransfer);
+    transferToApprove.denyTransfer();
   }
 
   /* This is a payable copy of the above function that, when the correct eth is provided, moves tokens from
   the owner, to the buyer */
   function buyToken(uint256 quantity) public payable returns (bool) {
-    require(msg.sender != owner);
-    require(msg.sender != approver);
+    require(!hasRole(msg.sender, ADMIN_ROLE));
 
     /* Transfer the set wei to abx, then we give the user their token */
     owner.transfer(quantity * pricePerTokenInWei);
 
     return _transfer(msg.sender, owner, quantity);
-  }
-
-  /* Multi sig for burning unsold tokens */
-  function burnUnsoldTokens() internal {
-    uint256 unsoldTokens = balances[owner];
-    balances[owner] = balances[owner].sub(unsoldTokens);
-    totalSupply = totalSupply.sub(unsoldTokens);
-    burnIsPending = false;
-  }
-
-  function startBurn() public onlyOwner {
-    burnIsPending = true;
-  }
-
-  function cancelBurn() public {
-    require(msg.sender == owner || msg.sender == approver);
-    burnIsPending = false;
-  }
-
-  function isBurnPending() public view returns (bool) {
-    return burnIsPending;
-  }
-
-  function approveBurn() public {
-    require(msg.sender == approver);
-    require(balances[owner] != 0);
-    require(burnIsPending == true);
-    burnUnsoldTokens();
   }
 
   /* balanceOf is already implemented. So we just need a getTotalSupply() so we can show users the percentage they own */
@@ -196,7 +174,6 @@ contract KinesisVelocityToken is BasicToken, Ownable {
 	function getPrice() public view returns (uint256) {
 		return pricePerTokenInWei;
 	}
-
 
   function getTransfers() public view returns (address[]) {
     return transfers;

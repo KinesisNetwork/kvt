@@ -9,7 +9,8 @@
     "client-compile": "webpack -p --progress",
     "contract-compile": "rm -r ./build/contracts && truffle compile",
     "contract-deploy": "truffle migrate",
-    "test": "truffle test"
+    "test": "truffle test",
+    "rpc": "ganache-cli"
   },
   "author": "Kinesis",
   "license": "ISC",
@@ -18,6 +19,7 @@
     "axios": "^0.17.1",
     "chai": "^4.1.2",
     "font-awesome": "^4.7.0",
+    "ganache-cli": "^6.1.0",
     "isotope-layout": "^3.0.4",
     "jquery": "1.12.4",
     "lodash": "4.17.4",
@@ -30,7 +32,7 @@
     "react-router-dom": "4.1.1",
     "react-scroll": "^1.6.7",
     "smooth-scroll": "^12.1.5",
-    "truffle": "^4.0.5",
+    "truffle": "^4.1.11",
     "truffle-contract": "^3.0.2",
     "truffle-hdwallet-provider": "0.0.3",
     "tslint": "5.7.0",
@@ -38,7 +40,7 @@
     "typescript": "2.4.1",
     "web3": "^0.20.4",
     "wowjs": "^1.1.3",
-    "zeppelin-solidity": "^1.5.0"
+    "zeppelin-solidity": "^1.9.0"
   },
   "devDependencies": {
     "@types/lodash": "4.14.71",
