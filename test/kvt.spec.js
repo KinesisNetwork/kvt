@@ -554,4 +554,112 @@ contract('KinesisVelocityToken', function (accounts) {
       expect(postApprovalInvestorBalance).to.eql(250)
     })
   })
+
+  describe('burning tokens', () => {
+    it('sets burn to pending', async () => {
+      await instance.requestBurn(50, { from: owner })
+      const isBurnPending = await instance.isBurnPending()
+      expect(isBurnPending).to.eql(true)
+      const numberToBurn = await instance.pendingBurnNumber()
+      expect(numberToBurn.toNumber()).to.eql(50)
+    })
+
+    it('allows start and cancel of burn from all admins', async () => {
+      const startThenCancel = async (user) => {
+        await instance.requestBurn(50, { from: user })
+        expect(await instance.isBurnPending()).to.eql(true)
+
+        await instance.cancelBurn({ from: user })
+        expect(await instance.isBurnPending()).to.eql(false)
+      }
+      await [owner, approverOne, approverTwo].reduce((chain, user) => chain.then(() => startThenCancel(user)), Promise.resolve())
+    })
+
+    it('does not allow non-admin to create burn', async () => {
+      try {
+        await instance.requestBurn(50, { from: investorOne })
+        expect(false).to.eql(true)
+      } catch (e) {
+        expect(e.message).to.eql(revertMessage)
+      }
+      expect(await instance.isBurnPending()).to.eql(false)
+    })
+
+    it('fails when trying to approve burn that is not requested', async () => {
+      try {
+        await instance.approveBurn({ from: owner })
+        expect(false).to.eql(true)
+      } catch (e) {
+        expect(e.message).to.eql(revertMessage)
+        expect((await instance.getTotalSupply()).toNumber()).to.eql(tokenSupply)
+      }
+    })
+
+    it('does not allow another burn to be requested while one is already there', async () => {
+      await instance.requestBurn(50, { from: owner })
+      try {
+        await instance.requestBurn(100, { from: owner })
+        expect(false).to.eql(true)
+      } catch (e) {
+        expect(e.message).to.eql(revertMessage)
+      }
+    })
+
+    it('does not allow non-admin to cancel burn', async () => {
+      await instance.requestBurn(50, { from: owner })
+
+      try {
+        await instance.cancelBurn({ from: investorOne })
+        expect(false).that.eql(true)
+      } catch (e) {
+        expect(e.message).to.eql(revertMessage)
+      }
+      expect(await instance.isBurnPending()).to.eql(true)
+    })
+
+    it('requires a different user to approve burn', async () => {
+      await instance.requestBurn(50, { from: owner })
+
+      try {
+        await instance.approveBurn({ from: owner })
+        expect(false).to.eql(true)
+      } catch (e) {
+        expect(e.message).to.eql(revertMessage)
+      }
+
+      await instance.approveBurn({ from: approverOne })
+
+      const newTotal = await instance.getTotalSupply()
+      expect(newTotal.toNumber()).to.eql(tokenSupply - 50)
+    })
+
+    it('disallows start burn of more than in owner balance', async () => {
+      try {
+        await instance.requestBurn(tokenSupply + 1, { from: owner })
+        expect(false).to.eql(true)
+      } catch (e) {
+        expect(e.message).to.eql(revertMessage)
+      }
+    })
+    it('disallows approve burn of more than in owner balance', async () => {
+      await instance.requestBurn(tokenSupply, { from: owner })
+      await approveTransferToAddress(investorOne, 5)
+      try {
+        await instance.approveBurn({ from: approverOne })
+        expect(false).to.eql(true)
+      } catch (e) {
+        expect(e.message).to.eql(revertMessage)
+      }
+    })
+
+    it('takes out the specified amount from owner balance and total supply', async () => {
+      await instance.requestBurn(500, { from: owner })
+      expect((await instance.getTotalSupply()).toNumber()).to.eql(tokenSupply)
+      expect((await instance.balanceOf(owner)).toNumber()).to.eql(tokenSupply)
+
+      await instance.approveBurn({ from: approverOne })
+      expect((await instance.getTotalSupply()).toNumber()).to.eql(tokenSupply - 500)
+      expect((await instance.balanceOf(owner)).toNumber()).to.eql(tokenSupply - 500)
+    })
+  })
 })
