@@ -1,10 +1,9 @@
 import * as React from 'react'
 const loadTemplateJs = require('../../vendor/js/main.js')
 
-import { Navigation } from '../Navigation';
-import { Footer } from '../Footer';
-import { Home } from '../Promo/Home';
-import { Token } from './Token';
+import { Navigation } from '../Navigation'
+import { Footer } from '../Footer'
+import { Token } from './Token'
 
 export class TokenPage extends React.Component<null, null> {
   constructor(props: any) {
@@ -21,10 +20,10 @@ export class TokenPage extends React.Component<null, null> {
       <div>
         <header>
           <div className='header_wrapper'>
-            <Navigation hideNavigation={true}/>
+            <Navigation hideNavigation={true} />
           </div>
         </header>
-        <Token /> 
+        <Token />
         <Footer />
       </div>
     )
