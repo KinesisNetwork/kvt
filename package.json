@@ -4,7 +4,7 @@
   "description": "Promotional website",
   "main": "js/index.js",
   "scripts": {
-    "start": "webpack --watch",
+    "start": "webpack --watch && npm run webserver",
     "webserver": "python3 -m http.server 7000",
     "client-compile": "webpack -p --progress",
     "contract-compile": "rm -r ./build/contracts && truffle compile",

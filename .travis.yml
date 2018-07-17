@@ -2,6 +2,7 @@ language: node_js
 jobs:
   include:
     - stage: test
+      script: npm run build
 
     - stage: build and deploy
       env: BUCKET=integration-kvt.kinesisgroup.io TRAVIS_TAG=true
@@ -12,7 +13,6 @@ jobs:
         region: ap-southeast-2
         skip_cleanup: true
         bucket: $BUCKET
-        local_dir: dist
         on:
           tags: true
     - stage: build and deploy
