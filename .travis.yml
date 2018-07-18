@@ -8,6 +8,7 @@ jobs:
       env: BUCKET=integration-kvt.kinesisgroup.io TRAVIS_TAG=true
       if: branch = master and type = push
       script: npm run build
+      after_success: rm -rf node_modules src transfer_helper test
       deploy: &deploy
         provider: s3
         region: ap-southeast-2
@@ -19,10 +20,12 @@ jobs:
       env: BUCKET=uat-kvt.kinesisgroup.io
       if: tag is present
       script: npm run build
+      after_success: rm -rf node_modules src transfer_helper test
       deploy:
         <<: *deploy
     - env: BUCKET=kvt.kinesisgroup.io
       if: tag is present and tag =~ ^((?!beta).)*$
       script: npm run build
+      after_success: rm -rf node_modules src transfer_helper test
       deploy:
         <<: *deploy
