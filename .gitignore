@@ -5,3 +5,5 @@ dist
 *.swp
 .vscode
 .DS_Store
+
+.cache
