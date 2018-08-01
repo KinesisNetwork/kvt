@@ -268,7 +268,11 @@ contract('KinesisVelocityToken', function (accounts) {
   })
 
   describe('buy Token', () => {
-    it('correctly transfers from owner to investor on purchase', async () => {
+    it('correctly transfers from owner to investor on purchase if they are on the whitelist', async () => {
+      await instance.setPurchaser(investorOne, {
+        from: approverOne
+      })
+
       let originalOwnerQty = (await instance.balanceOf(owner)).toNumber()
       let originalInvestorOneQty = (await instance.balanceOf(investorOne)).toNumber()
       expect(originalOwnerQty).to.eql(tokenSupply)
@@ -283,6 +287,21 @@ contract('KinesisVelocityToken', function (accounts) {
       let newInvestorOneQty = (await instance.balanceOf(investorOne)).toNumber()
       expect(newOwnerQty).to.eql(originalOwnerQty - 100)
       expect(newInvestorOneQty).to.eql(originalInvestorOneQty + 100)
+    })
+
+    it('doest not transfer from owner to investor if the investor is not on the whitelist', async () => {
+      const incorrectError = 'Wrong Error'
+
+      try {
+        await instance.buyToken(100, {
+          from: investorOne,
+          value: 100 * (await instance.getPrice()).toNumber()
+        })
+
+        throw new Error(incorrectError)
+      } catch (e) {
+        expect(e.message).to.eql(revertMessage)
+      }
     })
   })
 

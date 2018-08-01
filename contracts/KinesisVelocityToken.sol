@@ -10,6 +10,7 @@ contract KinesisVelocityToken is BasicToken, Ownable, RBAC {
   string public symbol = "KVT";
   uint8 public decimals = 0;
   string public constant ADMIN_ROLE = "admin";
+  string public constant PURCHASER_ROLE = "purchaser";
 
   address[] public transfers;
 
@@ -159,6 +160,7 @@ contract KinesisVelocityToken is BasicToken, Ownable, RBAC {
   the owner, to the buyer */
   function buyToken(uint256 quantity) public payable returns (bool) {
     require(!hasRole(msg.sender, ADMIN_ROLE));
+    require(hasRole(msg.sender, PURCHASER_ROLE));
 
     /* Transfer the set wei to abx, then we give the user their token */
     owner.transfer(quantity * pricePerTokenInWei);
@@ -177,8 +179,8 @@ contract KinesisVelocityToken is BasicToken, Ownable, RBAC {
 
   function getTransfers() public view returns (address[]) {
     return transfers;
-  } 
-  
+  }
+
   /* Multi sig for burning unsold tokens */
   bool burnIsPending = false;
   uint256 numberToBurn = 0;
@@ -223,5 +225,14 @@ contract KinesisVelocityToken is BasicToken, Ownable, RBAC {
     require(balances[owner] >= numberToBurn);
     require(burnIsPending == true);
     burnTokens();
+  }
+
+  /* Purchaser Whitelist */
+  function isPurchaser() public view returns (bool) {
+    return hasRole(msg.sender, PURCHASER_ROLE);
+  }
+
+  function setPurchaser(address newPurchaser) public onlyRole(ADMIN_ROLE) {
+    return addRole(newPurchaser, PURCHASER_ROLE);
   }
 }
