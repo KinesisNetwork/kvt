@@ -1,34 +1,24 @@
-pragma solidity ^0.4.23;
+pragma solidity ^0.4.24;
 
-import "zeppelin-solidity/contracts/token/ERC20/StandardToken.sol";
-import "zeppelin-solidity/contracts/ownership/Ownable.sol";
-import "zeppelin-solidity/contracts/ownership/rbac/RBAC.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/BasicToken.sol";
+import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
+import "openzeppelin-solidity/contracts/ownership/rbac/RBAC.sol";
 import "./MultiSigTransfer.sol";
 
 contract KinesisVelocityToken is BasicToken, Ownable, RBAC {
   string public name = "KinesisVelocityToken";
   string public symbol = "KVT";
   uint8 public decimals = 0;
-  string public constant ADMIN_ROLE = "admin";
-  string public constant PURCHASER_ROLE = "purchaser";
+  string public constant ADMIN_ROLE = "ADMIN";
 
   address[] public transfers;
 
-	/* This is 0.1 ETH */
-  uint256 public pricePerTokenInWei = 100000000000000000;
-
-  uint public INITIAL_SUPPLY = 300000;
+  uint public constant INITIAL_SUPPLY = 300000;
   uint public totalSupply = 0;
 
   bool public isTransferable = false;
-  bool toggleTransferablePending = false;
-  address transferToggleRequester = address(0);
-
-  /*
-    We treat the God address as our trust account.
-    Only whitelisted admins can move funds from this account
-  */
-  address trustAccount = address(0);
+  bool public toggleTransferablePending = false;
+  address public transferToggleRequester = address(0);
 
   constructor() public {
     totalSupply = INITIAL_SUPPLY;
@@ -36,38 +26,55 @@ contract KinesisVelocityToken is BasicToken, Ownable, RBAC {
     addRole(msg.sender, ADMIN_ROLE);
   }
 
-	function isOwner() public view returns (bool) {
-		return owner == msg.sender;
-	}
-
-  function isAdmin() public view returns (bool) {
-    /* Inherited from Whitelist.sol */
-    return hasRole(msg.sender, ADMIN_ROLE);
+  /**
+  * @dev Determine if the address is the owner of the contract
+  * @param _address The address to determine of ownership
+  */
+  function isOwner(address _address) public view returns (bool) {
+    return owner == _address;
   }
 
-  function setAdmin(address newAdmin) public onlyOwner {
-    return addRole(newAdmin, ADMIN_ROLE);
+  /**
+  * @dev Returns the list of MultiSig transfers
+  */
+  function getTransfers() public view returns (address[]) {
+    return transfers;
   }
 
-  function removeAdmin(address oldAdmin) public onlyOwner {
-    return removeRole(oldAdmin, ADMIN_ROLE);
+  /**
+  * @dev The KVT ERC20 token uses adminstrators to handle transfering to the crowdsale, vesting and pre-purchasers
+  */
+  function isAdmin(address _address) public view returns (bool) {
+    return hasRole(_address, ADMIN_ROLE);
   }
 
-  /* Multi-Signature on Transferable state */
-  function getTransferableState() public view returns (bool) {
-    return isTransferable;
+  /**
+  * @dev Set an administrator as the owner, using Open Zepplin RBAC implementation
+  */
+  function setAdmin(address _newAdmin) public onlyOwner {
+    return addRole(_newAdmin, ADMIN_ROLE);
   }
 
-  function isToggleTransferablePending() public view returns (bool) {
-    return toggleTransferablePending;
+  /**
+  * @dev Remove an administrator as the owner, using Open Zepplin RBAC implementation
+  */
+  function removeAdmin(address _oldAdmin) public onlyOwner {
+    return removeRole(_oldAdmin, ADMIN_ROLE);
   }
 
-  function setTransferable(bool toState) public onlyRole(ADMIN_ROLE) {
-    require(isTransferable != toState);
+  /**
+  * @dev As an administrator, request the token is made transferable
+  * @param _toState The transfer state being requested
+  */
+  function setTransferable(bool _toState) public onlyRole(ADMIN_ROLE) {
+    require(isTransferable != _toState);
     toggleTransferablePending = true;
     transferToggleRequester = msg.sender;
   }
 
+  /**
+  * @dev As an administrator who did not make the request, approve the transferable state change
+  */
   function approveTransferableToggle() public onlyRole(ADMIN_ROLE) {
     require(toggleTransferablePending == true);
     require(transferToggleRequester != msg.sender);
@@ -76,38 +83,12 @@ contract KinesisVelocityToken is BasicToken, Ownable, RBAC {
     transferToggleRequester = address(0);
   }
 
-  /* Multi-Signature on Price Changes */
-  uint256 pendingPriceChange = 0;
-  address priceChangeRequester = address(0);
-
-  function getPendingPriceChange() public view returns (uint256) {
-    return pendingPriceChange;
-  }
-
-  function requestPriceChange(uint priceChangeInWei) public onlyRole(ADMIN_ROLE) {
-    pendingPriceChange = priceChangeInWei;
-    priceChangeRequester = msg.sender;
-  }
-
-  function approvePriceChange() public onlyRole(ADMIN_ROLE) {
-    require(msg.sender != priceChangeRequester);
-    require(pendingPriceChange != 0);
-    pricePerTokenInWei = pendingPriceChange;
-    pendingPriceChange = 0;
-    priceChangeRequester = address(0);
-  }
-
   /**
   * @dev transfer token for a specified address
   * @param _to The address to transfer to.
   * @param _value The amount to be transferred.
   */
   function _transfer(address _to, address _from, uint256 _value) private returns (bool) {
-    // We allow admins to transfer to the zero address, to reserve the funds
-    if (!hasRole(_from, ADMIN_ROLE)) {
-      require(_to != address(0));
-    }
-
     require(_value <= balances[_from]);
 
     // SafeMath.sub will throw if there is not enough balance.
@@ -117,75 +98,70 @@ contract KinesisVelocityToken is BasicToken, Ownable, RBAC {
     return true;
   }
 
+  /**
+  * @dev Public transfer token function. This wrapper ensures the token is transferable
+  * @param _to The address to transfer to.
+  * @param _value The amount to be transferred.
+  */
   function transfer(address _to, uint256 _value) public returns (bool) {
-    if (_to != owner) {
+    require(_to != address(0));
+
+    /* We allow holders to return their Tokens to the contract owner at any point */
+    if (_to != owner && msg.sender != crowdsale) {
       require(isTransferable == true);
     }
 
-    require(!hasRole(msg.sender, ADMIN_ROLE));
+    /* Transfers from the owner address must use the administrative transfer */
+    require(msg.sender != owner);
+
     return _transfer(_to, msg.sender, _value);
   }
 
-  /* Transfer funds from the Trust 0x00 Address to the desired location */
-  function trustTransfer(address to, uint32 quantity) public onlyRole(ADMIN_ROLE) {
-    newMultiSigTransfer(trustAccount, to, msg.sender, quantity);
-  }
-
-  function adminTransfer(address to, uint32 quantity) public onlyRole(ADMIN_ROLE) {
-    newMultiSigTransfer(owner, to, msg.sender, quantity);
-  }
-
-  function newMultiSigTransfer(address from, address to, address requester, uint32 quantity) internal {
-    address newTransfer = new MultiSigTransfer(quantity, to, from, requester);
+  /**
+  * @dev Request an administrative transfer. This does not move tokens
+  * @param _to The address to transfer to.
+  * @param _quantity The amount to be transferred.
+  */
+  function adminTransfer(address _to, uint32 _quantity) public onlyRole(ADMIN_ROLE) {
+    address newTransfer = new MultiSigTransfer(_quantity, _to, msg.sender);
     transfers.push(newTransfer);
   }
 
-  function approveTransfer(address approvedTransfer) public onlyRole(ADMIN_ROLE) returns (bool) {
-    MultiSigTransfer transferToApprove = MultiSigTransfer(approvedTransfer);
-    uint32 transferQuantity = transferToApprove.getQuantity();
-    address deliveryAddress = transferToApprove.getTargetAddress();
-    address fromAddress = transferToApprove.getFromAddress();
-    address requesterAddress = transferToApprove.getRequesterAddress();
+  /**
+  * @dev Approve an administrative transfer. This moves the tokens if the requester
+  * is an admin, but not the same admin as the one who made the request
+  * @param _approvedTransfer The contract address of the multisignature transfer.
+  */
+  function approveTransfer(address _approvedTransfer) public onlyRole(ADMIN_ROLE) returns (bool) {
+    MultiSigTransfer transferToApprove = MultiSigTransfer(_approvedTransfer);
+
+    uint32 transferQuantity = transferToApprove.quantity();
+    address deliveryAddress = transferToApprove.targetAddress();
+    address requesterAddress = transferToApprove.requesterAddress();
+
     require(msg.sender != requesterAddress);
+
     transferToApprove.approveTransfer();
-    return _transfer(deliveryAddress, fromAddress, transferQuantity);
+    return _transfer(deliveryAddress, owner, transferQuantity);
   }
 
-  function denyTransfer(address approvedTransfer) public onlyRole(ADMIN_ROLE) returns (bool) {
-    MultiSigTransfer transferToApprove = MultiSigTransfer(approvedTransfer);
+  /**
+  * @dev Deny an administrative transfer. This ensures it cannot be approved.
+  * @param _approvedTransfer The contract address of the multisignature transfer.
+  */
+  function denyTransfer(address _approvedTransfer) public onlyRole(ADMIN_ROLE) returns (bool) {
+    MultiSigTransfer transferToApprove = MultiSigTransfer(_approvedTransfer);
     transferToApprove.denyTransfer();
   }
 
-  /* This is a payable copy of the above function that, when the correct eth is provided, moves tokens from
-  the owner, to the buyer */
-  function buyToken(uint256 quantity) public payable returns (bool) {
-    require(!hasRole(msg.sender, ADMIN_ROLE));
-    require(hasRole(msg.sender, PURCHASER_ROLE));
-
-    /* Transfer the set wei to abx, then we give the user their token */
-    owner.transfer(quantity * pricePerTokenInWei);
-
-    return _transfer(msg.sender, owner, quantity);
-  }
-
-  /* balanceOf is already implemented. So we just need a getTotalSupply() so we can show users the percentage they own */
-	function getTotalSupply() public view returns (uint256) {
-		return totalSupply;
-	}
-
-	function getPrice() public view returns (uint256) {
-		return pricePerTokenInWei;
-	}
-
-  function getTransfers() public view returns (address[]) {
-    return transfers;
-  }
-
   /* Multi sig for burning unsold tokens */
-  bool burnIsPending = false;
-  uint256 numberToBurn = 0;
-  address burnRequester = address(0);
+  bool public burnIsPending = false;
+  uint256 public numberToBurn = 0;
+  address public burnRequester = address(0);
 
+  /**
+  * @dev Remove the tokens from the contract owner and totalSupply
+  */
   function burnTokens() internal {
     balances[owner] = balances[owner].sub(numberToBurn);
     totalSupply = totalSupply.sub(numberToBurn);
@@ -194,32 +170,30 @@ contract KinesisVelocityToken is BasicToken, Ownable, RBAC {
     burnRequester = address(0);
   }
 
-  function requestBurn(uint256 burnable) public onlyRole(ADMIN_ROLE) {
+  /**
+  * @dev Admin requests number of tokens to be burnt
+  * @param _burnable The number of tokens to burn
+  */
+  function requestBurn(uint256 _burnable) public onlyRole(ADMIN_ROLE) {
     require(burnIsPending == false);
-    require(balances[owner] >= burnable);
+    require(balances[owner] >= _burnable);
     burnIsPending = true;
-    numberToBurn = burnable;
+    numberToBurn = _burnable;
     burnRequester = msg.sender;
   }
 
+  /**
+  * @dev Admin cancels the pending token burn
+  */
   function cancelBurn() public onlyRole(ADMIN_ROLE) {
     burnIsPending = false;
     numberToBurn = 0;
     burnRequester = address(0);
   }
 
-  function isBurnPending() public view returns (bool) {
-    return burnIsPending;
-  }
-
-  function pendingBurnNumber() public view returns (uint256) {
-    return numberToBurn;
-  }
-
-  function getBurnRequester() public view returns (address) {
-    return burnRequester;
-  }
-
+  /**
+  * @dev Admins approves the burn, if they did not request the burn
+  */
   function approveBurn() public onlyRole(ADMIN_ROLE) {
     require(msg.sender != burnRequester);
     require(balances[owner] >= numberToBurn);
@@ -227,12 +201,13 @@ contract KinesisVelocityToken is BasicToken, Ownable, RBAC {
     burnTokens();
   }
 
-  /* Purchaser Whitelist */
-  function isPurchaser() public view returns (bool) {
-    return hasRole(msg.sender, PURCHASER_ROLE);
-  }
+  address public crowdsale = address(0);
 
-  function setPurchaser(address newPurchaser) public onlyRole(ADMIN_ROLE) {
-    return addRole(newPurchaser, PURCHASER_ROLE);
+  /**
+  * @dev Any admin can set the current crowdsale address, to allows transfers
+  * from the crowdsale to the purchaser
+  */
+  function setCrowdsaleAddress(address _crowdsaleAddress) public onlyRole(ADMIN_ROLE) {
+    crowdsale = _crowdsaleAddress;
   }
 }

@@ -1,6 +1,6 @@
 pragma solidity ^0.4.17;
 
-import "zeppelin-solidity/contracts/ownership/Ownable.sol";
+import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 
 contract MultiSigTransfer is Ownable {
   string public name = "MultiSigTransfer";
@@ -9,47 +9,45 @@ contract MultiSigTransfer is Ownable {
   bool public denied = false;
   uint32 public quantity;
   address public targetAddress;
-  address public fromAddress;
   address public requesterAddress;
 
+  /**
+  * @dev The multisig transfer contract ensures that no single administrator can
+  * KVTs without approval of another administrator
+  * @param _quantity The number of KVT to transfer
+  * @param _targetAddress The receiver of the KVTs
+  * @param _requesterAddress The administrator requesting the transfer
+  */
   constructor(
-    uint32 quantityIn,
-    address targetAddressIn,
-    address fromAddressIn,
-    address requesterAddressIn
+    uint32 _quantity,
+    address _targetAddress,
+    address _requesterAddress
   ) public {
-    quantity = quantityIn;
-    targetAddress = targetAddressIn;
-    fromAddress = fromAddressIn;
-    requesterAddress = requesterAddressIn;
+    quantity = _quantity;
+    targetAddress = _targetAddress;
+    requesterAddress = _requesterAddress;
   }
 
+  /**
+  * @dev Mark the transfer as approved / complete
+  */
   function approveTransfer() public onlyOwner {
+    require(denied == false);
     require(complete == false);
     complete = true;
   }
 
+  /**
+  * @dev Mark the transfer as denied
+  */
   function denyTransfer() public onlyOwner {
     require(denied == false);
     denied = true;
   }
 
-  function getQuantity() public view returns (uint32) {
-    return quantity;
-  }
-
-  function getTargetAddress() public view returns (address) {
-    return targetAddress;
-  }
-
-  function getFromAddress() public view returns (address) {
-    return fromAddress;
-  }
-
-  function getRequesterAddress() public view returns (address) {
-    return requesterAddress;
-  }
-
+  /**
+  * @dev Determine if the transfer is pending
+  */
   function isPending() public view returns (bool) {
     return !complete;
   }

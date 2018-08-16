@@ -53,6 +53,7 @@ contract('KinesisVelocityToken', function (accounts) {
       await instance.adminTransfer(investorOne, 100, {
         from: owner
       })
+
       const ownerBalancePreApproval = await instance.balanceOf(owner)
       const investorBalancePreApproval = await instance.balanceOf(investorOne)
       expect(ownerBalancePreApproval.toNumber()).to.eql(ownerBalance)
@@ -62,7 +63,7 @@ contract('KinesisVelocityToken', function (accounts) {
       const transfer = transferList[0]
 
       const transferInstance = await MultiSigTransfer.at(transfer)
-      let quant = await transferInstance.getQuantity()
+      let quant = await transferInstance.quantity()
       expect(quant.toNumber()).to.eql(100)
       let isPending = await transferInstance.isPending()
       expect(isPending).to.eql(true)
@@ -142,7 +143,7 @@ contract('KinesisVelocityToken', function (accounts) {
     it('correctly sets the total supply to owner on contract initialisation', async () => {
       let newToken = await KinesisVelocityToken.new()
 
-      let totalSupply = await newToken.getTotalSupply()
+      let totalSupply = await newToken.totalSupply()
       let ownerQty = await newToken.balanceOf(owner)
 
       expect(totalSupply.toNumber()).to.eql(ownerQty.toNumber())
@@ -150,7 +151,7 @@ contract('KinesisVelocityToken', function (accounts) {
   })
 
   describe('transferFrom', () => {
-    it('correctly transfers from owner to investor', async () => {
+    it('correctly getTransfers from owner to investor', async () => {
       let originalOwnerQty = await instance.balanceOf(owner)
       let originalInvestorOneQty = await instance.balanceOf(investorOne)
       expect(originalOwnerQty.toNumber()).to.eql(tokenSupply)
@@ -186,7 +187,7 @@ contract('KinesisVelocityToken', function (accounts) {
       }
     })
 
-    it('transfers from investor1 to investor2 if contract is transferable', async () => {
+    it('getTransfers from investor1 to investor2 if contract is transferable', async () => {
       await setTransferable()
       await approveTransferToAddress(investorOne, 100)
 
@@ -227,7 +228,7 @@ contract('KinesisVelocityToken', function (accounts) {
       }
     })
 
-    it('doesn\'t allow owner to make basic transfers even when token set to transferable', async () => {
+    it('doesn\'t allow owner to make basic getTransfers even when token set to transferable', async () => {
       await setTransferable()
 
       let originalOwnerQty = (await instance.balanceOf(owner)).toNumber()
@@ -267,79 +268,33 @@ contract('KinesisVelocityToken', function (accounts) {
     })
   })
 
-  describe('buy Token', () => {
-    it('correctly transfers from owner to investor on purchase if they are on the whitelist', async () => {
-      await instance.setPurchaser(investorOne, {
-        from: approverOne
-      })
-
-      let originalOwnerQty = (await instance.balanceOf(owner)).toNumber()
-      let originalInvestorOneQty = (await instance.balanceOf(investorOne)).toNumber()
-      expect(originalOwnerQty).to.eql(tokenSupply)
-      expect(originalInvestorOneQty).to.eql(0)
-
-      await instance.buyToken(100, {
-        from: investorOne,
-        value: 100 * (await instance.getPrice()).toNumber()
-      })
-
-      let newOwnerQty = (await instance.balanceOf(owner)).toNumber()
-      let newInvestorOneQty = (await instance.balanceOf(investorOne)).toNumber()
-      expect(newOwnerQty).to.eql(originalOwnerQty - 100)
-      expect(newInvestorOneQty).to.eql(originalInvestorOneQty + 100)
-    })
-
-    it('doest not transfer from owner to investor if the investor is not on the whitelist', async () => {
-      const incorrectError = 'Wrong Error'
-
-      try {
-        await instance.buyToken(100, {
-          from: investorOne,
-          value: 100 * (await instance.getPrice()).toNumber()
-        })
-
-        throw new Error(incorrectError)
-      } catch (e) {
-        expect(e.message).to.eql(revertMessage)
-      }
-    })
-  })
-
   describe('isOwner', () => {
     it('returns true for the owner', async function () {
-      const isOwner = await instance.isOwner({
-        from: owner
-      })
+      const isOwner = await instance.isOwner(owner)
       expect(isOwner).to.eql(true)
     })
 
     it('returns false for the anyone who is not the owner', async function () {
-      const isOwner = await instance.isOwner({
-        from: investorOne
-      })
+      const isOwner = await instance.isOwner(investorOne)
       expect(isOwner).to.eql(false)
     })
   })
 
   describe('isAdmin', () => {
     it('returns true for an admin', async function () {
-      const isOwner = await instance.isAdmin({
-        from: approverOne
-      })
+      const isOwner = await instance.isAdmin(approverOne)
       expect(isOwner).to.eql(true)
     })
 
     it('returns false for the anyone who is not an admin', async function () {
-      const isOwner = await instance.isAdmin({
-        from: investorOne
-      })
+      const isOwner = await instance.isAdmin(investorOne)
       expect(isOwner).to.eql(false)
     })
   })
 
   describe('isTransferable changes', () => {
     it('initially is not transferable', async () => {
-      const isTransferable = await instance.getTransferableState()
+      const isTransferable = await instance.isTransferable()
       expect(isTransferable).to.eql(false)
     })
 
@@ -347,9 +302,9 @@ contract('KinesisVelocityToken', function (accounts) {
       await instance.setTransferable(true, {
         from: owner
       })
-      const isPending = await instance.isToggleTransferablePending()
+      const isPending = await instance.toggleTransferablePending()
       expect(isPending).to.eql(true)
-      const isTransferable = await instance.getTransferableState()
+      const isTransferable = await instance.isTransferable()
       expect(isTransferable).to.eql(false)
     })
 
@@ -362,7 +317,7 @@ contract('KinesisVelocityToken', function (accounts) {
         throw new Error('wrong error')
       } catch (e) {
         expect(e.message).to.eql(revertMessage)
-        const isPending = await instance.isToggleTransferablePending()
+        const isPending = await instance.toggleTransferablePending()
         expect(isPending).to.eql(false)
       }
     })
@@ -376,7 +331,7 @@ contract('KinesisVelocityToken', function (accounts) {
         throw new Error('wrong error')
       } catch (e) {
         expect(e.message).to.eql(revertMessage)
-        const isPending = await instance.isToggleTransferablePending()
+        const isPending = await instance.toggleTransferablePending()
         expect(isPending).to.eql(false)
       }
     })
@@ -388,8 +343,8 @@ contract('KinesisVelocityToken', function (accounts) {
       await instance.approveTransferableToggle({
         from: approverOne
       })
-      const isPending = await instance.isToggleTransferablePending()
-      const isTransferable = await instance.getTransferableState()
+      const isPending = await instance.toggleTransferablePending()
+      const isTransferable = await instance.isTransferable()
       expect(isPending).to.eql(false)
       expect(isTransferable).to.eql(true)
     })
@@ -407,8 +362,8 @@ contract('KinesisVelocityToken', function (accounts) {
         throw new Error('wrong error')
       } catch (e) {
         expect(e.message).to.eql(revertMessage)
-        const isPending = await instance.isToggleTransferablePending()
-        const isTransferable = await instance.getTransferableState()
+        const isPending = await instance.toggleTransferablePending()
+        const isTransferable = await instance.isTransferable()
         expect(isPending).to.eql(true)
         expect(isTransferable).to.eql(false)
       }
@@ -423,8 +378,8 @@ contract('KinesisVelocityToken', function (accounts) {
         throw new Error('wrong error')
       } catch (e) {
         expect(e.message).to.eql(revertMessage)
-        const isPending = await instance.isToggleTransferablePending()
-        const isTransferable = await instance.getTransferableState()
+        const isPending = await instance.toggleTransferablePending()
+        const isTransferable = await instance.isTransferable()
         expect(isPending).to.eql(false)
         expect(isTransferable).to.eql(false)
       }
@@ -438,158 +393,42 @@ contract('KinesisVelocityToken', function (accounts) {
       await instance.approveTransferableToggle({
         from: approverOne
       })
-      isPending = await instance.isToggleTransferablePending()
+      isPending = await instance.toggleTransferablePending()
       expect(isPending).to.eql(false)
-      isTransferable = await instance.getTransferableState()
+      isTransferable = await instance.isTransferable()
       expect(isTransferable).to.eql(true)
 
       await instance.setTransferable(false, {
         from: owner
       })
-      isPending = await instance.isToggleTransferablePending()
+      isPending = await instance.toggleTransferablePending()
       expect(isPending).to.eql(true)
       await instance.approveTransferableToggle({
         from: approverOne
       })
-      isTransferable = await instance.getTransferableState()
+      isTransferable = await instance.isTransferable()
       expect(isTransferable).to.eql(false)
-      isPending = await instance.isToggleTransferablePending()
+      isPending = await instance.toggleTransferablePending()
       expect(isPending).to.eql(false)
-    })
-  })
-
-  describe('setting price', () => {
-    it('full price change test', async () => {
-      const currentPrice = (await instance.getPrice()).toNumber()
-      /* Approval before any request doesn't change anything */
-      try {
-        await instance.approvePriceChange({
-          from: approverOne
-        })
-
-        throw new Error('wrong error')
-      } catch (e) {
-        expect(e.message).to.eql(revertMessage)
-        const preRequestApprovalPrice = (await instance.getPrice()).toNumber()
-        expect(preRequestApprovalPrice).to.eql(currentPrice)
-      }
-
-      /* Only owner can request a price change */
-      const priceChange = 0.5 * 1e18
-      try {
-        await instance.requestPriceChange(priceChange, {
-          from: investorOne
-        })
-
-        throw new Error('wrong error')
-      } catch (e) {
-        expect(e.message).to.eql(revertMessage)
-        const approverRequestedPriceChange = (await instance.getPendingPriceChange()).toNumber()
-        expect(approverRequestedPriceChange).to.eql(0)
-        const afterApproverRequestPrice = (await instance.getPrice()).toNumber()
-        expect(afterApproverRequestPrice).to.eql(currentPrice)
-      }
-
-      await instance.requestPriceChange(priceChange, {
-        from: owner
-      })
-      const requestedPriceChange = (await instance.getPendingPriceChange()).toNumber()
-      expect(requestedPriceChange).to.eql(priceChange)
-      const afterRequestPrice = (await instance.getPrice()).toNumber()
-      expect(afterRequestPrice).to.eql(currentPrice)
-
-      /* Second price request overwrites the first one */
-      const secondPriceChange = 1 * 1e18
-      await instance.requestPriceChange(secondPriceChange, {
-        from: owner
-      })
-      const secondRequestedPriceChange = (await instance.getPendingPriceChange()).toNumber()
-      expect(secondRequestedPriceChange).to.eql(secondPriceChange)
-      const afterSecondRequestPrice = (await instance.getPrice()).toNumber()
-      expect(afterSecondRequestPrice).to.eql(currentPrice)
-
-      /* Owner can't approve if the created the request */
-      try {
-        await instance.approvePriceChange({
-          from: owner
-        })
-
-        throw new Error('wrong error')
-      } catch (e) {
-        expect(e.message).to.eql(revertMessage)
-        const postOwnerApprovalRequestPrice = (await instance.getPendingPriceChange()).toNumber()
-        expect(postOwnerApprovalRequestPrice).to.eql(secondPriceChange)
-        const postOwnerApprovalPrice = (await instance.getPrice()).toNumber()
-        expect(postOwnerApprovalPrice).to.eql(currentPrice)
-      }
-
-      /* Only admin can approve */
-      try {
-        await instance.approvePriceChange({
-          from: investorOne
-        })
-
-        throw new Error('wrong error')
-      } catch (e) {
-        expect(e.message).to.eql(revertMessage)
-        const postInvestorApprovalRequestPrice = (await instance.getPendingPriceChange()).toNumber()
-        expect(postInvestorApprovalRequestPrice).to.eql(secondPriceChange)
-        const postInvestorApprovalPrice = (await instance.getPrice()).toNumber()
-        expect(postInvestorApprovalPrice).to.eql(currentPrice)
-      }
-
-      /* Admin approves and price changes */
-      await instance.approvePriceChange({
-        from: approverOne
-      })
-      const postApprovalRequestPrice = (await instance.getPendingPriceChange()).toNumber()
-      expect(postApprovalRequestPrice).to.eql(0)
-      const postApprovalPrice = (await instance.getPrice()).toNumber()
-      expect(postApprovalPrice).to.eql(secondPriceChange)
-    })
-  })
-
-  describe('trust transfers are multisig', () => {
-    it('sets a transfer from the trust account to be approved', async () => {
-      await approveTransferToAddress(trustAccount, 500)
-      await instance.trustTransfer(investorOne, 250, {
-        from: approverOne
-      })
-
-      const preApprovalTrustBalance = (await instance.balanceOf(trustAccount)).toNumber()
-      expect(preApprovalTrustBalance).to.eql(500)
-      const preApprovalInvestorBalance = (await instance.balanceOf(investorOne)).toNumber()
-      expect(preApprovalInvestorBalance).to.eql(0)
-
-      /* Since a transfer has already occurred */
-      const transfer = (await instance.getTransfers())[1]
-      await instance.approveTransfer(transfer, {
-        from: approverTwo
-      })
-
-      const postApprovalTrustBalance = (await instance.balanceOf(trustAccount)).toNumber()
-      expect(postApprovalTrustBalance).to.eql(250)
-      const postApprovalInvestorBalance = (await instance.balanceOf(investorOne)).toNumber()
-      expect(postApprovalInvestorBalance).to.eql(250)
     })
   })
 
   describe('burning tokens', () => {
     it('sets burn to pending', async () => {
       await instance.requestBurn(50, { from: owner })
-      const isBurnPending = await instance.isBurnPending()
-      expect(isBurnPending).to.eql(true)
-      const numberToBurn = await instance.pendingBurnNumber()
+      const burnIsPending = await instance.burnIsPending()
+      expect(burnIsPending).to.eql(true)
+      const numberToBurn = await instance.numberToBurn()
       expect(numberToBurn.toNumber()).to.eql(50)
     })
 
     it('allows start and cancel of burn from all admins', async () => {
       const startThenCancel = async (user) => {
         await instance.requestBurn(50, { from: user })
-        expect(await instance.isBurnPending()).to.eql(true)
+        expect(await instance.burnIsPending()).to.eql(true)
 
         await instance.cancelBurn({ from: user })
-        expect(await instance.isBurnPending()).to.eql(false)
+        expect(await instance.burnIsPending()).to.eql(false)
       }
       await [owner, approverOne, approverTwo].reduce((chain, user) => chain.then(() => startThenCancel(user)), Promise.resolve())
     })
@@ -601,7 +440,7 @@ contract('KinesisVelocityToken', function (accounts) {
       } catch (e) {
         expect(e.message).to.eql(revertMessage)
       }
-      expect(await instance.isBurnPending()).to.eql(false)
+      expect(await instance.burnIsPending()).to.eql(false)
     })
 
     it('fails when trying to approve burn that is not requested', async () => {
@@ -610,7 +449,7 @@ contract('KinesisVelocityToken', function (accounts) {
         expect(false).to.eql(true)
       } catch (e) {
         expect(e.message).to.eql(revertMessage)
-        expect((await instance.getTotalSupply()).toNumber()).to.eql(tokenSupply)
+        expect((await instance.totalSupply()).toNumber()).to.eql(tokenSupply)
       }
     })
 
@@ -633,7 +472,7 @@ contract('KinesisVelocityToken', function (accounts) {
       } catch (e) {
         expect(e.message).to.eql(revertMessage)
       }
-      expect(await instance.isBurnPending()).to.eql(true)
+      expect(await instance.burnIsPending()).to.eql(true)
     })
 
     it('requires a different user to approve burn', async () => {
@@ -648,7 +487,7 @@ contract('KinesisVelocityToken', function (accounts) {
 
       await instance.approveBurn({ from: approverOne })
 
-      const newTotal = await instance.getTotalSupply()
+      const newTotal = await instance.totalSupply()
       expect(newTotal.toNumber()).to.eql(tokenSupply - 50)
     })
 
@@ -673,11 +512,11 @@ contract('KinesisVelocityToken', function (accounts) {
 
     it('takes out the specified amount from owner balance and total supply', async () => {
       await instance.requestBurn(500, { from: owner })
-      expect((await instance.getTotalSupply()).toNumber()).to.eql(tokenSupply)
+      expect((await instance.totalSupply()).toNumber()).to.eql(tokenSupply)
       expect((await instance.balanceOf(owner)).toNumber()).to.eql(tokenSupply)
 
       await instance.approveBurn({ from: approverOne })
-      expect((await instance.getTotalSupply()).toNumber()).to.eql(tokenSupply - 500)
+      expect((await instance.totalSupply()).toNumber()).to.eql(tokenSupply - 500)
       expect((await instance.balanceOf(owner)).toNumber()).to.eql(tokenSupply - 500)
     })
   })
