@@ -57,9 +57,9 @@ contract KVTCrowdsale is Ownable, RBAC {
    * @param _token Address of the token being sold
    */
   constructor(uint256 _rate, address _wallet, ERC20 _token) public {
-    require(_rate > 0);
-    require(_wallet != address(0));
-    require(_token != address(0));
+    require(_rate > 0, "rate must be greater than 0");
+    require(_wallet != address(0), "wallet address must exist");
+    require(_token != address(0), "token address must exist");
 
     rate = _rate;
     wallet = _wallet;
@@ -170,10 +170,10 @@ contract KVTCrowdsale is Ownable, RBAC {
   )
     internal view
   {
-    require(_beneficiary != address(0));
-    require(_weiAmount != 0);
-    require(hasRole(_beneficiary, PURCHASER_ROLE));
-    require(!isFinalized);
+    require(_beneficiary != address(0), "the beneficiary cannot be the zero address");
+    require(_weiAmount != 0, "the weiAmount must not be zero");
+    require(hasRole(_beneficiary, PURCHASER_ROLE), "the beneficiary must be a valid purchaser");
+    require(!isFinalized, "the crowdsale must not yet be finalized");
   }
 
   /**
@@ -221,8 +221,8 @@ contract KVTCrowdsale is Ownable, RBAC {
   }
 
   function approvePriceChange() public onlyRole(ADMIN_ROLE) {
-    require(msg.sender != priceChangeRequester);
-    require(pendingPriceChange != 0);
+    require(msg.sender != priceChangeRequester, "the requester cannot approve a price change");
+    require(pendingPriceChange != 0, "the price change must not be zero");
     rate = pendingPriceChange;
     pendingPriceChange = 0;
     priceChangeRequester = address(0);
@@ -239,7 +239,7 @@ contract KVTCrowdsale is Ownable, RBAC {
   * @dev Approve the end of the crowdsale
   */
   function requestFinalize() public onlyRole(ADMIN_ROLE) {
-    require(!isFinalized);
+    require(!isFinalized, "the crowdsale is already finalized");
     pendingFinalization = true;
     finalizationRequester = msg.sender;
   }
@@ -248,9 +248,9 @@ contract KVTCrowdsale is Ownable, RBAC {
   * @dev Approve the end of the crowdsale
   */
   function approveFinalize() public onlyRole(ADMIN_ROLE) {
-    require(!isFinalized);
-    require(pendingFinalization);
-    require(msg.sender != finalizationRequester);
+    require(!isFinalized, "the crowdsale is already finalized");
+    require(pendingFinalization, "the crowdsale finalization has not been requested");
+    require(msg.sender != finalizationRequester, "the crowdsale cannot be finalized by the requester");
 
     finalization();
     emit Finalized();

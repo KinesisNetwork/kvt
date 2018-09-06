@@ -1,4 +1,4 @@
-pragma solidity ^0.4.17;
+pragma solidity ^0.4.24;
 
 import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 
@@ -32,8 +32,8 @@ contract MultiSigTransfer is Ownable {
   * @dev Mark the transfer as approved / complete
   */
   function approveTransfer() public onlyOwner {
-    require(denied == false);
-    require(complete == false);
+    require(denied == false, "cannot approve a denied transfer");
+    require(complete == false, "cannot approve a complete transfer");
     complete = true;
   }
 
@@ -41,7 +41,7 @@ contract MultiSigTransfer is Ownable {
   * @dev Mark the transfer as denied
   */
   function denyTransfer() public onlyOwner {
-    require(denied == false);
+    require(denied == false, "cannot deny a transfer that is already denied");
     denied = true;
   }
 

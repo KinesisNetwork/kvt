@@ -67,7 +67,7 @@ contract KinesisVelocityToken is BasicToken, Ownable, RBAC {
   * @param _toState The transfer state being requested
   */
   function setTransferable(bool _toState) public onlyRole(ADMIN_ROLE) {
-    require(isTransferable != _toState);
+    require(isTransferable != _toState, "to init a transfer toggle, the toState must change");
     toggleTransferablePending = true;
     transferToggleRequester = msg.sender;
   }
@@ -76,8 +76,8 @@ contract KinesisVelocityToken is BasicToken, Ownable, RBAC {
   * @dev As an administrator who did not make the request, approve the transferable state change
   */
   function approveTransferableToggle() public onlyRole(ADMIN_ROLE) {
-    require(toggleTransferablePending == true);
-    require(transferToggleRequester != msg.sender);
+    require(toggleTransferablePending == true, "transfer toggle not in pending state");
+    require(transferToggleRequester != msg.sender, "the requester cannot approve the transfer toggle");
     isTransferable = !isTransferable;
     toggleTransferablePending = false;
     transferToggleRequester = address(0);
@@ -89,7 +89,7 @@ contract KinesisVelocityToken is BasicToken, Ownable, RBAC {
   * @param _value The amount to be transferred.
   */
   function _transfer(address _to, address _from, uint256 _value) private returns (bool) {
-    require(_value <= balances[_from]);
+    require(_value <= balances[_from], "the balance in the from address is smaller than the tx value");
 
     // SafeMath.sub will throw if there is not enough balance.
     balances[_from] = balances[_from].sub(_value);
@@ -104,15 +104,15 @@ contract KinesisVelocityToken is BasicToken, Ownable, RBAC {
   * @param _value The amount to be transferred.
   */
   function transfer(address _to, uint256 _value) public returns (bool) {
-    require(_to != address(0));
+    require(_to != address(0), "cannot transfer to the zero address");
 
     /* We allow holders to return their Tokens to the contract owner at any point */
     if (_to != owner && msg.sender != crowdsale) {
-      require(isTransferable == true);
+      require(isTransferable == true, "kvt is not yet transferable");
     }
 
     /* Transfers from the owner address must use the administrative transfer */
-    require(msg.sender != owner);
+    require(msg.sender != owner, "the owner of the kvt contract cannot transfer");
 
     return _transfer(_to, msg.sender, _value);
   }
@@ -139,7 +139,7 @@ contract KinesisVelocityToken is BasicToken, Ownable, RBAC {
     address deliveryAddress = transferToApprove.targetAddress();
     address requesterAddress = transferToApprove.requesterAddress();
 
-    require(msg.sender != requesterAddress);
+    require(msg.sender != requesterAddress, "a requester cannot approve an admin transfer");
 
     transferToApprove.approveTransfer();
     return _transfer(deliveryAddress, owner, transferQuantity);
@@ -152,53 +152,6 @@ contract KinesisVelocityToken is BasicToken, Ownable, RBAC {
   function denyTransfer(address _approvedTransfer) public onlyRole(ADMIN_ROLE) returns (bool) {
     MultiSigTransfer transferToApprove = MultiSigTransfer(_approvedTransfer);
     transferToApprove.denyTransfer();
-  }
-
-  /* Multi sig for burning unsold tokens */
-  bool public burnIsPending = false;
-  uint256 public numberToBurn = 0;
-  address public burnRequester = address(0);
-
-  /**
-  * @dev Remove the tokens from the contract owner and totalSupply
-  */
-  function burnTokens() internal {
-    balances[owner] = balances[owner].sub(numberToBurn);
-    totalSupply = totalSupply.sub(numberToBurn);
-    burnIsPending = false;
-    numberToBurn = 0;
-    burnRequester = address(0);
-  }
-
-  /**
-  * @dev Admin requests number of tokens to be burnt
-  * @param _burnable The number of tokens to burn
-  */
-  function requestBurn(uint256 _burnable) public onlyRole(ADMIN_ROLE) {
-    require(burnIsPending == false);
-    require(balances[owner] >= _burnable);
-    burnIsPending = true;
-    numberToBurn = _burnable;
-    burnRequester = msg.sender;
-  }
-
-  /**
-  * @dev Admin cancels the pending token burn
-  */
-  function cancelBurn() public onlyRole(ADMIN_ROLE) {
-    burnIsPending = false;
-    numberToBurn = 0;
-    burnRequester = address(0);
-  }
-
-  /**
-  * @dev Admins approves the burn, if they did not request the burn
-  */
-  function approveBurn() public onlyRole(ADMIN_ROLE) {
-    require(msg.sender != burnRequester);
-    require(balances[owner] >= numberToBurn);
-    require(burnIsPending == true);
-    burnTokens();
   }
 
   address public crowdsale = address(0);
